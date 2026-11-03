@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://makecode.microbit.org/?lang=en&controller=1&hideMenu=#editor -->
+<html lang="en" manifest="/---manifest" data-framework="typescript" data-scribe-recorder-ready="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="blockly-ws-search-style">path.blocklyPath.blockly-ws-search-highlight {
+    fill: #000;
+  }
+  path.blocklyPath.blockly-ws-search-highlight.blockly-ws-search-current {
+    fill: grey;
+  }
+  .blockly-ws-search-close-btn {
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjE0Ij48cGF0aCBkPSJNMTkgNi40MUwxNy41OSA1IDEyIDEwLjU5IDYuNDEgNSA1IDYuNDEgMTAuNTkgMTIgNSAxNy41OSA2LjQxIDE5IDEyIDEzLjQxIDE3LjU5IDE5IDE5IDE3LjU5IDEzLjQxIDEyeiIvPjxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=) no-repeat top left;
+  }
+  .blockly-ws-search-next-btn {
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjE0Ij48cGF0aCBkPSJNNy40MSA4LjU5TDEyIDEzLjE3bDQuNTktNC41OEwxOCAxMGwtNiA2LTYtNiAxLjQxLTEuNDF6Ii8+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PC9zdmc+) no-repeat top left;
+  }
+  .blockly-ws-search-previous-btn {
+    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjE0Ij48cGF0aCBkPSJNNy40MSAxNS40MUwxMiAxMC44M2w0LjU5IDQuNThMMTggMTRsLTYtNi02IDZ6Ii8+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==) no-repeat top left;
+  }
+  .blockly-ws-search {
+    background: #fff;
+    border: solid lightgrey 0.5px;
+    box-shadow: 0px 10px 20px grey;
+    justify-content: center;
+    padding: 0.25em;
+    position: absolute;
+    z-index: 70;
+  }
+  .blockly-ws-search-input input {
+    border: none;
+  }
+  .blockly-ws-search button {
+    border: none;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .blockly-ws-search-actions {
+    display: flex;
+  }
+  .blockly-ws-search-container {
+    display: flex;
+  }
+  .blockly-ws-search-content {
+    display: flex;
+  }</style><style class="blockly-renderer-style">.pxt-renderer.classic-theme .blocklyText,
+.pxt-renderer.classic-theme .blocklyFlyoutLabelText {
+font: 600 12pt "Consolas", "Monaco", "Menlo", "Ubuntu Mono", "source-code-pro", monospace;
+}
+.pxt-renderer.classic-theme .blocklyTextInputBubble textarea {
+font-weight: normal;
+}
+.pxt-renderer.classic-theme .blocklyText {
+fill: #fff;
+}
+.pxt-renderer.classic-theme .blocklyNonEditableField>rect:not(.blocklyDropdownRect),
+.pxt-renderer.classic-theme .blocklyEditableField>rect:not(.blocklyDropdownRect) {
+fill: #fff;
+}
+.pxt-renderer.classic-theme .blocklyNonEditableField>text,
+.pxt-renderer.classic-theme .blocklyEditableField>text,
+.pxt-renderer.classic-theme .blocklyNonEditableField>g>text,
+.pxt-renderer.classic-theme .blocklyEditableField>g>text {
+fill: #575E75;
+}
+.pxt-renderer.classic-theme .blocklyFlyoutLabelText {
+fill: #575E75;
+}
+.pxt-renderer.classic-theme .blocklyText.blocklyBubbleText {
+fill: #575E75;
+}
+.pxt-renderer.classic-theme .blocklyDraggable:not(.blocklyDisabled)
+ .blocklyEditableField:not(.blocklyEditing):hover>rect,
+.pxt-renderer.classic-theme .blocklyDraggable:not(.blocklyDisabled)
+ .blocklyEditableField:not(.blocklyEditing):hover>.blocklyPath {
+stroke: #fff;
+stroke-width: 2;
+}
+.pxt-renderer.classic-theme .blocklyHtmlInput {
+font-family: "Consolas", "Monaco", "Menlo", "Ubuntu Mono", "source-code-pro", monospace;
+font-weight: 600;
+color: #575E75;
+}
+.pxt-renderer.classic-theme .blocklyDropdownText {
+fill: #fff !important;
+}
+.pxt-renderer.classic-theme.blocklyWidgetDiv .blocklyMenuItem,
+.pxt-renderer.classic-theme.blocklyDropDownDiv .blocklyMenuItem {
+font-family: "Consolas", "Monaco", "Menlo", "Ubuntu Mono", "source-code-pro", monospace;
+}
+.pxt-renderer.classic-theme.blocklyDropDownDiv .blocklyMenuItemContent {
+color: #fff;
+}
+.pxt-renderer.classic-theme .blocklyHighlightedConnectionPathVisible {
+stroke: #fff200;
+}
+.pxt-renderer.classic-theme .blocklyDisabledPattern > .blocklyOutlinePath {
+fill: var(--blocklyDisabledPattern)
+}
+.pxt-renderer.classic-theme .blocklyInsertionMarker>.blocklyPath {
+fill-opacity: 0.2;
+stroke: none;
+}
+.pxt-renderer.classic-theme .blocklySelected>.blocklyPath.blocklyPathSelected {
+fill: none;
+filter: var(--blocklySelectedGlowFilter);
+}
+.pxt-renderer.classic-theme .blocklyConnectionIndicator, .pxt-renderer.classic-theme .blocklyInputConnectionIndicator {
+fill: #ff0000;
+stroke: #ffff00;
+stroke-width: 3px;
+}
+.pxt-renderer.classic-theme .blocklyConnectionIndicator {
+display: none;
+}
+.pxt-renderer.classic-theme .blocklyBlockDragSurface > g > .blocklyDraggable > .blocklyConnectionIndicator {
+display: block;
+}
+.pxt-renderer.classic-theme .blocklyConnectionLine {
+stroke: #ffff00;
+stroke-width: 4px;
+}
+.pxt-renderer.classic-theme .blocklyConnectionLine.hidden {
+display: none;
+}
+.pxt-renderer.classic-theme .blocklyFlyoutHeading .blocklyFlyoutLabelText {font-size: 1.5rem;
+}
+.pxt-renderer.classic-theme .blocklyText::selection {
+fill: #fff;
+}
+.pxt-renderer.classic-theme .blocklyNonEditableField>text::selection,
+.pxt-renderer.classic-theme .blocklyEditableField>text::selection,
+.pxt-renderer.classic-theme .blocklyNonEditableField>g>text::selection,
+.pxt-renderer.classic-theme .blocklyEditableField>g>text::selection {
+fill: #575E75;
+}
+.pxt-renderer.classic-theme .blocklyDropdownText::selection {
+fill: #fff !important;
+}</style><style id="blockly-common-style">
+:is(
+  .injectionDiv,
+  .blocklyWidgetDiv,
+  .blocklyDropdownDiv,
+  .blocklyTooltipDiv,
+) * {
+  box-sizing: border-box;
+}
+
+.blocklySvg {
+  background-color: #fff;
+  outline: none;
+  overflow: hidden;  /* IE overflows by default. */
+  position: absolute;
+  display: block;
+}
+
+.blocklyWidgetDiv {
+  display: none;
+  position: absolute;
+  z-index: 99999;  /* big value for bootstrap3 compatibility */
+}
+
+.injectionDiv {
+  height: 100%;
+  position: relative;
+  overflow: hidden;  /* So blocks in drag surface disappear at edges */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.blocklyBlockCanvas.blocklyCanvasTransitioning,
+.blocklyBubbleCanvas.blocklyCanvasTransitioning {
+  transition: transform .5s;
+}
+
+.blocklyEmboss {
+  filter: var(--blocklyEmbossFilter);
+}
+
+.blocklyTooltipDiv {
+  background-color: #ffffc7;
+  border: 1px solid #ddc;
+  box-shadow: 4px 4px 20px 1px rgba(0,0,0,.15);
+  color: #000;
+  display: none;
+  font: 9pt sans-serif;
+  opacity: .9;
+  padding: 2px;
+  position: absolute;
+  z-index: 100000;  /* big value for bootstrap3 compatibility */
+}
+
+.blocklyDropDownDiv {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  visibility: hidden;
+  border: 1px solid;
+  border-color: #dadce0;
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 4px;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,.3);
+}
+
+.blocklyDropDownDiv:focus {
+  box-shadow: 0 0 6px 1px rgba(0,0,0,.3);
+}
+
+.blocklyDropDownContent {
+  max-height: 300px;  /* @todo: spec for maximum height. */
+}
+
+.blocklyDropDownArrow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  z-index: -1;
+  background-color: inherit;
+  border-color: inherit;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-top-left-radius: 4px;
+  border-color: inherit;
+}
+
+.blocklyHighlighted>.blocklyPath {
+  filter: var(--blocklyEmbossFilter);
+}
+
+.blocklyHighlightedConnectionPath {
+  fill: none;
+}
+
+.blocklyHighlightedConnectionPathVisible {
+  stroke: #fc3;
+  stroke-width: 4px;
+}
+
+.blocklyPathLight {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 1;
+}
+
+.blocklySelected>.blocklyPathLight {
+  display: none;
+}
+
+.blocklyDraggable {
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+.blocklyDragging {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  /* Drag surface disables events to not block the toolbox, so we have to
+   * reenable them here for the cursor values to work. */
+  pointer-events: auto;
+}
+
+  /* Changes cursor on mouse down. Not effective in Firefox because of
+     https://bugzilla.mozilla.org/show_bug.cgi?id=771241 */
+.blocklyDraggable:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.blocklyDragging.blocklyDraggingDelete,
+.blocklyDragging.blocklyDraggingDelete .blocklyField {
+  cursor: url("https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/blockly/media/handdelete.cur"), auto;
+}
+
+.blocklyDragging>.blocklyPath,
+.blocklyDragging>.blocklyPathLight {
+  fill-opacity: .8;
+  stroke-opacity: .8;
+}
+
+.blocklyDragging>.blocklyPathDark {
+  display: none;
+}
+
+.blocklyDisabledPattern>.blocklyPath {
+  fill: var(--blocklyDisabledPattern);
+  fill-opacity: .5;
+  stroke-opacity: .5;
+}
+
+.blocklyDisabled>.blocklyPathLight,
+.blocklyDisabled>.blocklyPathDark {
+  display: none;
+}
+
+.blocklyInsertionMarker>.blocklyPath,
+.blocklyInsertionMarker>.blocklyPathLight,
+.blocklyInsertionMarker>.blocklyPathDark {
+  fill-opacity: .2;
+  stroke: none;
+}
+
+.blocklyNonEditableField>text {
+  pointer-events: none;
+}
+
+.blocklyFlyout {
+  position: absolute;
+  z-index: 20;
+}
+
+.blocklyText text {
+  cursor: default;
+}
+
+/*
+  Don't allow users to select text.  It gets annoying when trying to
+  drag a block and selected text moves instead.
+*/
+.blocklySvg text {
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  cursor: inherit;
+}
+
+.blocklyIconGroup {
+  cursor: default;
+}
+
+.blocklyIconGroup:not(:hover):not(:focus),
+.blocklyIconGroupReadonly {
+  opacity: .6;
+}
+
+.blocklyIconShape {
+  fill: #00f;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+.blocklyIconSymbol {
+  fill: #fff;
+}
+
+.blocklyMinimalBody {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.blocklyHtmlInput {
+  border: none;
+  border-radius: 4px;
+  height: 100%;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* Remove the increase and decrease arrows on the field number editor */
+input.blocklyHtmlInput[type=number]::-webkit-inner-spin-button,
+input.blocklyHtmlInput[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.blocklyMainBackground {
+  stroke-width: 1;
+  stroke: #c6c6c6;  /* Equates to #ddd due to border being off-pixel. */
+}
+
+.blocklyMutatorBackground {
+  fill: #fff;
+  stroke: #ddd;
+  stroke-width: 1;
+}
+
+.blocklyFlyoutBackground {
+  fill: #ddd;
+  fill-opacity: .8;
+}
+
+.blocklyMainWorkspaceScrollbar {
+  z-index: 20;
+}
+
+.blocklyFlyoutScrollbar {
+  z-index: 30;
+}
+
+.blocklyScrollbarHorizontal,
+.blocklyScrollbarVertical {
+  position: absolute;
+  outline: none;
+}
+
+.blocklyScrollbarBackground {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.blocklyScrollbarHandle {
+  fill: #ccc;
+}
+
+.blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.blocklyScrollbarHandle:hover {
+  fill: #bbb;
+}
+
+/* Darken flyout scrollbars due to being on a grey background. */
+/* By contrast, workspace scrollbars are on a white background. */
+.blocklyFlyout .blocklyScrollbarHandle {
+  fill: #bbb;
+}
+
+.blocklyFlyout .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle,
+.blocklyFlyout .blocklyScrollbarHandle:hover {
+  fill: #aaa;
+}
+
+.blocklyInvalidInput {
+  background: #faa;
+}
+
+.blocklyVerticalMarker {
+  stroke-width: 3px;
+  fill: rgba(255,255,255,.5);
+  pointer-events: none;
+}
+
+.blocklyComputeCanvas {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.blocklyNoPointerEvents {
+  pointer-events: none;
+}
+
+.blocklyContextMenu {
+  border-radius: 4px;
+  max-height: 100%;
+  box-sizing: content-box;
+}
+
+.blocklyDropdownMenu {
+  border-radius: 2px;
+  padding: 0 !important;
+}
+
+.blocklyDropdownMenu .blocklyMenuItem {
+  /* 28px on the left for icon or checkbox. */
+  padding-left: 28px;
+}
+
+/* BiDi override for the resting state. */
+.blocklyDropdownMenu .blocklyMenuItemRtl {
+  /* Flip left/right padding for BiDi. */
+  padding-left: 5px;
+  padding-right: 28px;
+}
+
+.blocklyWidgetDiv .blocklyMenu {
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  background: #fff;
+  border: 1px solid transparent;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,.3);
+  font: normal 13px Arial, sans-serif;
+  margin: 0;
+  outline: none;
+  padding: 4px 0;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+  z-index: 20000;  /* Arbitrary, but some apps depend on it... */
+}
+
+.blocklyWidgetDiv .blocklyMenu:focus {
+  box-shadow: 0 0 6px 1px rgba(0,0,0,.3);
+}
+
+.blocklyDropDownDiv .blocklyMenu {
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  background: inherit;  /* Compatibility with gapi, reset from goog-menu */
+  border: inherit;  /* Compatibility with gapi, reset from goog-menu */
+  font: normal 13px "Helvetica Neue", Helvetica, sans-serif;
+  outline: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+  z-index: 20000;  /* Arbitrary, but some apps depend on it... */
+}
+
+/* State: resting. */
+.blocklyMenuItem {
+  border: none;
+  color: #000;
+  cursor: pointer;
+  list-style: none;
+  margin: 0;
+  /* 7em on the right for shortcut. */
+  min-width: 7em;
+  padding: 6px 15px;
+  white-space: nowrap;
+}
+
+/* State: disabled. */
+.blocklyMenuItemDisabled {
+  color: #ccc;
+  cursor: inherit;
+}
+
+/* State: hover. */
+.blocklyMenuItemHighlight {
+  background-color: rgba(0,0,0,.1);
+}
+
+/* State: selected/checked. */
+.blocklyMenuItemSelected .blocklyMenuItemCheckbox {
+  background: url(https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/blockly/media/sprites.svg) no-repeat -48px -16px;
+  float: left;
+  margin-left: -24px;
+  width: 16px;
+  height: 16px;
+  position: static;  /* Scroll with the menu. */
+  display: block;
+}
+
+.blocklyMenuItemRtl .blocklyMenuItemCheckbox {
+  float: right;
+  margin-right: -24px;
+}
+
+.blocklyMenuSeparator {
+  background-color: #ccc;
+  height: 1px;
+  border: 0;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.blocklyRTL .blocklyMenuItemContent .blocklyShortcutContainer {
+  flex-direction: row-reverse;
+}
+.blocklyMenuItemContent .blocklyShortcutContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.blocklyMenuItemContent .blocklyShortcutContainer .blocklyShortcut {
+  color: #ccc;
+}
+
+.blocklyBlockDragSurface, .blocklyAnimationLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: visible !important;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.blocklyField {
+  cursor: default;
+}
+
+.blocklyInputField {
+  cursor: text;
+}
+
+.blocklyDragging .blocklyField,
+.blocklyDragging .blocklyIconGroup {
+  cursor: grabbing;
+}
+
+.blocklyActiveFocus:is(
+  .blocklyFlyout,
+  .blocklyWorkspace,
+  .blocklyWorkspaceSelectionRing,
+  .blocklyField,
+  .blocklyPath,
+  .blocklyHighlightedConnectionPath,
+  .blocklyComment,
+  .blocklyBubble,
+  .blocklyIconGroup,
+  .blocklyTextarea,
+  .blocklyZoom,
+  .blocklyTrash,
+) {
+  outline: none;
+}
+.hiddenForAria {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.injectionDiv {
+  --blockly-active-node-color: #fff200;
+  --blockly-active-tree-color: #1379f6;
+  --blockly-selection-width: 3px;
+}
+
+/* Active focus cases: */
+/* Blocks with active focus. */
+.blocklyKeyboardNavigation
+  .blocklyActiveFocus:is(.blocklyPath, .blocklyHighlightedConnectionPath),
+/* Fields with active focus, */
+.blocklyKeyboardNavigation
+  .blocklyActiveFocus.blocklyField
+  > .blocklyFieldRect,
+/* Icons with active focus. */
+.blocklyKeyboardNavigation
+  .blocklyActiveFocus.blocklyIconGroup
+  > .blocklyIconShape:first-child,
+.blocklyKeyboardNavigation
+  .blocklyActiveFocus
+  > .blocklyFocusRing {
+  stroke: var(--blockly-active-node-color);
+  stroke-width: var(--blockly-selection-width);
+}
+
+/* Passive focus cases: */
+/* Blocks with passive focus except when widget/dropdown div in use. */
+.blocklyKeyboardNavigation:not(
+        :has(
+            .blocklyDropDownDiv:focus-within,
+            .blocklyWidgetDiv:focus-within
+          )
+      )
+  .blocklyPassiveFocus:is(
+    .blocklyPath:not(.blocklyFlyout .blocklyPath),
+    .blocklyHighlightedConnectionPath
+  ),
+/* Fields with passive focus except when widget/dropdown div in use. */
+.blocklyKeyboardNavigation:not(
+        :has(
+            .blocklyDropDownDiv:focus-within,
+            .blocklyWidgetDiv:focus-within
+          )
+      )
+  .blocklyPassiveFocus.blocklyField
+  > .blocklyFieldRect,
+/* Icons with passive focus except when widget/dropdown div in use. */
+.blocklyKeyboardNavigation:not(
+        :has(
+            .blocklyDropDownDiv:focus-within,
+            .blocklyWidgetDiv:focus-within
+          )
+      )
+  .blocklyPassiveFocus.blocklyIconGroup
+  > .blocklyIconShape:first-child {
+  stroke: var(--blockly-active-node-color);
+  stroke-dasharray: 5px 3px;
+  stroke-width: var(--blockly-selection-width);
+}
+
+/* Different ways for toolbox/flyout to be the active tree: */
+/* Active focus in the flyout. */
+.blocklyKeyboardNavigation .blocklyFlyout:has(.blocklyActiveFocus),
+/* Active focus in the toolbox. */
+.blocklyKeyboardNavigation .blocklyToolbox:has(.blocklyActiveFocus),
+/* Active focus on the toolbox/flyout. */
+.blocklyKeyboardNavigation
+  .blocklyActiveFocus:is(.blocklyFlyout, .blocklyToolbox) {
+  outline-offset: calc(var(--blockly-selection-width) * -1);
+  outline: var(--blockly-selection-width) solid
+    var(--blockly-active-tree-color);
+}
+
+/* Suppress default outline. */
+.blocklyKeyboardNavigation
+  .blocklyToolboxCategoryContainer:focus-visible {
+  outline: none;
+}
+
+ /* Different ways for the workspace to be the active tree: */
+/* Active focus within workspace. */
+.blocklyKeyboardNavigation
+  .blocklyWorkspace:has(.blocklyActiveFocus)
+  .blocklyWorkspaceFocusRing,
+/* Active focus within drag layer. */
+.blocklyKeyboardNavigation
+  .blocklySvg:has(~ .blocklyBlockDragSurface .blocklyActiveFocus)
+  .blocklyWorkspaceFocusRing,
+/* Active focus on workspace. */
+.blocklyKeyboardNavigation
+  .blocklyWorkspace.blocklyActiveFocus
+  .blocklyWorkspaceFocusRing,
+/* Focus in widget/dropdown div considered to be in workspace. */
+  .blocklyKeyboardNavigation
+  .blocklyWorkspace.blocklyShowingDropDownDiv
+  .blocklyWorkspaceFocusRing,
+.blocklyKeyboardNavigation
+  .blocklyWorkspace.blocklyShowingWidgetDiv
+  .blocklyWorkspaceFocusRing {
+  stroke: var(--blockly-active-tree-color);
+  stroke-width: calc(var(--blockly-selection-width) * 2);
+}
+
+/* The region itself is the active node (e.g. focused by clicking the
+   background). */
+.blocklyKeyboardNavigation
+  .blocklyWorkspace.blocklyActiveFocus
+  .blocklyWorkspaceSelectionRing,
+/* The selection ring itself is the active node (it doubles as the workspace's
+   keyboard focus target). */
+.blocklyKeyboardNavigation
+  .blocklyWorkspaceSelectionRing.blocklyActiveFocus {
+  stroke: var(--blockly-active-node-color);
+  stroke-width: var(--blockly-selection-width);
+}
+
+/* The selection ring is a decorative highlight that can also be the workspace's
+   focus target; either way it should never intercept pointer events. */
+.blocklyWorkspaceSelectionRing {
+  pointer-events: none;
+}
+
+/* The workspace itself is the active node. */
+.blocklyKeyboardNavigation
+  .blocklyBubble.blocklyActiveFocus
+  .blocklyEmboss .blocklyDraggable {
+  stroke: var(--blockly-active-node-color);
+  stroke-width: var(--blockly-selection-width);
+}
+/* Flyout buttons and labels */
+.blocklyKeyboardNavigation .blocklyFlyout .blocklyFlyoutLabel.blocklyActiveFocus,
+.blocklyKeyboardNavigation .blocklyFlyout .blocklyFlyoutButton.blocklyActiveFocus {
+  outline: none;
+}
+.blocklyKeyboardNavigation .blocklyFlyout .blocklyFlyoutLabel.blocklyActiveFocus > .blocklyFlyoutLabelText,
+.blocklyKeyboardNavigation .blocklyFlyout .blocklyFlyoutButton.blocklyActiveFocus > .blocklyFlyoutButtonBackground {
+  outline-offset: 2px;
+  outline: var(--blockly-selection-width) solid var(--blockly-active-node-color);
+  border-radius: 2px;
+}
+.blocklyDialog {
+  min-width: 300px;
+  border-radius: 16px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #999;
+}
+.blocklyDialogForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+.blocklyDialogButtonRow {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+}
+
+
+.blocklyZoom>image, .blocklyZoom>svg>image {
+  opacity: .4;
+}
+
+.blocklyZoom>image:hover, .blocklyZoom>svg>image:hover, .blocklyZoom:focus>image {
+  opacity: .8;
+}
+
+.blocklyZoom>image:active, .blocklyZoom>svg>image:active {
+  opacity: 1;
+}
+
+
+.blocklyToast {
+  font-size: 1.2rem;
+  position: absolute;
+  bottom: -10rem;
+  right: 2rem;
+  padding: 1rem;
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 0.4rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  line-height: 1.5;
+  transition: bottom 0.3s ease-out;
+}
+
+.blocklyToast .blocklyToastMessage {
+  maxWidth: 18rem;
+}
+
+.blocklyToast .blocklyToastCloseButton {
+  margin: 0;
+  padding: 0.2rem;
+  background-color: transparent;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+
+.injectionDiv {
+  --commentFillColour: #FFFCC7;
+  --commentBorderColour: #F2E49B;
+}
+
+.blocklyComment .blocklyTextarea {
+  background-color: var(--commentFillColour);
+  border: 1px solid var(--commentBorderColour);
+  box-sizing: border-box;
+  display: block;
+  outline: 0;
+  padding: 5px;
+  resize: none;
+  width: 100%;
+  height: 100%;
+}
+
+.blocklyReadonly.blocklyComment .blocklyTextarea {
+  cursor: inherit;
+}
+
+.blocklyDeleteIcon {
+  width: 20px;
+  height: 20px;
+  display: none;
+  cursor: pointer;
+}
+
+.blocklyFoldoutIcon {
+  width: 20px;
+  height: 20px;
+  transform-origin: 12px 12px;
+  cursor: pointer;
+}
+.blocklyResizeHandle {
+  width: 12px;
+  height: 12px;
+  cursor: se-resize;
+}
+.blocklyReadonly.blocklyComment .blocklyResizeHandle {
+  cursor: inherit;
+}
+
+.blocklyCommentTopbarBackground {
+  fill: var(--commentBorderColour);
+  height: 24px;
+}
+
+.blocklyComment .blocklyCommentPreview.blocklyText {
+  fill: #000;
+  dominant-baseline: middle;
+  visibility: hidden;
+}
+
+.blocklyCollapsed.blocklyComment .blocklyCommentPreview {
+  visibility: visible;
+}
+
+.blocklyCollapsed.blocklyComment .blocklyCommentForeignObject,
+.blocklyCollapsed.blocklyComment .blocklyResizeHandle {
+  display: none;
+}
+
+.blocklyCollapsed.blocklyComment .blocklyFoldoutIcon {
+  transform: rotate(-90deg);
+}
+
+.blocklyRTL .blocklyCommentTopbar {
+  transform: scale(-1, 1);
+}
+
+.blocklyRTL .blocklyCommentForeignObject {
+  direction: rtl;
+}
+
+.blocklyRTL .blocklyCommentPreview {
+  /* Revert the scale and control RTL using direction instead. */
+  transform: scale(-1, 1);
+  direction: rtl;
+}
+
+.blocklyRTL .blocklyResizeHandle {
+  transform: scale(-1, 1);
+  cursor: sw-resize;
+}
+
+.blocklyCommentHighlight {
+  fill: none;
+}
+
+.blocklyCommentText.blocklyActiveFocus {
+  border-color: #fc3;
+  border-width: 2px;
+}
+
+.blocklySelected .blocklyCommentHighlight {
+  stroke: #fc3;
+  stroke-width: 3px;
+}
+
+.blocklyCollapsed.blocklySelected .blocklyCommentHighlight {
+  stroke: none;
+}
+
+.blocklyCollapsed.blocklySelected .blocklyCommentTopbarBackground {
+  stroke: #fc3;
+  stroke-width: 3px;
+}
+
+
+.blocklyTextInputBubble .blocklyTextarea {
+  background-color: var(--commentFillColour);
+  border: 0;
+  box-sizing: border-box;
+  display: block;
+  outline: 0;
+  padding: 5px;
+  resize: none;
+  width: 100%;
+  height: 100%;
+}
+
+
+.blocklyFlyoutButton {
+  fill: #888;
+  cursor: default;
+}
+
+.blocklyFlyoutButtonShadow {
+  fill: #666;
+}
+
+@media (hover: hover) {
+  .blocklyFlyoutButton:hover {
+    fill: #aaa;
+  }
+}
+
+.blocklyFlyoutButton:active {
+  fill: #aaa;
+}
+
+.blocklyFlyoutLabel {
+  cursor: default;
+}
+
+.blocklyFlyoutLabelBackground {
+  opacity: 0;
+}
+
+
+  .blocklyTrash {
+    opacity: 0.4;
+    transition: opacity 0.08 ease-out;
+  }
+
+  .blocklyTrashLid {
+    transition: rotate 0.08s ease-out;
+    transform-origin: 46px 12px;
+    rotate: 0deg;
+    pointer-events: none;
+  }
+
+  .blocklyRTL .blocklyTrashLid {
+    transform-origin: 0px 12px;
+  }
+
+  .blocklyTrash.blocklyTrashFull .blocklyTrashLid {
+    rotate: 5deg;
+  }
+
+  .blocklyRTL .blocklyTrash.blocklyTrashFull .blocklyTrashLid {
+    rotate: -5deg;
+  }
+
+  .blocklyTrash.blocklyTrashOpen,
+  .blocklyTrash:hover,
+  .blocklyTrash:focus {
+    opacity: 0.8;
+  }
+
+  .blocklyTrash.blocklyTrashFull.blocklyTrashOpen .blocklyTrashLid,
+  .blocklyTrash.blocklyTrashFull:hover .blocklyTrashLid,
+  .blocklyTrash.blocklyTrashFull:focus .blocklyTrashLid {
+    rotate: 45deg;
+  }
+
+  .blocklyRTL .blocklyTrash.blocklyTrashFull.blocklyTrashOpen .blocklyTrashLid,
+  .blocklyRTL .blocklyTrash.blocklyTrashFull:hover .blocklyTrashLid,
+  .blocklyRTL .blocklyTrash.blocklyTrashFull:focus .blocklyTrashLid {
+    rotate: -45deg;
+  }
+
+
+.blocklyToolboxCategory:not(.blocklyToolboxSelected):hover {
+  background-color: rgba(255, 255, 255, .2);
+}
+
+.blocklyToolbox[layout="h"] .blocklyToolboxCategoryContainer {
+  margin: 1px 5px 1px 0;
+}
+
+.blocklyToolbox[dir="RTL"][layout="h"] .blocklyToolboxCategoryContainer {
+  margin: 1px 0 1px 5px;
+}
+
+.blocklyToolboxCategory {
+  height: 22px;
+  line-height: 22px;
+  margin-bottom: 3px;
+  padding-right: 8px;
+  white-space: nowrap;
+}
+
+.blocklyToolbox[dir="RTL"] .blocklyToolboxCategory {
+  margin-left: 8px;
+  padding-right: 0;
+}
+
+.blocklyToolboxCategoryIcon {
+  background-image: url(https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/blockly/media/sprites.svg);
+  height: 16px;
+  vertical-align: middle;
+  visibility: hidden;
+  width: 16px;
+}
+
+.blocklyToolboxCategoryIconClosed {
+  background-position: -32px -1px;
+}
+
+.blocklyToolbox[dir="RTL"] .blocklyToolboxCategoryIconClosed {
+  background-position: 0 -1px;
+}
+
+.blocklyToolboxSelected>.blocklyToolboxCategoryIconClosed {
+  background-position: -32px -17px;
+}
+
+.blocklyToolbox[dir="RTL"] .blocklyToolboxSelected>.blocklyToolboxCategoryIconClosed {
+  background-position: 0 -17px;
+}
+
+.blocklyToolboxCategoryIconOpen {
+  background-position: -16px -1px;
+}
+
+.blocklyToolboxSelected>.blocklyToolboxCategoryIconOpen {
+  background-position: -16px -17px;
+}
+
+.blocklyToolboxCategoryLabel {
+  cursor: default;
+  font: 16px sans-serif;
+  padding: 0 3px;
+  vertical-align: middle;
+}
+
+.blocklyToolboxDelete .blocklyToolboxCategoryLabel {
+  cursor: url("https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/blockly/media/handdelete.cur"), auto;
+}
+
+.blocklyToolboxSelected .blocklyToolboxCategoryLabel {
+  color: #fff;
+}
+
+
+.blocklyTreeSeparator {
+  border-bottom: solid #e5e5e5 1px;
+  height: 0;
+  margin: 5px 0;
+}
+
+.blocklyToolbox[layout="h"] .blocklyTreeSeparator {
+  border-right: solid #e5e5e5 1px;
+  border-bottom: none;
+  height: auto;
+  margin: 0 5px 0 5px;
+  padding: 5px 0;
+  width: 0;
+}
+
+
+.blocklyToolboxDelete {
+  cursor: url("https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/blockly/media/handdelete.cur"), auto;
+}
+
+.blocklyToolboxGrab {
+  cursor: url("https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/blockly/media/handclosed.cur"), auto;
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* Category tree in Toolbox. */
+.blocklyToolbox {
+  box-sizing: border-box;
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  background-color: #ddd;
+  overflow-x: visible;
+  overflow-y: auto;
+  padding: 4px 0 4px 0;
+  position: absolute;
+  z-index: 70;  /* so blocks go under toolbox when dragging */
+  -webkit-tap-highlight-color: transparent;  /* issue #1345 */
+}
+
+.blocklyToolboxCategoryGroup {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.blocklyToolboxCategoryGroup:focus {
+  outline: none;
+}
+
+
+.pxtFieldDropdown.blocklyActiveFocus > .blocklyFieldRect, .pxtFieldDropdown.blocklyPassiveFocus > .blocklyFieldRect {
+    stroke-opacity: 1;
+}
+
+
+.blocklyDropDownButtonContainer,
+.blocklyDropDownButton {
+    display: inline-block;
+    float: left;
+    border-radius: 4px;
+    text-align: center;
+    margin: 0;
+}
+
+.blocklyDropDownButtonContainer {
+    padding: 4px;
+}
+
+.blocklyDropDownButton {
+    border: 1px solid;
+    transition: box-shadow .1s;
+    cursor: pointer;
+    outline: none;
+}
+
+.blocklyDropDownButtonHover {
+    box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.2);
+}
+
+.blocklyDropDownButtonFocus {
+    box-shadow: 0px 0px 0px 4px rgb(255, 255, 255);
+}
+
+.blocklyDropDownButton:active {
+    box-shadow: 0px 0px 0px 6px rgba(255, 255, 255, 0.2);
+}
+
+.blocklyDropDownButton > img {
+    width: 80%;
+    height: 80%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.blocklyImageMenu .blocklyDropDownButton > img {
+    top: unset;
+    transform: unset;
+    margin-top: 4px;
+}
+.blocklyImageMenu .blocklyDropdownTextLabel {
+    line-height: 1.15;
+    margin-top: 2px;
+}
+
+
+.blocklyGridPickerTooltip {
+    z-index: 995;
+}
+
+.blocklyGridPickerPadder {
+    outline: none;
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3)
+}
+
+.blocklyWidgetDiv .blocklyGridPickerRow {
+    display: table-row;
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu {
+    display: table;
+    outline: none;
+    border-spacing: 7px;
+}
+
+.blocklyGridPickerScroller {
+    outline: none;
+    padding: 4px;
+    border-radius: 4px;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+}
+
+.blocklyGridPickerScroller.keyboardNavigable:has(:focus-visible) {
+    outline: 4px solid var(--pxt-focus-border);
+}
+
+.blocklyGridPickerPadder {
+    border-radius: 4px;
+    outline: none;
+    position: relative;
+}
+
+.blocklyGridPickerPadder .ui.input i.search.icon {
+    margin-top: -0.2rem;
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu .gridpicker-menuitem {
+    background: white;
+    cursor: pointer;
+    min-width: unset;
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu .gridpicker-menuitem-highlight, .blocklyWidgetDiv .blocklyGridPickerMenu .gridpicker-menuitem-hover {
+    background: #d6e9f8;
+    box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.2);
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu .gridpicker-option {
+    border: solid 1px black;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 12pt;
+    font-weight: bold;
+    display: table-cell;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+        user-select: none;
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu .gridpicker-menuitem-content {
+    color: #fff;
+    font-size: 13px;
+    font-family: var(--pxt-page-font);
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu .floatLeft {
+    float: left;
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu .gridpicker-option.gridpicker-option-selected {
+    position: relative;
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu .gridpicker-menuitem .gridpicker-menuitem-checkbox {
+    display: none;
+}
+
+.blocklyWidgetDiv .blocklyGridPickerMenu:focus .blocklyGridPickerRow .gridpicker-menuitem.gridpicker-option-focused {
+    outline: 3px solid var(--pxt-focus-border);
+}
+
+.blocklyGridPickerTooltip {
+    z-index: 995;
+}
+
+.blocklyGridPickerSelectedBar {
+    display: flex;
+    padding-top: 5px;
+    justify-content: space-between;
+}
+
+.blocklyGridPickerSelectedImage {
+    padding: 3px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ui.input input.blocklyGridPickerSearchBar {
+    background: none;
+    border: none;
+    color: white;
+}
+
+.ui.input input.blocklyGridPickerSearchBar::placeholder {
+    color: white;
+}
+
+.ui.input input.blocklyGridPickerSearchBar::-webkit-input-placeholder {
+    color: white;
+}
+
+.ui.input input.blocklyGridPickerSearchBar::-moz-placeholder {
+    color: white;
+}
+
+.ui.input input.blocklyGridPickerSearchBar:-ms-input-placeholder {
+    color: white;
+}
+
+.ui.input input.blocklyGridPickerSearchBar:-moz-placeholder {
+    color: white;
+}
+
+
+   .blocklyFieldGridContainer {
+     padding: 7px;
+     overflow: auto;
+   }
+   
+  .blocklyFieldGrid {
+    display: grid;
+    grid-gap: 7px;
+    grid-template-columns: repeat(var(--grid-columns), min-content);
+  }
+
+ .blocklyFieldGrid .blocklyFieldGridItem {
+   border: 1px solid rgba(1, 1, 1, 0.5);
+   border-radius: 4px;
+   color: white;
+   min-width: auto;
+   background: none;
+   white-space: nowrap;
+   cursor: pointer;
+   padding: 6px 15px;
+ }
+ 
+ .blocklyFieldGrid .blocklyFieldGridRow {
+   display: contents;
+ }
+ 
+ .blocklyFieldGrid .blocklyFieldGridItem.blocklyFieldGridItemSelected {
+   background-color: rgba(1, 1, 1, 0.25);
+ }
+
+ .blocklyFieldGrid .blocklyFieldGridItem:focus {
+   box-shadow: 0 0 0 4px hsla(0, 0%, 100%, .2);
+   outline: none;
+ }
+ 
+
+.blocklyColourSwatch {
+    width: 22px;
+    height: 22px;
+}
+
+.blocklyFieldColour.blocklyFieldGridContainer {
+    padding: 0px;
+}
+
+.blocklyFieldColour .blocklyFieldGrid {
+    grid-gap: 0px;
+    row-gap: 0px;
+    outline: none;
+}
+
+.blocklyFieldColour .blocklyFieldGrid .blocklyFieldGridItem {
+    padding: 0;
+    border: none;
+    margin: 2px;
+}
+
+.blocklyFieldColour .blocklyFieldGrid .blocklyFieldGridItem .blocklyColourSwatch {
+    border: 2px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+}
+
+.blocklyFieldColour .blocklyFieldGridItem:focus .blocklyColourSwatch {
+    box-shadow: 2px 2px 7px 2px rgba(0,0,0,.3);
+    border-color: #eee;
+    border-width: 1px;
+}
+
+.blocklyFieldColour .blocklyFieldGrid .blocklyFieldGridItemSelected .blocklyColourSwatch {
+    outline: 1px solid #000;
+    border-color: #eee;
+    border-width: 1px;
+}
+
+
+    .blocklyMatrix:focus-visible {
+        outline: none;
+    }
+
+
+:root {
+    --blocklyFieldSliderBackgroundColor: #547AB2;
+    --blocklyFieldSliderThumbColor: #ffffff;
+    --blocklyFieldSliderThumbBorderColor: rgba(0, 0, 0, 0.15);
+}
+.blocklyFieldSliderLabel {
+    font-family: "Helvetica Neue", "Segoe UI", Helvetica, sans-serif;
+    font-size: 0.65rem;
+    color: #000000;
+    margin: 8px;
+}
+.blocklyFieldSliderLabelText {
+    font-weight: bold;
+}
+.blocklyFieldSliderReadout {
+    margin-left: 10px;
+}
+
+input[type=range].blocklyFieldSlider {
+    -webkit-appearance: none;
+    width: 100%;
+}
+input[type=range].blocklyFieldSlider:focus {
+    outline: none;
+}
+input[type=range].blocklyFieldSlider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    margin: 8px;
+    height: 22px;
+    width: 150px;
+    outline: none;
+    border-radius: 11px;
+    margin-bottom: 20px;
+    background: var(--blocklyFieldSliderBackgroundColor);
+}
+input[type=range].blocklyFieldSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 26px;
+    height: 26px;
+    margin-top: -1px;
+    background-color: var(--blocklyFieldSliderThumbColor);
+    border-radius: 100%;
+    -webkit-box-shadow: 0 0 0 4px var(--blocklyFieldSliderThumbBorderColor);
+    -moz-box-shadow: 0 0 0 4px var(--blocklyFieldSliderThumbBorderColor);
+    box-shadow: 0 0 0 4px var(--blocklyFieldSliderThumbBorderColor);
+    cursor: pointer;
+}
+input[type=range].blocklyFieldSlider:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid white;
+    outline-offset: 3px;
+    -webkit-box-shadow: 0 0 0 3px var(--pxt-focus-border);
+    -moz-box-shadow: 0 0 0 3px var(--pxt-focus-border);
+    box-shadow: 0 0 0 3px var(--pxt-focus-border);
+}
+input[type=range].blocklyFieldSlider::-moz-range-track {
+    margin: 8px;
+    height: 22px;
+    width: 95%;
+    outline: none;
+    border-radius: 11px;
+    margin-bottom: 20px;
+    background: var(--blocklyFieldSliderBackgroundColor);
+}
+input[type=range].blocklyFieldSlider::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+    margin-top: -1px;
+    background-color: var(--blocklyFieldSliderThumbColor);
+    border-radius: 100%;
+    -webkit-box-shadow: 0 0 0 4px var(--blocklyFieldSliderThumbBorderColor);
+    -moz-box-shadow: 0 0 0 4px var(--blocklyFieldSliderThumbBorderColor);
+    box-shadow: 0 0 0 4px var(--blocklyFieldSliderThumbBorderColor);
+    cursor: pointer;
+}
+
+
+.field-text-quote {
+    fill: #a31515 !important;
+}
+
+
+.pxt-renderer.classic-theme .blocklyDraggable:not(.blocklyDisabled) .blocklyFieldLedMatrixGroup.blocklyEditableField:not(.blocklyEditing):hover>rect {
+    stroke: none;
+}
+.pxt-renderer.classic-theme .blocklyDraggable:not(.blocklyDisabled) .blocklyFieldLedMatrixGroup.blocklyActiveFocus.blocklyEditableField:not(.blocklyEditing):hover>rect {
+    stroke: var(--blockly-active-node-color);
+    stroke-width: var(--blockly-selection-width);
+}
+.pxt-renderer.classic-theme .blocklyDraggable:not(.blocklyDisabled) .blocklyFieldLedMatrixGroup.blocklyPassiveFocus.blocklyEditableField:not(.blocklyEditing):hover>rect {
+    stroke: var(--blockly-active-node-color);
+    stroke-dasharray: 5px 3px;
+    stroke-width: var(--blockly-selection-width);
+}
+.blocklyFieldLedMatrixGroup > .blocklyFieldRect {
+    fill: none !important;
+}
+
+.saturation-value-handle {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    border: 2px solid white;
+}
+input[type=range].blocklyFieldSlider.hueSlider {
+    height: 35px;
+}
+input[type=range].blocklyFieldSlider.hueSlider::-webkit-slider-runnable-track {
+    margin-top: 10px;
+    height: 11px;
+}
+input[type=range].blocklyFieldSlider.hueSlider::-webkit-slider-thumb {
+    margin-top: -7px;
+    -webkit-box-shadow: 0 0 0 2px var(--blocklyFieldSliderThumbBorderColor);
+    -moz-box-shadow: 0 0 0 2px var(--blocklyFieldSliderThumbBorderColor);
+    box-shadow: 0 0 0 2px var(--blocklyFieldSliderThumbBorderColor);
+}
+input[type=range].blocklyFieldSlider.hueSlider::-moz-range-track {
+    margin-top: 10px;
+    height: 11px;
+}
+input[type=range].blocklyFieldSlider.hueSlider::-moz-range-thumb {
+    margin-top: -7px;
+    -webkit-box-shadow: 0 0 0 2px var(--blocklyFieldSliderThumbBorderColor);
+    -moz-box-shadow: 0 0 0 2px var(--blocklyFieldSliderThumbBorderColor);
+    box-shadow: 0 0 0 2px var(--blocklyFieldSliderThumbBorderColor);
+}
+input.screen-reader-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+    white-space: nowrap;
+    border-width: 0;
+}
+
+
+
+.argumentEditorInput {
+    overflow: visible;
+}
+
+.functioneditor i.argumentEditorTypeIcon {
+    color: var(--pxt-target-foreground1);
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 40px;
+    left: 50%;
+    margin-left: -12px;
+}
+
+.argumentEditorRemoveIcon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: -40px;
+    left: 50%;
+    margin-left: -12px;
+    cursor: pointer;
+}
+
+
+
+.blockly-dotted-outline-on-hover {
+    transition: stroke .4s;
+}
+.blockly-dotted-outline-on-hover.hover {
+    stroke-dasharray: 2;
+    stroke: white;
+    stroke-width: 2;
+}
+.blocklyDisabledPattern>.blocklyPath.pxtRendererHighlight {
+    fill: none;
+}
+
+
+.blocklyDropdownMenu .blocklyMenuItemCheckbox {
+    filter: contrast(0) brightness(100);
+}
+
+.blocklyVerticalMarker {
+    fill: none;
+}
+
+
+.pxtFlyoutHidden {
+    display: none;
+}
+
+
+.blocklyBubble .blocklyDeleteIcon, .blocklyBubble .blocklyFoldoutIcon {
+    filter: grayscale(100%) brightness(100000);
+}
+
+.blocklyBubble .blocklyTextarea.blocklyText {
+    color: #575E75;
+}
+
+
+.blocklyTextInputBubble .blocklyTextarea {
+  background-color: var(--commentFillColour);
+  border: 0;
+  display: block;
+  margin: 0;
+  outline: 0;
+  padding: 3px;
+  resize: none;
+  text-overflow: hidden;
+}
+
+
+.blockly-ws-search {
+    background: var(--pxt-neutral-background1);
+    color: var(--pxt-neutral-foreground1);
+    border: solid var(--pxt-neutral-alpha50) 1px;
+    border-top: none;
+    border-right: none;
+    box-shadow: 0px 2px 15px var(--pxt-neutral-alpha50);
+}
+
+.blockly-ws-search input {
+    -webkit-tap-highlight-color: transparent;
+    background: var(--pxt-neutral-background1);
+    color: var(--pxt-neutral-foreground1);
+    border: none;
+}
+
+.blockly-ws-search input::-webkit-input-placeholder {
+    color: var(--pxt-neutral-alpha50);
+}
+
+.blockly-ws-search input::-moz-placeholder {
+    color: var(--pxt-neutral-alpha50);
+}
+
+.blockly-ws-search input::-ms-input-placeholder {
+    color: var(--pxt-neutral-alpha50);
+}
+
+.blockly-ws-search input:active,
+.blockly-ws-search input:focus {
+    border-color: var(--pxt-neutral-alpha50);
+    background: var(--pxt-neutral-background1);
+    color: var(--pxt-neutral-foreground1);
+}
+
+.blockly-ws-search input::selection {
+    color: var(--pxt-neutral-foreground1);
+}
+
+.blockly-ws-search button {
+    padding-left: 6px;
+    padding-right: 6px;
+    color: var(--pxt-neutral-foreground1);
+}</style>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <script type="text/javascript">
+    if(/[&?]translate=1/.test(window.location.href)) {
+		var _jipt = [];
+        _jipt.push(['project', 'makecode']);
+        _jipt.push(['escape', function() {
+            window.location.href = window.location.href.replace(/[$\?]translate=1/, '');
+        }]);
+        _jipt.push(['before_dom_insert', function(text, node, attribute) {
+            if (text)
+                text = text.replace(/^\{(id|loc):[^\}]+\}/g, '');
+            return text;
+        }]);
+        // inject crowdin
+        (function _() {
+            var s = document.createElement("script");
+            s.setAttribute("type", "text/javascript");
+            s.setAttribute("src", "//cdn.crowdin.com/jipt/jipt.js");
+            document.head.insertBefore(s, document.head.firstElementChild);
+        })();
+    }
+	</script>
+
+    
+<!-- include appmeta.html -->
+
+<!-- include robotsmeta.html -->
+
+<!-- end include robotsmeta.html -->
+
+<title>Microsoft MakeCode for micro:bit</title>
+<meta name="description" content="A Blocks / JavaScript code editor for the micro:bit powered by Microsoft MakeCode.">
+<link rel="manifest" href="https://makecode.microbit.org/blob/32fc0ea616f1323c58a8aa15cc7285f13d6aa407/sim.webmanifest">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Microsoft MakeCode for micro:bit">
+<meta name="apple-mobile-web-app-status-bar-style" content="translucent-black">
+<meta name="format-detection" content="telephone=no">
+<meta name="application-name" content="Microsoft MakeCode for micro:bit">
+<meta name="apple-itunes-app" content="app-id=1092687276">
+<meta name="msapplication-TileColor" content="#5C005C">
+<meta name="msapplication-TileImage" content="https://cdn.makecode.com/blob/4de54063603c8d16531078818a83f7c29a3588fa/static/icons/apple-touch-icon.png">
+<meta name="msapplication-config" content="none">
+<meta name="theme-color" content="#5C005C">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="">
+<meta name="twitter:title" content="Microsoft MakeCode for micro:bit">
+<meta name="twitter:description" content="A Blocks / JavaScript code editor for the micro:bit powered by Microsoft MakeCode.">
+<meta name="twitter:image" content="https://cdn.makecode.com/blob/4de54063603c8d16531078818a83f7c29a3588fa/static/icons/apple-touch-icon.png">
+
+<meta property="og:title" content="Microsoft MakeCode for micro:bit">
+<meta property="og:site_name" content="Microsoft MakeCode for micro:bit">
+<meta property="og:description" content="A Blocks / JavaScript code editor for the micro:bit powered by Microsoft MakeCode.">
+<meta property="og:image" content="https://cdn.makecode.com/blob/4de54063603c8d16531078818a83f7c29a3588fa/static/icons/apple-touch-icon.png">
+
+<link rel="apple-touch-icon" href="https://cdn.makecode.com/blob/4de54063603c8d16531078818a83f7c29a3588fa/static/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="https://cdn.makecode.com/blob/4de54063603c8d16531078818a83f7c29a3588fa/static/icons/apple-touch-icon.png">
+<link rel="shortcut icon" href="https://cdn.makecode.com/blob/4de54063603c8d16531078818a83f7c29a3588fa/static/icons/apple-touch-icon.png">
+
+<!-- end include appmeta.html -->
+
+
+    <link rel="stylesheet" data-rtl="https://cdn.makecode.com/blob/8fe9a8f78d183e7c2fd41226012cb65573902656/rtlsemantic.css" href="./semantic.css" type="text/css">
+<script src="./ai.2.min.js.download"></script><style>.immersive-reader-button{cursor:pointer;display:inline-block;padding:5px;} .immersive-reader-button:hover{background:rgba(0,0,0,.05);border-radius:2px</style><style id="theme-override">.pxt-theme-root { --pxt-header-background: #3454D1;
+--pxt-header-foreground: #FFFFFF;
+--pxt-header-background-hover: #1d3282;
+--pxt-header-foreground-hover: #FFFFFF;
+--pxt-header-stencil: #2742ab;
+--pxt-primary-background: #6633cc;
+--pxt-primary-foreground: #FFFFFF;
+--pxt-primary-background-hover: #5C2EB8;
+--pxt-primary-foreground-hover: #FFFFFF;
+--pxt-primary-accent: #5229A3;
+--pxt-secondary-background: #3454D1;
+--pxt-secondary-foreground: #FFFFFF;
+--pxt-secondary-background-hover: #2742ab;
+--pxt-secondary-foreground-hover: #FFFFFF;
+--pxt-secondary-accent: #516DD8;
+--pxt-tertiary-background: #3454D1;
+--pxt-tertiary-foreground: #FFFFFF;
+--pxt-tertiary-background-hover: #2742ab;
+--pxt-tertiary-foreground-hover: #FFFFFF;
+--pxt-tertiary-accent: #1d3282;
+--pxt-target-background1: #ECF0F1;
+--pxt-target-foreground1: #000000;
+--pxt-target-background1-hover: #cfd9db;
+--pxt-target-foreground1-hover: #000000;
+--pxt-target-stencil1: #e1e1e1;
+--pxt-target-background2: #FDFDFF;
+--pxt-target-foreground2: #000000;
+--pxt-target-background2-hover: #cacaff;
+--pxt-target-foreground2-hover: #000000;
+--pxt-target-stencil2: #e1e1e1;
+--pxt-target-background3: #FFFFFF;
+--pxt-target-foreground3: #000000;
+--pxt-target-background3-hover: #e6e6e6;
+--pxt-target-foreground3-hover: #000000;
+--pxt-target-stencil3: #e1e1e1;
+--pxt-neutral-background1: #FFFFFF;
+--pxt-neutral-foreground1: rgba(0,0,0,.85);
+--pxt-neutral-background1-hover: #e6e6e6;
+--pxt-neutral-foreground1-hover: rgba(0,0,0,.85);
+--pxt-neutral-stencil1: rgba(34, 74, 114, 0.15);
+--pxt-neutral-background2: #F8F8F8;
+--pxt-neutral-foreground2: rgba(0,0,0,.85);
+--pxt-neutral-background2-hover: #DFDFDF;
+--pxt-neutral-foreground2-hover: rgba(0,0,0,.85);
+--pxt-neutral-stencil2: #e9eef2;
+--pxt-neutral-background3: #617374;
+--pxt-neutral-foreground3: #FFFFFF;
+--pxt-neutral-background3-hover: #363c3d;
+--pxt-neutral-foreground3-hover: #FFFFFF;
+--pxt-neutral-stencil3: #FFFFFF;
+--pxt-neutral-background3-alpha90: #617374E5;
+--pxt-neutral-base: rgba(0, 0, 0, 1);
+--pxt-neutral-alpha0: rgba(0, 0, 0, 0);
+--pxt-neutral-alpha10: rgba(0, 0, 0, 0.1);
+--pxt-neutral-alpha20: rgba(0, 0, 0, 0.2);
+--pxt-neutral-alpha50: rgba(0, 0, 0, 0.5);
+--pxt-neutral-alpha80: rgba(0, 0, 0, 0.8);
+--pxt-link: #3977B4;
+--pxt-link-hover: #204467;
+--pxt-focus-border: #0078D4;
+--pxt-success: #2ECC71;
+--pxt-pxt-success-foreground: #000000;
+--pxt-pxt-success-hover: #22BE64;
+--pxt-pxt-success-alpha10: #2ECC7119;
+--pxt-warning: #FFD43A;
+--pxt-warning-foreground: #000000;
+--pxt-warning-hover: #FFCE21;
+--pxt-warning-alpha10: #FFD43A19;
+--pxt-error: #FF3A54;
+--pxt-error-foreground: #000000;
+--pxt-error-hover: #FF213E;
+--pxt-error-alpha10: #FF3A5419;
+--pxt-colors-purple-background: #9932cc;
+--pxt-colors-purple-foreground: #FFFFFF;
+--pxt-colors-purple-hover: #7a28a3;
+--pxt-colors-purple-alpha10: #9932cc19;
+--pxt-colors-orange-background: #ff7f50;
+--pxt-colors-orange-foreground: #FFFFFF;
+--pxt-colors-orange-hover: #ff5a1d;
+--pxt-colors-orange-alpha10: #ff7f5019;
+--pxt-colors-brown-background: #663905;
+--pxt-colors-brown-foreground: #FFFFFF;
+--pxt-colors-brown-hover: #351e03;
+--pxt-colors-brown-alpha10: #66390519;
+--pxt-colors-blue-background: #3454D1;
+--pxt-colors-blue-foreground: #FFFFFF;
+--pxt-colors-blue-hover: #2742ab;
+--pxt-colors-blue-alpha10: #3454D119;
+--pxt-colors-green-background: #107c10;
+--pxt-colors-green-foreground: #FFFFFF;
+--pxt-colors-green-hover: #096a09;
+--pxt-colors-green-alpha10: #107c1019;
+--pxt-colors-red-background: #E41B21;
+--pxt-colors-red-foreground: #FFFFFF;
+--pxt-colors-red-hover: #d60f15;
+--pxt-colors-red-alpha10: #e41b2119;
+--pxt-colors-teal-background: #2C7485;
+--pxt-colors-teal-foreground: #FFFFFF;
+--pxt-colors-teal-hover: #1f535f;
+--pxt-colors-teal-alpha10: #2C748519;
+--pxt-colors-yellow-background: #FDE74C;
+--pxt-colors-yellow-foreground: #000000;
+--pxt-colors-yellow-hover: #fce01a;
+--pxt-colors-yellow-alpha10: #FDE74C19;
+#simulator .editor-sidebar .filemenu {
+    --pxt-focus-border: yellow;
+}
+
+/* Lots of specificity to override another !important rule */
+#simulator #editorSidebar .simtoolbar .ui.icon.tiny.buttons .ui.button.play-button.play .icon.play {
+    color: var(--pxt-colors-green-background) !important;
+}
+
+.theme-preview-microbit-light .theme-preview-sim-button {
+    background-color: var(--pxt-neutral-background2) !important;
+}
+
+#filelist, #editortools {
+    /* Special textured backgrounds, but we only have assets for light theme */
+    background: #fff url("/static/logo_texture.png") 0 0 repeat !important;
+}
+
+/*
+ * Adjustments to match the original micro:bit theme
+ */
+path.blocklyFlyoutBackground {
+    fill: #4b4949 !important;
+}
+
+.monacoFlyout {
+    background: #4b4949 !important;
+}
+
+#simulator .editor-sidebar .filemenu {
+    background: var(--pxt-secondary-background);
+    color: var(--pxt-secondary-foreground);
+}
+
+#simulator .editor-sidebar .filemenu .item:hover, #simulator .editor-sidebar .filemenu .link.item:hover {
+    background: var(--pxt-secondary-background-hover) !important;
+    color: var(--pxt-secondary-foreground-hover) !important;
+}
+
+#simulator .ui.button.play-button .icon.play {
+    color: var(--pxt-colors-green-background) !important;
+}
+
+.simtoolbar .ui.button.icon {
+    background-color: #e0e1e2;
+    color: rgba(0,0,0,.6);
+}
+
+.simtoolbar .ui.button.icon:hover {
+    filter: none;
+    background-color: rgb(224, 225, 226);
+}
+
+#serialPreview .label {
+    border-color: var(--pxt-primary-background);
+}
+
+.ui.dimmer {
+    /* Matches color specified in dimmer.variables, but with partial transparency */
+    background-color: rgba(52, 84, 209, 0.4) !important;
+}
+ }</style><style type="text/css">.ui.accent { color: #5C005C; }
+                .ui.inverted.menu .accent.active.item, .ui.inverted.accent.menu  { background-color: #5C005C; }</style><link href="./blockly.css" rel="stylesheet" type="text/css" id="style-blockly.css"></head>
+
+<body class="main pxt-theme-root"><div style="display: none;" id="lightningjs-usabilla_live"><div><iframe frameborder="0" id="lightningjs-frame-usabilla_live" src="./saved_resource(1).html"></iframe></div></div>
+    <div id="pxt-aria-live" class="sr-only" aria-live="polite"></div>
+    
+
+    <div id="custom-content">
+    </div>
+    <div id="blocks-editor-field-div">
+    </div>
+
+    <div id="allcontent">
+        <div id="editorcontent">
+            <div id="content" class="ui dimmable full-abs"><div id="root" class="ui dimmable controller tutorialSimSidebar has-touch hideMenuBar full-abs"><div id="simulator" class="simulator"><div id="editorSidebar" class="editor-sidebar tutorial-sim"><div class="simulator-container"><div class="ui items simPanel invisibleScrollbar"><div id="boardview" class="ui vertical editorFloat" role="region" aria-label="Simulator" tabindex="-1"><div id="simulators" class="simulator"><div class="simframe ui embed" tabindex="0" style="padding-bottom: 81.9672%;"><iframe id="sim-frame-0065490697879638930.9575577421411176" title="Simulator" allowfullscreen="" allow="autoplay;microphone" sandbox="allow-same-origin allow-scripts" class="no-select grayscale" src="./---simulator.html" frameborder="0" data-runid="1083798749594209380.07530835472843878" data-origin="https://trg-microbit.userpxt.io" style="" data-runtimeid="green-3084956451565681170.04240537279396983"></iframe><i class="" style="display: none;"></i><div class="ui active loader" style="display: none;"></div></div></div><div id="debugger" class="ui item landscape only"></div></div><aside class="ui item grid centered simtoolbar portrait " role="complementary" aria-label="Simulator toolbar"><div class="ui icon tiny buttons" style="padding: 0px;"><button class="ui button icon  play-button  play" title="Start the simulator" tabindex="0" aria-disabled="false"><i class="icon play green " aria-hidden="true" role="presentation"></i></button><button class="ui button icon  fullscreen-button tablet only hidefullscreen" title="Launch in fullscreen" tabindex="0"><i class="fas fa-expand-alt fa-flip-horizontal " aria-hidden="true" role="presentation"></i></button><button class="ui button icon  restart-button" title="Restart the simulator" tabindex="0" aria-disabled="false"><i class="icon refresh " aria-hidden="true" role="presentation"></i></button><button class="ui button icon  debug-button " title="Toggle debug mode" tabindex="0" aria-disabled="false"><i class="icon icon bug " aria-hidden="true" role="presentation"></i></button><button class="ui button icon  expand-button portrait only editortools-btn hidefullscreen" title="Hide the simulator" tabindex="0"><i class="icon stop " aria-hidden="true" role="presentation"></i></button></div><div class="ui icon tiny buttons computer only" style="padding: 0px;"><button class="ui button icon   mute-button " title="Mute audio" tabindex="0" aria-disabled="false"><i class="icon volume up " aria-hidden="true" role="presentation"></i></button></div><div class="ui icon tiny buttons computer only" style="padding: 0px;"><button class="disabled ui button icon  screenshot-button " title="Take Screenshot" tabindex="0" aria-disabled="true"><i class="icon icon camera left " aria-hidden="true" role="presentation"></i></button><button class="ui button icon  fullscreen-button" title="Launch in fullscreen" tabindex="0"><i class="fas fa-flip-horizontal fa-expand-alt " aria-hidden="true" role="presentation"></i></button></div></aside><div class="ui item portrait hide hidefullscreen"></div><div class="ui item grid centered portrait hide hidefullscreen"></div><div class="ui item grid centered portrait hide hidefullscreen"></div><div id="serialPreview" class="ui editorFloat portrait hide hidefullscreen"><div></div><div></div></div><div id="miniSimOverlay" role="button" title="Open in fullscreen"></div></div></div></div></div><div id="maineditor" class="" role="main" aria-hidden="false"><button class="ui button icon  computer only collapse-button large" id="computertogglesim" title="Hide the simulator" tabindex="0"><i class="icon inverted chevron left " aria-hidden="true" role="presentation"></i></button><div class="full-abs" id="pxtJsonEditor" style="display: none;"></div><div class="full-abs" id="githubEditor" style="display: none;"></div><div class="full-abs" id="blocksArea" style="display: block;"><div class="blocksAndErrorList"><div class="blocksEditorOuter"><div id="blocksEditor"><div class="injectionDiv pxt-renderer classic-theme" role="application" dir="LTR" style="--blocklyGridPattern: url(#blocklyGridPattern47349963435280396); --blocklyEmbossFilter: url(#blocklyEmbossFilter6606150759966907); --blocklyDisabledPattern: url(#blocklyDisabledPattern6606150759966907); --blocklyDebugFilter: url(#blocklyDebugFilter6606150759966907); --blocklySelectedGlowFilter: url(#blocklySelectedGlowFilter6606150759966907);"><div layout="v" class="blocklyToolbox" dir="LTR" id="blockly-2" style="left: 0px; height: 100%;"><div class="blocklyToolboxCategoryGroup" tabindex="-1"><div style="" class="pxtToolbox coloredToolbox" id="blocksEditorToolbox"><style>
+                    span.docs.inlineblock.basic {
+                        --inline-namespace-color: #1E90FF;
+                    }
+                    
+                    span.docs.inlineblock.input {
+                        --inline-namespace-color: #D400D4;
+                    }
+                    
+                    span.docs.inlineblock.input {
+                        --inline-namespace-color: #D400D4;
+                    }
+                    
+                    span.docs.inlineblock.music {
+                        --inline-namespace-color: #E63022;
+                    }
+                    
+                    span.docs.inlineblock.led {
+                        --inline-namespace-color: #5C2D91;
+                    }
+                    
+                    span.docs.inlineblock.led {
+                        --inline-namespace-color: #5C2D91;
+                    }
+                    
+                    span.docs.inlineblock.radio {
+                        --inline-namespace-color: #E3008C;
+                    }
+                    
+                    span.docs.inlineblock.radio {
+                        --inline-namespace-color: #E3008C;
+                    }
+                    
+                    span.docs.inlineblock.loops {
+                        --inline-namespace-color: #00AA00;
+                    }
+                    
+                    span.docs.inlineblock.logic {
+                        --inline-namespace-color: #00A4A6;
+                    }
+                    
+                    span.docs.inlineblock.variables {
+                        --inline-namespace-color: #DC143C;
+                    }
+                    
+                    span.docs.inlineblock.math {
+                        --inline-namespace-color: #9400D3;
+                    }
+                    
+                    span.docs.inlineblock.addpackage {
+                        --inline-namespace-color: #717171;
+                    }
+                    
+                    span.docs.inlineblock.functions {
+                        --inline-namespace-color: #3455DB;
+                    }
+                    
+                    span.docs.inlineblock.arrays {
+                        --inline-namespace-color: #E65722;
+                    }
+                    
+                    span.docs.inlineblock.text {
+                        --inline-namespace-color: #B8860B;
+                    }
+                    
+                    span.docs.inlineblock.game {
+                        --inline-namespace-color: #007A4B;
+                    }
+                    
+                    span.docs.inlineblock.game {
+                        --inline-namespace-color: #007A4B;
+                    }
+                    
+                    span.docs.inlineblock.images {
+                        --inline-namespace-color: #7600A8;
+                    }
+                    
+                    span.docs.inlineblock.pins {
+                        --inline-namespace-color: #B22222;
+                    }
+                    
+                    span.docs.inlineblock.pins {
+                        --inline-namespace-color: #B22222;
+                    }
+                    
+                    span.docs.inlineblock.serial {
+                        --inline-namespace-color: #002050;
+                    }
+                    
+                    span.docs.inlineblock.serial {
+                        --inline-namespace-color: #002050;
+                    }
+                    
+                    span.docs.inlineblock.control {
+                        --inline-namespace-color: #333333;
+                    }
+                    
+                    span.docs.inlineblock.control {
+                        --inline-namespace-color: #333333;
+                    }
+                    </style><div id="blocklySearchArea"><div id="blocklySearchInput" class="ui fluid icon input" role="search" data-dashlane-rid="67b82b78777727d8"><input type="text" placeholder="Search..." class="blocklySearchInputField" aria-label="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-dashlane-rid="49d25c960a5d88ee"><i class="search icon" role="presentation" aria-hidden="true"></i><div class="accessible-hidden" id="blocklySearchLabel" aria-live="polite"></div></div></div><div class="blocklyTreeRoot"><div class="blocklyTreeInner" id="blocks-toolbox-tree" role="tree" aria-label="Toolbox" tabindex="0"><div id="blocks-basic" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-basic.label" class=""><div class="blocklyTreeRow" data-ns="basic" style="padding-left: 0px; --block-meta-color: #1E90FF; --block-faded-color: #1565b3;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconbasic" role="presentation"></span><span id="blocks-basic.label" class="blocklyTreeLabel">Basic</span></div></div></div><div id="blocks-input" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-input.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="input" style="padding-left: 0px; --block-meta-color: #D400D4; --block-faded-color: #940094; animation-delay: 1.15s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconinput" role="presentation"></span><span id="blocks-input.label" class="blocklyTreeLabel">Input</span></div></div></div><div id="blocks-inputmore" role="treeitem" aria-selected="false" tabindex="-1" aria-label="Input more" class="sr-only"><div class="blocklyTreeRow" data-ns="input" style="padding-left: 0px; --block-meta-color: #D400D4; --block-faded-color: #940094;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmore" role="presentation"></span><span id="blocks-inputmore.label" class="blocklyTreeLabel">more</span></div></div></div><div id="blocks-music" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-music.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="music" style="padding-left: 0px; --block-meta-color: #E63022; --block-faded-color: #a12218; animation-delay: 1.3s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmusic" role="presentation"></span><span id="blocks-music.label" class="blocklyTreeLabel">Music</span></div></div></div><div id="blocks-led" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-led.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="led" style="padding-left: 0px; --block-meta-color: #5C2D91; --block-faded-color: #402066; animation-delay: 1.45s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconled" role="presentation"></span><span id="blocks-led.label" class="blocklyTreeLabel">LED</span></div></div></div><div id="blocks-ledmore" role="treeitem" aria-selected="false" tabindex="-1" aria-label="LED more" class="sr-only"><div class="blocklyTreeRow" data-ns="led" style="padding-left: 0px; --block-meta-color: #5C2D91; --block-faded-color: #402066;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmore" role="presentation"></span><span id="blocks-ledmore.label" class="blocklyTreeLabel">more</span></div></div></div><div id="blocks-radio" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-radio.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="radio" style="padding-left: 0px; --block-meta-color: #E3008C; --block-faded-color: #9f0062; animation-delay: 1.6s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconradio" role="presentation"></span><span id="blocks-radio.label" class="blocklyTreeLabel">Radio</span></div></div></div><div id="blocks-radiomore" role="treeitem" aria-selected="false" tabindex="-1" aria-label="Radio more" class="sr-only"><div class="blocklyTreeRow" data-ns="radio" style="padding-left: 0px; --block-meta-color: #E3008C; --block-faded-color: #9f0062;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmore" role="presentation"></span><span id="blocks-radiomore.label" class="blocklyTreeLabel">more</span></div></div></div><div id="blocks-loops" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-loops.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="loops" style="padding-left: 0px; --block-meta-color: #00AA00; --block-faded-color: #007700; animation-delay: 1.75s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconloops" role="presentation"></span><span id="blocks-loops.label" class="blocklyTreeLabel">Loops</span></div></div></div><div id="blocks-logic" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-logic.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="logic" style="padding-left: 0px; --block-meta-color: #00A4A6; --block-faded-color: #007374; animation-delay: 1.9s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconlogic" role="presentation"></span><span id="blocks-logic.label" class="blocklyTreeLabel">Logic</span></div></div></div><div id="blocks-variables" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-variables.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="variables" style="padding-left: 0px; --block-meta-color: #DC143C; --block-faded-color: #9a0e2a; animation-delay: 2.05s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconvariables" role="presentation"></span><span id="blocks-variables.label" class="blocklyTreeLabel">Variables</span></div></div></div><div id="blocks-Math" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-Math.label" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="Math" style="padding-left: 0px; --block-meta-color: #9400D3; --block-faded-color: #680094; animation-delay: 2.2s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmath" role="presentation"></span><span id="blocks-Math.label" class="blocklyTreeLabel">Math</span></div></div></div><div id="blocks-addpackage" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-addpackage.label" aria-haspopup="dialog" class=""><div class="blocklyTreeRow blocklyTreeAnimate" data-ns="addpackage" style="padding-left: 0px; --block-meta-color: #717171; --block-faded-color: #4f4f4f; animation-delay: 2.35s;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconaddpackage" role="presentation"></span><span id="blocks-addpackage.label" class="blocklyTreeLabel">Extensions</span></div></div></div><div class="blocklyTreeSeparator"><span role="presentation" style="display: inline-block;"></span></div><div id="blocks-advanced" role="treeitem" tabindex="-1" aria-labelledby="blocks-advanced.label" class="" aria-hidden="true"><div class="blocklyTreeRow" data-ns="advancedcollapsed" style="padding-left: 0px; --block-meta-color: #00272B; --block-faded-color: #001b1e;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconadvanced" role="presentation"></span><span id="blocks-advanced.label" class="blocklyTreeLabel">Advanced</span></div></div></div><div id="blocks-functions" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-functions.label" class="sr-only"><div class="blocklyTreeRow" data-ns="functions" style="padding-left: 0px; --block-meta-color: #3455DB; --block-faded-color: #243c99;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconfunctions" role="presentation"></span><span id="blocks-functions.label" class="blocklyTreeLabel">Functions</span></div></div></div><div id="blocks-arrays" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-arrays.label" class="sr-only"><div class="blocklyTreeRow" data-ns="arrays" style="padding-left: 0px; --block-meta-color: #E65722; --block-faded-color: #a13d18;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconarrays" role="presentation"></span><span id="blocks-arrays.label" class="blocklyTreeLabel">Arrays</span></div></div></div><div id="blocks-text" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-text.label" class="sr-only"><div class="blocklyTreeRow" data-ns="text" style="padding-left: 0px; --block-meta-color: #B8860B; --block-faded-color: #815e08;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIcontext" role="presentation"></span><span id="blocks-text.label" class="blocklyTreeLabel">Text</span></div></div></div><div id="blocks-game" role="treeitem" aria-selected="false" tabindex="-1" aria-expanded="false" aria-labelledby="blocks-game.label" class="sr-only"><div class="blocklyTreeRow" data-ns="game" style="padding-left: 0px; --block-meta-color: #007A4B; --block-faded-color: #005535;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIcongame" role="presentation"></span><span id="blocks-game.label" class="blocklyTreeLabel">Game</span></div></div></div><div id="blocks-gamemore" role="treeitem" aria-selected="false" tabindex="-1" aria-label="Game more" class="sr-only"><div class="blocklyTreeRow" data-ns="game" style="padding-left: 0px; --block-meta-color: #007A4B; --block-faded-color: #005535;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmore" role="presentation"></span><span id="blocks-gamemore.label" class="blocklyTreeLabel">more</span></div></div></div><div id="blocks-images" role="treeitem" aria-selected="false" tabindex="-1" aria-labelledby="blocks-images.label" class="sr-only"><div class="blocklyTreeRow" data-ns="images" style="padding-left: 0px; --block-meta-color: #7600A8; --block-faded-color: #530076;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconimages" role="presentation"></span><span id="blocks-images.label" class="blocklyTreeLabel">Images</span></div></div></div><div id="blocks-pins" role="treeitem" aria-selected="false" tabindex="-1" aria-expanded="false" aria-labelledby="blocks-pins.label" class="sr-only"><div class="blocklyTreeRow" data-ns="pins" style="padding-left: 0px; --block-meta-color: #B22222; --block-faded-color: #7d1818;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconpins" role="presentation"></span><span id="blocks-pins.label" class="blocklyTreeLabel">Pins</span></div></div></div><div id="blocks-pinsmore" role="treeitem" aria-selected="false" tabindex="-1" aria-label="Pins more" class="sr-only"><div class="blocklyTreeRow" data-ns="pins" style="padding-left: 0px; --block-meta-color: #B22222; --block-faded-color: #7d1818;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmore" role="presentation"></span><span id="blocks-pinsmore.label" class="blocklyTreeLabel">more</span></div></div></div><div id="blocks-serial" role="treeitem" aria-selected="false" tabindex="-1" aria-expanded="false" aria-labelledby="blocks-serial.label" class="sr-only"><div class="blocklyTreeRow" data-ns="serial" style="padding-left: 0px; --block-meta-color: #002050; --block-faded-color: #001638;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconserial brandIcon" role="presentation"></span><span id="blocks-serial.label" class="blocklyTreeLabel">Serial</span></div></div></div><div id="blocks-serialmore" role="treeitem" aria-selected="false" tabindex="-1" aria-label="Serial more" class="sr-only"><div class="blocklyTreeRow" data-ns="serial" style="padding-left: 0px; --block-meta-color: #002050; --block-faded-color: #001638;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmore" role="presentation"></span><span id="blocks-serialmore.label" class="blocklyTreeLabel">more</span></div></div></div><div id="blocks-control" role="treeitem" aria-selected="false" tabindex="-1" aria-expanded="false" aria-labelledby="blocks-control.label" class="sr-only"><div class="blocklyTreeRow" data-ns="control" style="padding-left: 0px; --block-meta-color: #333333; --block-faded-color: #242424;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconcontrol" role="presentation"></span><span id="blocks-control.label" class="blocklyTreeLabel">Control</span></div></div></div><div id="blocks-controlmore" role="treeitem" aria-selected="false" tabindex="-1" aria-label="Control more" class="sr-only"><div class="blocklyTreeRow" data-ns="control" style="padding-left: 0px; --block-meta-color: #333333; --block-faded-color: #242424;"><div class="blocklyTreeRowContentContainer"><span class="blocklyTreeIcon" role="presentation"></span><span class="blocklyTreeIcon pxt-toolbox-icon blocklyTreeIconmore" role="presentation"></span><span id="blocks-controlmore.label" class="blocklyTreeLabel">more</span></div></div></div></div></div></div><div id="debuggerToolbox"><div></div></div></div></div><svg role="none" class="blocklyFlyout blocklyToolboxFlyout" style="display: none;"><path class="blocklyFlyoutBackground"></path><g role="none" class="blocklyWorkspace" id="AAV0XkuA_W:O*t}f$l1@" tabindex="0"><rect fill="none" class="blocklyWorkspaceSelectionRing"></rect><rect fill="none" class="blocklyWorkspaceFocusRing"></rect><g role="none" class="blocklyBlockCanvas"></g><g role="none" class="blocklyBubbleCanvas"></g><defs></defs><defs></defs><defs><filter id="blocklyErrorHighlightedGlowFilter3976088797347591" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="1.1"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#FF0000" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter><filter id="blocklyBubbleEmbossGlowFilter3976088797347591" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="0.92"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#000000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite><femerge><femergenode in="outBlur"></femergenode><femergenode in="outGlow"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter></defs><defs><filter id="blocklyEmbossFilter3976088797347591"><fegaussianblur in="SourceAlpha" stdDeviation="1" result="blur"></fegaussianblur><fespecularlighting in="blur" surfaceScale="1" specularConstant="0.5" specularExponent="10" lighting-color="white" result="specOut"><fepointlight x="-5000" y="-10000" z="20000"></fepointlight></fespecularlighting><fecomposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"></fecomposite><fecomposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></fecomposite></filter><pattern id="blocklyDisabledPattern3976088797347591" patternUnits="userSpaceOnUse" width="10" height="10"><rect width="10" height="10" fill="#aaa"></rect><path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0"></path></pattern><filter id="blocklyDebugFilter3976088797347591" height="160%" width="180%" y="-30%" x="-40%"><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#ff0000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter></defs><defs><filter id="blocklySelectedGlowFilter3976088797347591" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="0.5"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#fff200" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter></defs><defs><filter id="blocklyHighlightedGlowFilter3976088797347591" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="1.1"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#FFF200" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter><filter id="blocklyErrorHighlightedGlowFilter3976088797347591" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="1.1"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#FF0000" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter><filter id="blocklyBubbleEmbossGlowFilter3976088797347591" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="0.92"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#000000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite><femerge><femergenode in="outBlur"></femergenode><femergenode in="outGlow"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter></defs></g></svg><svg role="none" class="blocklyScrollbarVertical blocklyFlyoutScrollbar" width="25"><g role="none"><rect class="blocklyScrollbarBackground" width="25"></rect><rect class="blocklyScrollbarHandle" rx="10" ry="10" width="20" x="2.5"></rect></g></svg><div class="blockly-ws-search" style="display: none; right: 0px; top: 0px;"><div class="blockly-ws-search-container"><div class="blockly-ws-search-content"><div class="blockly-ws-search-input"><input type="text" placeholder="Search"></div><div class="blockly-ws-search-actions"><button class="blockly-ws-search-next-btn" aria-label="Find next"></button><button class="blockly-ws-search-previous-btn" aria-label="Find previous"></button></div></div><button class="blockly-ws-search-close-btn" aria-label="Close search bar"></button></div></div><svg role="none" xmlns="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="blocklySvg" width="848px" data-cached-width="848" height="492px" data-cached-height="492" style="display: block;"><defs><pattern id="blocklyGridPattern47349963435280396" patternUnits="userSpaceOnUse" width="40.5" height="40.5" x="210" y="10"><line stroke="rgba(189, 195, 199, 0.30)" stroke-width="0.9" x1="17.1" y1="20.25" x2="23.400000000000002" y2="20.25"></line><line stroke="rgba(189, 195, 199, 0.30)" stroke-width="0.9" x1="20.25" y1="17.1" x2="20.25" y2="23.400000000000002"></line></pattern></defs><g role="region" class="blocklyWorkspace blocklyPassiveFocus" id="a!E]Xlct]M#aU)sGwB1i" aria-label="Blocks workspace." tabindex="0" aria-owns=""><rect height="100%" width="100%" class="blocklyMainBackground" style="fill: var(--blocklyGridPattern);"></rect><rect fill="none" class="blocklyWorkspaceSelectionRing" id="a!E]Xlct]M#aU)sGwB1i_focusTarget" role="figure" aria-roledescription="workspace" aria-label="1 stack of blocks" x="205" y="5" width="638" height="482"></rect><rect fill="none" class="blocklyWorkspaceFocusRing" x="200" y="0" width="648" height="492"></rect><g role="none" class="blocklyBlockCanvas" transform="translate(210, 10) scale(0.9)"><g role="none" class="device_forever blocklyBlock blocklyDraggable auto_#1e90ff" data-id="ag-.h1XDSDqhk0nCb3PX" transform="translate(0, 0)"><path class="blocklyPath" id="blockly-m" stroke="#176cbf" fill="#1e90ff" aria-label="Begin stack, forever" role="figure" aria-roledescription="container" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 152 a 4 4 0 0,1 4,4  v 4  V 8  V 40  V 44 a 4 4 0 0,1 -4,4  H 64  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,0 -4,4  v 116 a 4 4 0 0,0 4,4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  H 156 a 4 4 0 0,1 4,4  V 180  V 200 a 4 4 0 0,1 -4,4  h -152 a 4 4 0 0,1 -4,-4 z
+"></path><g role="none" class="basic_show_icon blocklyBlock blocklyDraggable auto_#1e90ff" data-id="0kCoPYxdjUHpUF,,fHi0" style="display: block;" transform="translate(16, 48)"><path class="blocklyPath" id="blockly-o" stroke="#176cbf" fill="#1e90ff" aria-label="show icon, heart, has input" role="figure" aria-roledescription="statement" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 123.171875 a 4 4 0 0,1 4,4  v 8  V 54  V 58  V 58 a 4 4 0 0,1 -4,4  h -123.171875  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z
+"></path><g role="none" class="basic_show_icon blocklyBlock blocklyDraggable auto_#1e90ff" data-id="b}AT^j.Vu~JBoMs?nU^z" transform="translate(0, 62)"><path class="blocklyPath" id="blockly-r" stroke="#176cbf" fill="#1e90ff" aria-label="show icon, small heart, has input" role="figure" aria-roledescription="statement" d=" m 0,0  m 0,4 a 4 4 0 0,1 4,-4  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 123.171875 a 4 4 0 0,1 4,4  v 8  V 54  V 58  V 58 a 4 4 0 0,1 -4,4  h -123.171875  c -2,0  -3,1  -4,2  l -4,4  c -1,1  -2,2  -4,2  h -12  c -2,0  -3,-1  -4,-2  l -4,-4  c -1,-1  -2,-2  -4,-2  h -8 a 4 4 0 0,1 -4,-4 z
+"></path><g role="none" class="blocklyLabelField" aria-hidden="true" id="b}AT^j.Vu~JBoMs?nU^z_field_blockly-u" transform="translate(8,21.5)"><text class="blocklyText blocklyFieldText" aria-hidden="true" dominant-baseline="central" x="0" y="9.5">show&nbsp;icon</text></g><g role="button" class="blocklyField blocklyDropdownField pxtFieldDropdown blocklyEditableField" aria-label="dropdown: small heart" aria-haspopup="grid" aria-expanded="false" id="b}AT^j.Vu~JBoMs?nU^z_field_blockly-v" transform="translate(95.171875,8)"><rect rx="4" ry="4" x="0" y="0" height="46" width="72" class="blocklyFieldRect blocklyDropdownRect" stroke="#176cbf" fill="transparent"></rect><text class="blocklyText blocklyFieldText" aria-hidden="true" dominant-baseline="central" text-anchor="end" x="64" y="23"></text><image style="" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAE5ElEQVR4nO3dMY5URxQF0NdGTtAQY3sB3gALsNgTJBapneA9WXbOBryAARIiRABBO5i2Ru2hLv9P9W9V9ZyT8nveVfXcgZGaelUAAADAEHbf+POrqnpaVY+r6vsTz/5SVZ+q6n1Vfbzn15BPvvtalC8V5Ieq+unEoVquq+rdytfId0u+Ps183zVecFXnC1eHWVcrnpfvmHx9mvlaBXm6XZamNTPl65sp38KZrYI83jBIy5qZ8vXNlG/hzFZBTv0L0RJrZsrXN1O+hTNbBQFKQSBSEAgUBAIFgUBBIFAQCBQEAgWBQEEgUBAIFAQCBYFAQSBQEAgUBAIFgUBBIFAQCFoF+XLWFOtnytc3U76FM1sF+bRhkJY1M+XrmynfwpmtgrzfMEjLmpny9c2Ub+HMR42HP1fVvqqebBbn2HVVfVjxvHzH5OvTzOfy6jb5+jyEfAAAAAAAAADwwEz9UZP9fv9LVb2sqmd1szb4lN5V1Zuqer3b7f6659dwfpOf37R70vf7/a9V9ds2cY5HVdWr3W73+8rXOb/DqJr4/FoFuaqqnzeL83X/1MKfhIeffH/Wt/8GPJV9VT1f8ZPQ+f1vZE16frPuSX9Z53tz6zDrxYrnnd+xac9v1j3pzzZLcZqZzq9v5jDnN+ue9FP/QrnEjyuedX53TXl+bjWBQEEgUBAIFAQCBYFAQSBQEAgUBAIFgUBBIFAQCBQEAgWBQEEgUBAIFAQCBYFAQSBQEAhm3ZO+6g6oE3m74lnnd9eU5zfrnvQ3m6U4zUzn1zdzmPObdU/667q5jOxc9oeZSzm/Y9OeX6sgH+vmOsZzua4V98sebuh7Ved5k/+7OvPvFa9xfremPr9LuLz6Rd1cSrbm3qUl3tbNPwv+mPny5cT52ZMOAAAAAAAAAOtcwkdNht3zLZ896adycXu+5bsdVfakn8TF7PmW7+7Isie92yXt+ZbvmD3pJ3BJe77l65s5zPefPenLrfn/EvLdZU86XBoFgUBBIFAQCBQEAgWBQEEgUBAIFAQCBYFAQSBQEAgUBAIFgUBBIFAQCBQEAgWBQEEgsCd9uTV7vuW7y570Tpe051u+vpnDfP/Zk77M2j3f8h2zJ73TRe35lu+IPen3dPF7vuWzJx0AAAAAAAAALsvUHzWpwfPZQz7/+zvtnvQaPJ895EemfX+n3JNeg+ezh/yrpnx/Z92TPno+e8j7Zg6Tb9Y96aPns4e8b+Yw+Wbdkz56PnvI+2YOk8+tJhAoCAQKAoGCQKAgECgIBAoCgYJAoCAQKAgECgKBgkCgIBAoCAQKAoGCQKAgECgIBAoCwax70kfPZw9538xh8s26J330fPaQ980cJt+se9JHz2cPed/MYfJNuSe9Bs9nD/kd076/Lq9uu/g97jX4+dX4+QAAAAAAAADggfFRkzb5+lxEPnvSl5Gvz7T5Wp/mvarzhavDrKsVz8t3TL4+zXz2pG8zU76+mcPksyd9m5ny9c0cJp896dvMlK9v5jD53GoCgYJAoCAQKAgECgKBgkCgIBAoCAQKAoGCQKAgECgIBAoCgYJAoCAQKAgECgKBgkCgIBDYk77NTPn6Zg6Tz570bWbK1zdzmHz2pG8zU76+mcPke9R4+HPd7N9+slmcY9dV9WHF8/Idk69PM5/Lq9vk6/MQ8gEAAADn8i9uSXT/dv6GSgAAAABJRU5ErkJggg==" height="36" width="36" x="8" y="5"></image><image height="12px" width="12px" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(52,17)"></image></g><path id="b}AT^j.Vu~JBoMs?nU^z_connection_blockly-s" class="blocklyHighlightedConnectionPath" d=" m -8,0  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 8 " transform="translate(12, 0)" role="figure" aria-roledescription="statement position"></path><path id="b}AT^j.Vu~JBoMs?nU^z_connection_blockly-t" class="blocklyHighlightedConnectionPath" d=" m -8,0  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 8 " transform="translate(12, 62)" role="figure" aria-roledescription="statement position"></path><g role="none" class="blocklyConnectionIndicatorParent"></g></g><g role="none" class="blocklyLabelField" aria-hidden="true" id="0kCoPYxdjUHpUF,,fHi0_field_blockly-w" transform="translate(8,21.5)"><text class="blocklyText blocklyFieldText" aria-hidden="true" dominant-baseline="central" x="0" y="9.5">show&nbsp;icon</text></g><g role="button" class="blocklyField blocklyDropdownField pxtFieldDropdown blocklyEditableField" aria-label="dropdown: heart" aria-haspopup="grid" aria-expanded="false" id="0kCoPYxdjUHpUF,,fHi0_field_blockly-x" transform="translate(95.171875,8)"><rect rx="4" ry="4" x="0" y="0" height="46" width="72" class="blocklyFieldRect blocklyDropdownRect" stroke="#176cbf" fill="transparent"></rect><text class="blocklyText blocklyFieldText" aria-hidden="true" dominant-baseline="central" text-anchor="end" x="64" y="23"></text><image style="" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF0ElEQVR4nO3dMW4USRQG4NcrkVjObTgAF+AAFneCBDmFBG6zmyPIuQAHsNe55cQStcGM2Z311KPL3T2uNt+XMp73q2b+MZbsehEAAABAF4Zf/PtxRJxExFFEPJt59m1E3ETEVURcP+QJSilnEfE2Il5FxOl80SIi4u+I+BYRH4dh+PLA53B+Kz+/rCCnEfFi5lA1F7E50NFKKe8i4v0ycXZHRcT5MAwfGr/O+W1HxYrPr1aQ44h4uVic/b7HyE/C7Sff5/j1d8C5lIh43fBJ6Pz+NzJWen5/VB58smyWyTPfxuFe3NjOetPweOe3a7XnVyvI0YJBalpmvlosxTwznd+0md2cX60gc/9ANEbLzLl/oBzjecNjnd99qzy/WkGAUBBIKQgkFAQSCgIJBYGEgkBCQSChIJBQEEgoCCQUBBIKAgkFgYSCQEJBIKEgkFAQSCgIJGoFuT1oivaZTXdAzeSy4bHO775Vnl+tIDcLBqlpmfltsRTzzHR+02Z2c361glwtGKSmZebH2FxGdihlO3Ms57drtedXK8h1bK5jPJSLaLhfdntD33kc5kW+uzrza8PXOL9/rfr8nsLl1W9icylZy71LY1zG5r8Fn9Z8+XLG+U07PwAAAAAAAABgRynlrJTyVynlsszvcvvcZ/LJt7p8pZR3C4Ta50fZ7OyWT7515Cub5v44UMC7kKObLJ98h8pX+3X33vdoy7dLvmmq+WoF6X2PtnzTZso3cubelpZSDvnXZj8NwzDqU0O+/eSbZl8+t5pAQkEgoSCQUBBIKAgkFAQSCgIJBYGEgkBCQSChIJBQEEgoCCQUBBIKAgkFgYSCQEJBIKEgkKgVpPc92vLdJ980e/PVCtL7Hm35ps2Ub+TMWkF636Mt3y75pmnN9/Pqx0Pcbjflakr55HuUfHchz0opf5ZSLhYIdrF97qmXG8sn36PkAwAAAAAAAAB2lJ73VMsn32PmKz3vqZZPvsfMVzraUy2ffI+Zz570ceSbZrX57ElfZqZ802Z2k8+e9AbyTbPGfG41gYSCQEJBIKEgkFAQSCgIJBQEEgoCCQWBhIJAQkEgoSCQUBBIKAgkFAQSCgIJBYGEgkBCQSBhT/p48k2zynz2pC8zU75pM7vJZ0/6OPJN89Ty9b+nWj75HjPfXciz0vGeavnke8x8AAAAAAAAAPD7+dVKrOOIOImIo4h4NvPs24i4iYiriLh+yBNsf03gbWz2y53OFy0iNr9y/S0iPg7D8OUhTyDftHzRwfsvK8hpRLyYOVTNRTT+DUDZ/ILZ+2Xi7I6KiPNhGD40fZF8P0fFA/JFJ++/WkGOI+LlYnH2+x4jv5NsP/k+x+FWBZeIeD32k1C++yOjIV909P6r/T3IybJZJs/sZo92hXy7WvN18/6rFeRowSA1LTO72aM9w2Pn8pTydfP+qxVk7h+IxmiZOfcPlGM8b3isfPe15Ovm/edWE0goCCQUBBIKAgkFgYSCQEJBIKEgkFAQSCgIJBQEEgoCCQWBhIJAQkEgoSCQUBBIKAgkFAQStYLcHjRF+8xu9mhXyHdfS75u3n+1gtwsGKSmZWY3e7RneOxcnlK+bt5/tYJcLRikpmVm73u05dvVmq+b91+tINexuY7xUC6i4X7e7Q1953GYF/nu6syvY79Avh3N+aKj999TuLz6TWwuJWu5d2mMy9j8t+DTxMuh5Vvx5dUAAAAAAAAAwH+t+ldNovN89pCv//Vd7Z706DyfPeQ7Vvv6rnJPenSezx7yvVb5+q51T3rv+ewhnzazm3xr3ZPeez57yKfN7CbfWvek957PHvJpM7vJ51YTSCgIJBQEEgoCCQWBhIJAQkEgoSCQUBBIKAgkFAQSCgIJBYGEgkBCQSChIJBQEEgoCCQUBBJr3ZPeez57yKfN7CbfWvek957PHvJpM7vJt9Y96b3ns4d82sxu8q1yT3p0ns8e8ntW+/q6vLruye9xj87PL/rPBwAAABzKP8/KS45dYO2PAAAAAElFTkSuQmCC" height="36" width="36" x="8" y="5"></image><image height="12px" width="12px" xlink:href="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi43MSIgaGVpZ2h0PSI4Ljc5IiB2aWV3Qm94PSIwIDAgMTIuNzEgOC43OSI+PHRpdGxlPmRyb3Bkb3duLWFycm93PC90aXRsZT48ZyBvcGFjaXR5PSIwLjEiPjxwYXRoIGQ9Ik0xMi43MSwyLjQ0QTIuNDEsMi40MSwwLDAsMSwxMiw0LjE2TDguMDgsOC4wOGEyLjQ1LDIuNDUsMCwwLDEtMy40NSwwTDAuNzIsNC4xNkEyLjQyLDIuNDIsMCwwLDEsMCwyLjQ0LDIuNDgsMi40OCwwLDAsMSwuNzEuNzFDMSwwLjQ3LDEuNDMsMCw2LjM2LDBTMTEuNzUsMC40NiwxMiwuNzFBMi40NCwyLjQ0LDAsMCwxLDEyLjcxLDIuNDRaIiBmaWxsPSIjMjMxZjIwIi8+PC9nPjxwYXRoIGQ9Ik02LjM2LDcuNzlhMS40MywxLjQzLDAsMCwxLTEtLjQyTDEuNDIsMy40NWExLjQ0LDEuNDQsMCwwLDEsMC0yYzAuNTYtLjU2LDkuMzEtMC41Niw5Ljg3LDBhMS40NCwxLjQ0LDAsMCwxLDAsMkw3LjM3LDcuMzdBMS40MywxLjQzLDAsMCwxLDYuMzYsNy43OVoiIGZpbGw9IiNmZmYiLz48L3N2Zz4=" transform="translate(52,17)"></image></g><path id="0kCoPYxdjUHpUF,,fHi0_connection_blockly-p" class="blocklyHighlightedConnectionPath" d=" m -8,0  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 8 " transform="translate(12, 0)" role="figure" aria-roledescription="statement position"></path><path id="0kCoPYxdjUHpUF,,fHi0_connection_blockly-q" class="blocklyHighlightedConnectionPath" d=" m -8,0  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 8 " transform="translate(12, 62)" role="figure" aria-roledescription="statement position"></path><g role="none" class="blocklyConnectionIndicatorParent"></g></g><g role="none" class="blocklyLabelField" aria-hidden="true" id="ag-.h1XDSDqhk0nCb3PX_field_blockly-y" transform="translate(8,14.5)"><text class="blocklyText blocklyFieldText" aria-hidden="true" dominant-baseline="central" x="0" y="9.5">forever</text></g><path id="ag-.h1XDSDqhk0nCb3PX_connection_blockly-n" class="blocklyHighlightedConnectionPath" d=" m -8,0  h 8  c 2,0  3,1  4,2  l 4,4  c 1,1  2,2  4,2  h 12  c 2,0  3,-1  4,-2  l 4,-4  c 1,-1  2,-2  4,-2  h 8 " transform="translate(28, 48)" role="figure" aria-roledescription="statement position"></path><g role="none" class="blocklyConnectionIndicatorParent"></g></g></g><g role="none" class="blocklyBubbleCanvas" transform="translate(210, 10) scale(0.9)"></g><rect height="25" width="25" class="blocklyScrollbarBackground" x="822.5" y="466.5"></rect><defs></defs><defs></defs><defs><filter id="blocklyErrorHighlightedGlowFilter6606150759966907" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="1.1"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#FF0000" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter><filter id="blocklyBubbleEmbossGlowFilter6606150759966907" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="0.92"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#000000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite><femerge><femergenode in="outBlur"></femergenode><femergenode in="outGlow"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter></defs><defs><filter id="blocklyEmbossFilter6606150759966907"><fegaussianblur in="SourceAlpha" stdDeviation="1" result="blur"></fegaussianblur><fespecularlighting in="blur" surfaceScale="1" specularConstant="0.5" specularExponent="10" lighting-color="white" result="specOut"><fepointlight x="-5000" y="-10000" z="20000"></fepointlight></fespecularlighting><fecomposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"></fecomposite><fecomposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></fecomposite></filter><pattern id="blocklyDisabledPattern6606150759966907" patternUnits="userSpaceOnUse" width="10" height="10"><rect width="10" height="10" fill="#aaa"></rect><path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0"></path></pattern><filter id="blocklyDebugFilter6606150759966907" height="160%" width="180%" y="-30%" x="-40%"><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#ff0000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter></defs><defs><filter id="blocklySelectedGlowFilter6606150759966907" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="0.5"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#fff200" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter></defs><defs><filter id="blocklyHighlightedGlowFilter6606150759966907" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="1.1"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#FFF200" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter><filter id="blocklyErrorHighlightedGlowFilter6606150759966907" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="1.1"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#FF0000" flood-opacity="1" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite></filter><filter id="blocklyBubbleEmbossGlowFilter6606150759966907" height="160%" width="180%" y="-30%" x="-40%"><fegaussianblur in="SourceGraphic" stdDeviation="0.92"></fegaussianblur><fecomponenttransfer result="outBlur"><fefunca type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1"></fefunca></fecomponenttransfer><feflood flood-color="#000000" flood-opacity="0.5" result="outColor"></feflood><fecomposite in="outColor" in2="outBlur" operator="in" result="outGlow"></fecomposite><femerge><femergenode in="outBlur"></femergenode><femergenode in="outGlow"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge></filter></defs></g></svg><svg role="none" class="blocklyScrollbarVertical blocklyMainWorkspaceScrollbar" width="25" height="466" style="transform: translate(822.5px, 0.5px);"><g role="none"><rect class="blocklyScrollbarBackground" width="25" height="466"></rect><rect class="blocklyScrollbarHandle" rx="10" ry="10" width="20" x="2.5" height="286.44677661169413" y="173.73113443278362"></rect></g></svg><svg role="none" class="blocklyScrollbarHorizontal blocklyMainWorkspaceScrollbar" height="25" width="622" style="transform: translate(200.5px, 466.5px);"><g role="none"><rect class="blocklyScrollbarBackground" height="25" width="622"></rect><rect class="blocklyScrollbarHandle" rx="10" ry="10" height="20" y="2.5" width="358.60819518298405" x="257.8577277308588"></rect></g></svg><svg role="none" class="blocklyBlockDragSurface" xmlns="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><g role="none" transform="translate(210, 10) scale(0.9)"></g></svg><svg role="none" class="blocklyAnimationLayer" xmlns="http://www.w3.org/2000/svg" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><g role="none"></g></svg><div id="blocklyAriaAnnounce" class="hiddenForAria" aria-live="polite" role="status" aria-atomic="true"><span>Use the arrow keys to navigate. Press Alt + Shift + A to toggle screenreader accessibility mode.</span></div><div id="blockly-0" class="blocklyWidgetDiv" tabindex="-1" style="direction: ltr; display: none; height: 321px;"></div></div></div><div id="blocklyTrashIcon" style="opacity: 0; display: none;"><i class="trash icon" aria-hidden="true"></i></div></div><div class="errorList errorListSummary" hidden=""><div class="errorListHeader" role="button" aria-label="Expand error list" tabindex="0"><h4>Problems</h4><div class="ui red circular label countBubble">0</div><div class="error-help-container"><button id="error-help-button" class="common-button secondary error-help-button" title="Explain with AI" role="button" tabindex="0"><span class="common-button-flex"><i class="xicon sparkle" aria-hidden="true"></i><span class="common-button-label">Explain with AI</span></span></button></div><button id="debug-button" class="common-button debuggerSuggestion" title="Debug this project" role="button" tabindex="0" aria-label="Debug this project"><span class="common-button-flex"><i class="icon bug" aria-hidden="true"></i><span class="common-button-label">Debug this project</span></span></button><div class="filler"></div><div class="toggleButton"><i class="icon chevron up " aria-hidden="true" role="presentation"></i></div></div></div></div></div><div class="full-abs" id="serialEditor" style="display: none;"><div id="serialArea" class="no-toggle hide-view-latest"><div id="serialHeader" class="ui serialHeader"><div class="leftHeaderWrapper"><div class="leftHeader"><button class="ui button   neutral" title="Go back" tabindex="0"><i class="icon arrow left " aria-hidden="true" role="presentation"></i><span class="ui text landscape only">Go back</span></button><div class="common-editor-toggle-outer"><div id="serial-editor-toggle" class="common-toggle-accessibility" role="tablist"><button id="serial-editor-toggle-option-0" class="common-button selected" title="Console" role="tab" tabindex="0" aria-selected="true" data-isfocusable="true"><span class="common-button-flex"><span class="common-button-label">Console</span></span></button><button id="serial-editor-toggle-option-1" class="common-button" title="Data Log" role="tab" tabindex="-1" aria-selected="false" data-isfocusable="true"><span class="common-button-flex"><span class="common-button-label">Data Log</span></span></button></div><div id="serial-editor-toggle" class="common-editor-toggle slim tablet-compact" role="tablist" aria-hidden="true"><div class="common-editor-toggle-item selected"><button class="common-button" title="Console" role="tab" tabindex="-1" aria-hidden="true"><span class="common-button-flex"><i class="fas fa-terminal" aria-hidden="true"></i><span class="common-button-label">Console</span></span></button></div><div class="common-editor-toggle-item"><button class="common-button" title="Data Log" role="tab" tabindex="-1" aria-hidden="true"><span class="common-button-flex"><i class="fas fa-table" aria-hidden="true"></i><span class="common-button-label">Data Log</span></span></button></div><div class="common-editor-toggle-handle" aria-hidden="true"></div></div></div></div></div><div class="rightHeader"><span class="ui small header">Simulator</span><button class="ui button   ui left floated icon button red circular toggleRecord csv-hide" title="Start recording" tabindex="0"><i class="icon circle icon " aria-hidden="true" role="presentation"></i></button><button class="ui button   ui icon blue button editorExport" title="Export data" tabindex="0" aria-label="Export data"><i class="icon download " aria-hidden="true" role="presentation"></i></button><button class="ui button   ui icon neutral button editorExport csv-hide" title="Save raw text" tabindex="0" aria-label="Save raw text"><i class="icon copy " aria-hidden="true" role="presentation"></i></button></div></div><div id="serialPlaceholder" class="ui segment"><div class="ui bottom left attached no-select label seriallabel">Values will be logged when the simulator sends data</div></div><div id="serialCharts" class="noconsole nochart"></div><div id="serialConsole" class="noconsole nochart"></div><div id="serialCsv"></div><button class="ui button   " id="serialCsvViewLatest" tabindex="0">View latest row...</button></div></div><div class="full-abs" id="assetEditor" style="display: none;"><div class="asset-editor-outer"><div class="asset-editor-sidebar"><div class="common-list asset-editor-sidebar-info"><div class="common-list-item"><div>Asset Preview</div></div><div class="common-list-item"><div class="asset-editor-sidebar-preview"></div></div><div class="common-list-item"><div class="asset-editor-sidebar-name">No asset selected</div></div></div><div class="common-list asset-editor-sidebar-controls"><div class="common-list-item"></div><div class="common-list-item"></div><div class="common-list-item"></div><div class="common-list-item"></div><div class="common-list-item"><button class="common-button tertiary asset-palette-button" title="Open the color palette" role="button" tabindex="0" aria-label="Open the color palette"><span class="common-button-flex"><i class="fas fa-palette" aria-hidden="true"></i><span class="common-button-label">Colors</span></span></button></div></div><textarea class="asset-editor-sidebar-copy"></textarea></div><div class="asset-editor-gallery"><div class="asset-editor-topbar"><div class="asset-editor-gallery-tab selected" role="navigation">My Assets</div><div class="asset-editor-gallery-tab " role="navigation">Gallery</div></div><div class="asset-editor-card-list "><div><button class="common-button create-new" title="Create a new asset" role="button" tabindex="0" aria-label="Create a new asset"><span class="common-button-flex"><i class="icon huge add circle" aria-hidden="true"></i><span class="common-button-label"></span></span></button></div></div><div class="asset-editor-card-list hidden"><div></div></div></div></div></div><div class="full-abs" id="monacoEditor" style="display: none;"><div id="monacoEditorArea" class="monacoEditorArea" style="direction: ltr;"><div id="monacoEditorRightArea" class="monacoEditorRightArea"><div id="monacoEditorInner"><div id="monacoFlyoutWidget" class="monacoFlyout" style="display: none;"><div id="monacoFlyoutWrapper" role="list"><div class="monacoFlyoutLabel monacoFlyoutHeading"><span class="monacoFlyoutHeadingIcon blocklyTreeIcon blocklyTreeIconDefault undefined" role="presentation" style="color: rgb(109, 91, 165);"></span><div class="monacoFlyoutLabelText">undefined</div></div></div></div></div><div class="errorList errorListSummary" hidden=""><div class="errorListHeader" role="button" aria-label="Expand error list" tabindex="0"><h4>Problems</h4><div class="ui red circular label countBubble">0</div><div class="error-help-container"><button id="error-help-button" class="common-button secondary error-help-button" title="Explain with AI" role="button" tabindex="0"><span class="common-button-flex"><i class="xicon sparkle" aria-hidden="true"></i><span class="common-button-label">Explain with AI</span></span></button></div><button id="debug-button" class="common-button debuggerSuggestion" title="Debug this project" role="button" tabindex="0" aria-label="Debug this project"><span class="common-button-flex"><i class="icon bug" aria-hidden="true"></i><span class="common-button-label">Debug this project</span></span></button><div class="filler"></div><div class="toggleButton"><i class="icon chevron up " aria-hidden="true" role="presentation"></i></div></div></div></div></div></div></div><div id="editortools" class="ui" role="region" aria-label="Editor toolbar"><div id="downloadArea" role="group" aria-label="Download and device connection" class="ui column items"><div class="ui item portrait hide"><button class="ui button   primary download-button left attached large fluid " role="button" title="Download your code to the micro:bit" tabindex="0"><span class="ui text">Download</span></button><div role="button" title="Download options" aria-haspopup="true" class="ui dropdown icon large right attached editortools-btn hw-button button menuAbove" data-tooltip="Click for one-click downloads." tabindex="0"><i class="icon ellipsis horizontal large " aria-hidden="true" role="presentation"></i><div role="menu" aria-label="Dropdown menu Download options" aria-hidden="true" class="menu"><div class="ui item link    " role="menuitem" aria-label="Connect Device" title="Connect Device" tabindex="-1"><i class="icon xicon microbit icon-and-text  " aria-hidden="true" role="presentation"></i><span class="ui text">Connect Device</span></div><div class="ui item link    " role="menuitem" aria-label="Download as File" title="Download as File" tabindex="-1"><i class="icon xicon file-download icon-and-text  " aria-hidden="true" role="presentation"></i><span class="ui text">Download as File</span></div><div class="ui item link    " role="menuitem" aria-label="Help" title="Help" tabindex="-1"><i class="icon help circle icon-and-text  " aria-hidden="true" role="presentation"></i><span class="ui text">Help</span></div></div></div></div><div class="ui portrait only"><button class="ui button icon  primary download-button left attached download-button-full " role="button" title="Download your code to the micro:bit" tabindex="0"><i class="icon xicon file-download " aria-hidden="true" role="presentation"></i></button><div role="button" title="Download options" aria-haspopup="true" class="ui dropdown icon  right attached editortools-btn hw-button button menuAbove menuRight" data-tooltip="Click for one-click downloads." tabindex="0"><i class="icon ellipsis horizontal  " aria-hidden="true" role="presentation"></i><div role="menu" aria-label="Dropdown menu Download options" aria-hidden="true" class="menu"><div class="ui item link    " role="menuitem" aria-label="Connect Device" title="Connect Device" tabindex="-1"><i class="icon xicon microbit icon-and-text  " aria-hidden="true" role="presentation"></i><span class="ui text">Connect Device</span></div><div class="ui item link    " role="menuitem" aria-label="Download" title="Download" tabindex="-1"><i class="icon xicon file-download icon-and-text  " aria-hidden="true" role="presentation"></i><span class="ui text">Download</span></div><div class="ui item link    " role="menuitem" aria-label="Help" title="Help" tabindex="-1"><i class="icon help circle icon-and-text  " aria-hidden="true" role="presentation"></i><span class="ui text">Help</span></div></div></div></div></div><div id="editorToolbarArea" role="group" aria-label="Editor tools" class="ui column items"><div class="ui icon buttons"><button class="ui button icon  editortools-btn undo-editortools-btn " role="button" tabindex="0" aria-label="Undo, " aria-disabled="false"><i class="icon xicon undo " aria-hidden="true" role="presentation"></i></button><button class="ui button icon  editortools-btn redo-editortools-btn disabled" role="button" tabindex="0" aria-label="Redo, Disabled" aria-disabled="true"><i class="icon xicon redo " aria-hidden="true" role="presentation"></i></button></div><div class="ui icon buttons mobile hide"><button class="ui button icon  editortools-btn zoomout-editortools-btn" role="button" title="Zoom Out" tabindex="0"><i class="icon minus circle " aria-hidden="true" role="presentation"></i></button><button class="ui button icon  editortools-btn zoomin-editortools-btn" role="button" title="Zoom In" tabindex="0"><i class="icon plus circle " aria-hidden="true" role="presentation"></i></button></div></div></div><div></div><div></div><div id="editorlogo" style="left: 200px; display: block;"><a class="poweredbylogo"></a></div></div></div>
+        </div>
+    </div>
+
+    <div id="msg" aria-live="polite">
+        <div id="errmsg" class="ui red inverted segment"></div>
+        <div id="warnmsg" class="ui orange inverted segment"></div>
+        <div id="infomsg" class="ui teal inverted segment"></div>
+        <div id="compilemsg" class="ui ignored info message"></div>
+    </div>
+
+    <script>
+        // This line gets patched up by the cloud
+        var pxtConfig = {
+    "relprefix": "/---",
+    "verprefix": "",
+    "workerjs": "/---worker",
+    "tdworkerjs": "/---tdworker",
+    "monacoworkerjs": "/---monacoworker",
+    "gifworkerjs": "/---gifworker",
+    "serviceworkerjs": "/---serviceworker",
+    "typeScriptWorkerJs": "/---tsworker",
+    "pxtVersion": "?",
+    "pxtRelId": "a2de741814d32e5156dd57569b9229adbfdb07d6",
+    "pxtCdnUrl": "https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/",
+    "commitCdnUrl": "https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/",
+    "blobCdnUrl": "https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/",
+    "targetUrl": "https://makecode.microbit.org",
+    "targetVersion": "?",
+    "targetRelId": "a2de741814d32e5156dd57569b9229adbfdb07d6",
+    "targetCdnUrl": "https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/",
+    "targetId": "microbit",
+    "runUrl": "/---run",
+    "docsUrl": "/---docs",
+    "multiUrl": "/---multi",
+    "asseteditorUrl": "/---asseteditor",
+    "skillmapUrl": "/---skillmap",
+    "authcodeUrl": "/---authcode",
+    "multiplayerUrl": "/---multiplayer",
+    "kioskUrl": "/---kiosk",
+    "teacherToolUrl": "/---eval",
+    "partsUrl": "https://trg-microbit.userpxt.io/---siminstructions",
+    "simUrl": "https://trg-microbit.userpxt.io/---simulator",
+    "simserviceworkerUrl": "https://trg-microbit.userpxt.io/---simserviceworker",
+    "simworkerconfigUrl": "https://trg-microbit.userpxt.io/---simworkerconfig",
+    "cdnUrl": "https://cdn.makecode.com"
+};
+    </script>
+    
+<!-- include apptrackingweb.html -->
+<script type="text/javascript" src="./pxtweb.js.download"></script>
+<!-- begin usabilla live embed code -->
+<script type="text/javascript">window.lightningjs||function(n){var e="lightningjs";function t(e,t){var r,i,a,o,d,c;return t&&(t+=(/\?/.test(t)?"&":"?")+"lv=1"),n[e]||(r=window,i=document,a=e,o=i.location.protocol,d="load",c=0,function(){n[a]=function(){var t=arguments,i=this,o=++c,d=i&&i!=r&&i.id||0;function s(){return s.id=o,n[a].apply(s,arguments)}return(e.s=e.s||[]).push([o,d,t]),s.then=function(n,t,r){var i=e.fh[o]=e.fh[o]||[],a=e.eh[o]=e.eh[o]||[],d=e.ph[o]=e.ph[o]||[];return n&&i.push(n),t&&a.push(t),r&&d.push(r),s},s};var e=n[a]._={};function s(){e.P(d),e.w=1,n[a]("_load")}e.fh={},e.eh={},e.ph={},e.l=t?t.replace(/^\/\//,("https:"==o?o:"http:")+"//"):t,e.p={0:+new Date},e.P=function(n){e.p[n]=new Date-e.p[0]},e.w&&s(),r.addEventListener?r.addEventListener(d,s,!1):r.attachEvent("onload",s);var l=function(){function n(){return["<!DOCTYPE ",o,"><",o,"><head></head><",t,"><",r,' src="',e.l,'"></',r,"></",t,"></",o,">"].join("")}var t="body",r="script",o="html",d=i[t];if(!d)return setTimeout(l,100);e.P(1);var c,s=i.createElement("div"),h=s.appendChild(i.createElement("div")),u=i.createElement("iframe");s.style.display="none",d.insertBefore(s,d.firstChild).id="lightningjs-"+a,u.frameBorder="0",u.id="lightningjs-frame-"+a,/MSIE[ ]+6/.test(navigator.userAgent)&&(u.src="javascript:false"),u.allowTransparency="true",h.appendChild(u);try{u.contentWindow.document.open()}catch(n){e.domain=i.domain,c="javascript:var d=document.open();d.domain='"+i.domain+"';",u.src=c+"void(0);"}try{var p=u.contentWindow.document;p.write(n()),p.close()}catch(e){u.src=c+'d.write("'+n().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}e.P(2)};e.l&&l()}()),n[e].lv="1",n[e]}var r=window.lightningjs=t(e);r.require=t,r.modules=n}({});window.usabilla_live = lightningjs.require("usabilla_live", "//w.usabilla.com/fe98398a199e.js");</script>
+<!-- end usabilla live embed code -->
+
+<script type="text/javascript">
+window.addEventListener("DOMContentLoaded", () => {
+    let hidden = false;
+    
+    // Observe the rootdir to see if we are in the homescreen or not. If
+    // we leave the home screen, hide the usabilla overlay
+    const observer = new MutationObserver((mutationList) => {
+        for (const mutation of mutationList) {
+            if (mutation.type === "attributes") {
+                const root = document.getElementById("root");
+
+                if (root.classList.contains("inHome")) {
+                    if (hidden) {
+                        hidden = false;
+                        const el = document.querySelector("div.usabilla__overlay");
+                        if (el) el.style.display = "";
+                    }
+                }
+                else if (!hidden) {
+                    hidden = true;
+                    const el = document.querySelector("div.usabilla__overlay");
+                    if (el) el.style.display = "none";
+                }
+            }
+        }
+    });
+
+    // Just poll until react has had time to render the root div
+    let interval = setInterval(() => {
+        const root = document.getElementById("root");
+
+        if (root) {
+            clearInterval(interval);
+            observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+        }
+    }, 500);
+});
+</script>
+<!-- end include apptrackingweb.html -->
+
+    
+<!-- include apptracking.html -->
+<script type="text/javascript">
+    window.loadAppInsights = function (includeCookie, telemetryInitializer) {
+        //Backend will patch / + blb + / with CDN url and the check that URL ends with the sha would pass
+        var isProduction = includeCookie && (/[0-9a-f]{40}\/$/.test("https://cdn.makecode.com/commit/a2de741814d32e5156dd57569b9229adbfdb07d6/"));
+        !function(T,l,y){var S=T.location,k="script",D="connectionString",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"5",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+            src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", // The SDK URL Source
+            onInit: function (sdk) {
+                sdk.addTelemetryInitializer(telemetryInitializer);
+            },
+            cfg: {
+                instrumentationKey:"9801ed01-c40f-46ec-aa40-2a1742a9e71c",
+                disableAjaxTracking: true,
+                overridePageViewDuration: false,
+                disableExceptionTracking: true,
+                disableCorrelationHeaders: true,
+                disableCookiesUsage: !isProduction,
+                isStorageUseDisabled: !isProduction,
+                url: "https://cdn.makecode.com/blob/c45ac1d707915fdf8ec69d4e8de5d7677db3482a/ai.2.min.js"
+            }
+        });
+        window.appInsights=appInsights;
+
+        var location = window.location.toString();
+        appInsights.trackPageView({
+            name: window.location.hostname,
+            uri: window.location.origin,
+            properties: {
+                url: scrubUrl(location),
+                urlReferrer: scrubUrl(document.referrer.toString())
+            }
+        });
+
+        // Scrub potential PII from the URL.
+        function scrubUrl(url) {
+            if (!url) return url;
+
+            var scriptIdRegex = /(?:S?\d{5}-\d{5}-\d{5}-\d{5})|(?:_[0-9a-zA-Z]{12})/g;
+            var scrubbedUrl = new URL(url.toLocaleLowerCase().replace(scriptIdRegex, "xxxxx-xxxxx-xxxxx-xxxxx"));
+
+            // Just as a precaution, strip any suspicious query parameters.
+            var blockedParamKeywords = ["username", "password", "token", "pwd"];
+            var searchParams = Array.from(scrubbedUrl.searchParams.keys());
+            for (var param of searchParams) {
+                if (blockedParamKeywords.some(k => param.indexOf(k) != -1)) {
+                    scrubbedUrl.searchParams.delete(param);
+                }
+            }
+
+            return scrubbedUrl.toString();
+        }
+
+        return isProduction;
+    }
+    pxt.initAnalyticsAsync();
+</script>
+<!-- end include apptracking.html -->
+
+    <script type="text/javascript" src="./pxtapp.js.download"></script>
+    <script type="text/javascript" src="./target.js.download"></script>
+    <script id="mainscript" type="text/javascript" src="./main.js.download"></script>
+    <xml id="blocklyToolboxDefinitionCategory" style="display: none">
+        <!-- An empty category is required so that Blockly launches in category mode -->
+        <category name="">
+        </category>
+    </xml>
+    <xml id="blocklyToolboxDefinitionFlyout" style="display: none">
+    </xml>
+    <script>
+        // Before loading vs/editor/editor.main, define a global MonacoEnvironment that overwrites
+        // the default worker url location (used when creating WebWorkers). The problem here is that
+        // HTML5 does not (yet) allow cross-domain web workers, so we need to proxy the instantion of
+        // a web worker through a same-domain script
+        window.MonacoEnvironment = {
+            getWorkerUrl: function(workerId, label) {
+                return pxt.webConfig.monacoworkerjs;
+            }
+        };
+
+        // this get rewritten to blob URLs with SHAs while uploading to the cloud
+        // keep in sync with release.manifest and asseteditor.html
+        window.MonacoPaths = {
+            "vs/loader": "https://cdn.makecode.com/blob/17e4c591ec47474f1e488f733acd77a1a528378d/vs/loader.js",
+            "vs/base/worker/workerMain": "https://cdn.makecode.com/blob/3edf5cb4f608aeb07473c5d7c333400e7e469dc0/vs/base/worker/workerMain.js",
+            "vs/basic-languages/bat/bat": "https://cdn.makecode.com/blob/c67b89bea8ad93bb58cd7686e001daa07e326c21/vs/basic-languages/bat/bat.js",
+            "vs/basic-languages/cpp/cpp": "https://cdn.makecode.com/blob/8743140f1aa68071ddaf925c836b045e1389bde8/vs/basic-languages/cpp/cpp.js",
+            "vs/basic-languages/markdown/markdown": "https://cdn.makecode.com/blob/e0cd73549d298474237961881b00500dbbad8638/vs/basic-languages/markdown/markdown.js",
+            "vs/basic-languages/python/python": "https://cdn.makecode.com/blob/e5e8a27fe42b8bd8079a5e770ed04a840f84832c/vs/basic-languages/python/python.js",
+            "vs/basic-languages/typescript/typescript": "https://cdn.makecode.com/blob/196f8e01f9716dee9f6da8fb53993c6100914d5f/vs/basic-languages/typescript/typescript.js",
+            "vs/editor/editor.main.css": "https://cdn.makecode.com/blob/88b279a451119201c6d16bf4a7ca982d3a2727d8/vs/editor/editor.main.css",
+            "vs/editor/editor.main": "https://cdn.makecode.com/blob/edadcbca51897cbcf45c11e9ce31db2750ea635c/vs/editor/editor.main.js",
+            "vs/editor/editor.main.nls": "https://cdn.makecode.com/blob/23ec988172113c78c24a7ed994c4628fb1a9fd32/vs/editor/editor.main.nls.js",
+            "vs/language/json/jsonMode": "https://cdn.makecode.com/blob/dfbe96a2b954d99771af6b680a09858c683ba123/vs/language/json/jsonMode.js",
+            "vs/language/json/jsonWorker": "https://cdn.makecode.com/blob/cf418d614a749960a65f0315e723d3dc36765940/vs/language/json/jsonWorker.js",
+            "vs/language/typescript/tsMode": "https://cdn.makecode.com/blob/1b9d76bcb69132f9f706a868da89b8220c2804fa/vs/language/typescript/tsMode.js",
+            "vs/language/typescript/tsWorker": "https://cdn.makecode.com/blob/39169161eed3b06ce4a6aab9a3fc0d93b678a558/vs/language/typescript/tsWorker.js",
+            "lzma/lzma_worker-min.js": "https://cdn.makecode.com/blob/d08e97ec4175dc71d21c6058a0d800eeeb1a8a0f/lzma/lzma_worker-min.js",
+            "smoothie/smoothie_compressed.js": "https://cdn.makecode.com/blob/cd329dd34330ab0c96039a5ca0882838527d2561/smoothie/smoothie_compressed.js",
+            "blockly.css": "https://cdn.makecode.com/blob/03c790c56ec047aab9af4eb9b9a0728717ddb353/blockly.css",
+            "rtlblockly.css": "https://cdn.makecode.com/blob/752d3cb8f473c30825ddb62b8e2f59d384ca0ec9/rtlblockly.css",
+            "gifjs/gif.js": "https://cdn.makecode.com/blob/15eaf38ac1eee2b2e4810a1ac13e8dbee035e546/gifjs/gif.js",
+            "qrcode/qrcode.min.js": "https://cdn.makecode.com/blob/b258d18871877debfef7348f75c2e52b954c053c/qrcode/qrcode.min.js",
+            "zip.js/zip.min.js": "https://cdn.makecode.com/blob/f01355117e534954c6d268457d9a73f11ebe3330/zip.js/zip.min.js",
+            "pdf-lib/pdf-lib.min.js": "https://cdn.makecode.com/blob/8eb336e6678d79fbc5d48c7808a7c4fcddda765a/pdf-lib/pdf-lib.min.js",
+            "music-editor/apple.png": "https://cdn.makecode.com/blob/73ef19074a264a2cfda67153087c296fa85b250b/music-editor/apple.png",
+            "music-editor/burger.png": "https://cdn.makecode.com/blob/b3d5ffa224f3de1e45b4d578abe96ef79f50e703/music-editor/burger.png",
+            "music-editor/cake.png": "https://cdn.makecode.com/blob/bbd922f5a142b7ccccd30e79711d4572a925abdd/music-editor/cake.png",
+            "music-editor/car.png": "https://cdn.makecode.com/blob/95426c52fcdf1cc5aa347c2271b6f7e15127add2/music-editor/car.png",
+            "music-editor/cat.png": "https://cdn.makecode.com/blob/4e82fb734dee2198aa547eda83f028e60dc6d964/music-editor/cat.png",
+            "music-editor/cherry.png": "https://cdn.makecode.com/blob/a59b245ee3961f3000433beac007e642f338897d/music-editor/cherry.png",
+            "music-editor/clam.png": "https://cdn.makecode.com/blob/e3834306653cc61af90f3f4fb2f437ade9cae13c/music-editor/clam.png",
+            "music-editor/computer.png": "https://cdn.makecode.com/blob/b290f4d481d3ad0b9d92c98dc4690c859a3f4781/music-editor/computer.png",
+            "music-editor/crab.png": "https://cdn.makecode.com/blob/bdb629f6b2748b1f8d791396c42bc09a900f1e2e/music-editor/crab.png",
+            "music-editor/dog.png": "https://cdn.makecode.com/blob/ed6a1811687fcbb8178e2132dc6d4ba7de1479b1/music-editor/dog.png",
+            "music-editor/duck.png": "https://cdn.makecode.com/blob/34c4c3b7338dfaae78da70617d9b47a24d228efe/music-editor/duck.png",
+            "music-editor/egg.png": "https://cdn.makecode.com/blob/f5fa4fb409effcfd952dc4a19e507e1b6077f9d6/music-editor/egg.png",
+            "music-editor/explosion.png": "https://cdn.makecode.com/blob/5dea8273ce0ca702e6b18881c1a2c79d51dc13f5/music-editor/explosion.png",
+            "music-editor/fish.png": "https://cdn.makecode.com/blob/b72c72622569457905d64cbc2807b83dd6aececa/music-editor/fish.png",
+            "music-editor/ice-cream.png": "https://cdn.makecode.com/blob/6c0d7afe8c5ea6e048b05fe4d001960b32ca7492/music-editor/ice-cream.png",
+            "music-editor/lemon.png": "https://cdn.makecode.com/blob/666ae7d337e9caaeaee4cab8e9774d9ed1c8a077/music-editor/lemon.png",
+            "music-editor/snake.png": "https://cdn.makecode.com/blob/27a03db4570069e4bb7e80226abaa97c3ba1659f/music-editor/snake.png",
+            "music-editor/star.png": "https://cdn.makecode.com/blob/de5695dfbb9d94a68770023c7d16a172a3760405/music-editor/star.png",
+            "music-editor/strawberry.png": "https://cdn.makecode.com/blob/e23907601862f30291b2f7702bdb4a430711f841/music-editor/strawberry.png",
+            "music-editor/taco.png": "https://cdn.makecode.com/blob/4bf3b89c751020043a1d199d65cf9d640359dd1d/music-editor/taco.png",
+            "music-editor/bass-clef.svg": "https://cdn.makecode.com/blob/6e5dab7887eeacdd81b16a9d0762db1d0a6172ff/music-editor/bass-clef.svg",
+            "music-editor/treble-clef.svg": "https://cdn.makecode.com/blob/3e0f47cf7d8c462f30e2e5d9422cf23cca731f86/music-editor/treble-clef.svg",
+        }
+    </script>
+
+
+
+<div class=""></div><div class=""></div><div class=""></div><script type="text/javascript" src="./editor.js.download" async=""></script><div class="blocklyDropDownDiv" tabindex="-1" id="blockly-1" style="opacity: 0; transition: transform 0.25s, opacity 0.25s;"><div class="blocklyDropDownContent"></div><div class="blocklyDropDownArrow"></div></div><div class="blocklyTooltipDiv"></div><script type="text/javascript" src="./fieldeditors.js.download" async=""></script><canvas class="blocklyComputeCanvas"></canvas></body></html>
