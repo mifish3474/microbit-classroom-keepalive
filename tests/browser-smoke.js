@@ -34,15 +34,37 @@ const evaluate = async (session, expression) => {
 const fixtureEditor = `<!doctype html><html><body><svg id="workspace" width="500" height="300"></svg>
 <iframe title="Simulator" src="https://trg-microbit.userpxt.io/---simulator"></iframe><script>
 const listeners = new Set();
+const markers = new Map();
+let markerSerial = 0;
 const workspace = {id:'fake-workspace',options:{},getParentSvg:()=>document.querySelector('svg'),
-  addChangeListener:f=>listeners.add(f), removeChangeListener:f=>listeners.delete(f),getTopBlocks:()=>[block]};
+  addChangeListener:f=>listeners.add(f), removeChangeListener:f=>listeners.delete(f),getTopBlocks:()=>[block,...markers.values()],
+  getMetricsManager:()=>({getViewMetrics:()=>({left:0,top:0,width:500,height:300})}),
+  getBlockById:id=>id===block.id?block:markers.get(id),
+  newBlock(type){const b=new Marker(type);markers.set(b.id,b);emit('create',b);return b;}};
+function emit(type,b){if(type==='delete'&&window.testDropDelete)return;requestAnimationFrame(()=>setTimeout(()=>{const e={type,blockId:b.id,workspaceId:workspace.id,ids:[b.id]};
+  for(const f of listeners)f(e);parent.postMessage({type:'pxthost',action:'workspacesave'},'https://classroom.microbit.org');},0));}
+class Marker {
+  constructor(type){this.id='test-icon-'+(++markerSerial);this.type=type;this.workspace=workspace;this.xy={x:0,y:0};this.reasons=new Set();}
+  setDisabledReason(v,r){v?this.reasons.add(r):this.reasons.delete(r)}
+  hasDisabledReason(r){return this.reasons.has(r)} isEnabled(){return !this.reasons.size}
+  getParent(){return null} getChildren(){return []} setTooltip(){} setMovable(){} setEditable(){}
+  initSvg(){this.root=document.createElementNS('http://www.w3.org/2000/svg','g');
+    this.root.innerHTML='<rect width="120" height="80" rx="8" fill="#b4cbd8"></rect><text x="8" y="40">show icon</text>';
+    document.querySelector('svg').append(this.root);}
+  render(){} getHeightWidth(){return {width:120,height:80}} getSvgRoot(){return this.root}
+  getRelativeToSurfaceXY(){return this.xy}
+  moveBy(x,y){this.xy.x+=x;this.xy.y+=y;this.root.setAttribute('transform','translate('+this.xy.x+','+this.xy.y+')')}
+  isDisposed(){return this.disposed===true}
+  dispose(){this.disposed=true;this.root?.remove();markers.delete(this.id);emit('delete',this);}
+}
 const block = {id:'fake-block',type:'pxt-on-start',workspace,xy:{x:100,y:80},getParent:()=>null,
   isMovable:()=>true,isShadow:()=>false,getRelativeToSurfaceXY(){return this.xy},moveBy(x,y){
   const old={...this.xy}; this.xy.x+=x;this.xy.y+=y;
   const event={type:'move',blockId:this.id,workspaceId:workspace.id,oldCoordinate:old,newCoordinate:{...this.xy}};
   queueMicrotask(()=>{for(const f of listeners) f(event);parent.postMessage({type:'pxthost',action:'workspacesave'},'https://classroom.microbit.org')});
 }};
-window.pxt={blocks:{requireBlockly:()=>({getMainWorkspace:()=>workspace,Events:{isEnabled:()=>true,getGroup:()=>'',BLOCK_MOVE:'move'}})}};
+window.pxt={blocks:{requireBlockly:()=>({BlockSvg:Marker,Blocks:{basic_show_icon:{}},getMainWorkspace:()=>workspace,
+  Events:{isEnabled:()=>true,getGroup:()=>'',BLOCK_MOVE:'move',BLOCK_CREATE:'create',BLOCK_DELETE:'delete'}})}};
 window.testBlock=block;
 </script></body></html>`;
 const fixtureStudent = `<!doctype html><html><body><section aria-label="Header">
@@ -110,7 +132,9 @@ try {
   assert.equal(observation.eligible, true, JSON.stringify({observation,
     dom: await evaluate(fixtureSession, "document.body.innerHTML") }));
   const send = msg => evaluate(popupSession, `chrome.runtime.sendMessage(${JSON.stringify(msg)})`);
-  await evaluate(popupSession, `document.getElementById('interval').value='1';
+  await evaluate(popupSession, `document.getElementById('mode').value='layout';
+    document.getElementById('mode').dispatchEvent(new Event('change'));
+    document.getElementById('interval').value='1';
     document.getElementById('confirm').checked=true;
     document.getElementById('confirm').dispatchEvent(new Event('change'));
     document.getElementById('start').click();`);
@@ -187,6 +211,89 @@ try {
   r = await send({type: "STATUS"});
   assert.equal(r.state.running, false);
   console.log("PASS: iframe replacement/removal invalidates authorization");
+  await call("Page.navigate", {url: "https://classroom.microbit.org/join"}, fixtureSession);
+  await delay(700);
+  r = await send({type:"START",tabId,interval:1,mode:"marker",activity:true,confirm:true});
+  assert.equal(r.state.editor, "marker-present", JSON.stringify(r));
+  assert.ok(r.state.nextTransitionAt > Date.now() + 59000);
+  const markerRead = () => evaluate(popupSession, `(async()=>{const {guardian:g}=await chrome.storage.session.get('guardian');
+    const [r]=await chrome.scripting.executeScript({target:{tabId:g.tabId,documentIds:[g.editorDocument]},world:'MAIN',
+      func:()=>{const p=globalThis.__classroomGuardianMarkerV1; const r=p?.block?.getSvgRoot()?.getBoundingClientRect();
+        return {present:!!p?.workspace.getBlockById(p.id),disabled:p?.block?!p.block.isEnabled():null,
+          left:r?.left,top:r?.top,right:r?.right,bottom:r?.bottom,originalX:window.testBlock.xy.x};}});return r.result;})()`);
+  const initialMarker = await markerRead();
+  assert.equal(initialMarker.present, true); assert.equal(initialMarker.disabled, true);
+  assert.ok(initialMarker.left >= 8 && initialMarker.right <= 508 && initialMarker.top >= 8 && initialMarker.bottom <= 308);
+  r = await send({type:"CHECK"}); assert.equal(r.state.editor,"marker-present");
+  r = await send({type:"ACTIVITY"}); assert.equal(r.state.editor,"marker-present");
+  assert.equal((await markerRead()).originalX, 100);
+  console.log("PASS: visible disabled icon fits the viewport; Check now and activity requests cannot shorten the hold");
+  if (process.argv.includes("--marker-alarms")) {
+    const {targetInfos} = await call("Target.getTargets");
+    const liveWorker = targetInfos.find(t=>t.type==='service_worker'&&t.url.endsWith('/worker.js'));
+    await call("Target.closeTarget",{targetId:popup.targetId});
+    await call("Target.closeTarget",{targetId:liveWorker.targetId});
+    console.log("Waiting 65 seconds for automatic icon deletion with popup closed and worker stopped...");
+    await delay(65000);
+    const p = await call("Target.createTarget",{url:'chrome-extension://'+id+'/popup.html',background:true});
+    const {sessionId:s} = await call("Target.attachToTarget",{targetId:p.targetId,flatten:true});
+    await delay(500);
+    const message = msg=>evaluate(s,`chrome.runtime.sendMessage(${JSON.stringify(msg)})`);
+    r = await message({type:'STATUS'}); assert.equal(r.state.editor,'marker-absent',JSON.stringify(r));
+    assert.ok(r.state.nextTransitionAt > Date.now() + 45000);
+    r = await message({type:'ACTIVITY'}); assert.equal(r.state.editor,'marker-absent');
+    console.log("PASS: icon deleted by real alarm; absence interval cannot be shortened. Waiting for re-add...");
+    await delay(65000);
+    r = await message({type:'STATUS'}); assert.equal(r.state.editor,'marker-present',JSON.stringify(r));
+    assert.equal(r.state.activityCount,1);
+    await message({type:'STOP'});
+    console.log("PASS: icon re-added after a full absent minute; create/delete events counted once");
+  } else {
+    // Accelerate only the synthetic adapter's timestamps; exercise the real worker recovery.
+    const ageMarker = age => evaluate(popupSession, `(async()=>{const {guardian:g}=await chrome.storage.session.get('guardian');
+      await chrome.scripting.executeScript({target:{tabId:g.tabId,documentIds:[g.editorDocument]},world:'MAIN',
+        func:age=>{window.testDropDelete=true;globalThis.__classroomGuardianMarkerV1.changedAt=Date.now()-age;},args:[${age}]});})()`);
+    await ageMarker(60001);
+    const otherTab = await evaluate(popupSession, "chrome.tabs.create({url:'about:blank',active:true}).then(t=>t.id)");
+    await delay(200);
+    r=await send({type:'CHECK'}); assert.equal(r.state.editorVisible,false,JSON.stringify(r));
+    assert.equal(r.state.verificationNote,'editor-hidden'); assert.equal(r.state.activityEnabled,true);
+    assert.equal(r.state.nextTransitionAt,null); assert.equal((await markerRead()).present,true);
+    await evaluate(popupSession, `chrome.tabs.update(${tabId},{active:true})`);
+    await delay(200);
+    console.log('PASS: real background tab holds the icon; returning to the tab resumes with animation-frame event delivery');
+    r=await send({type:'CHECK'}); assert.equal(r.state.editor,'marker-absent');
+    await ageMarker(60001);
+    r=await send({type:'CHECK'}); assert.equal(r.state.verificationNote,'waiting-for-delete-event');
+    assert.equal(r.state.activityEnabled,true); assert.equal(r.state.activityCount,0);
+    await ageMarker(180001);
+    r=await send({type:'CHECK'}); assert.equal(r.state.editor,'marker-present',JSON.stringify(r));
+    assert.equal(r.state.activityEnabled,true); assert.equal(r.state.activityCount,0);
+    assert.equal(r.state.workspaceOnlyCount,1); assert.equal(r.state.lastActivity,null);
+    assert.equal((await markerRead()).present,true);
+    console.log('PASS: suppressed delete event retries then safely re-adds without claiming event-confirmed activity (accelerated timestamps)');
+    // Model authorization lost on extension reload while the page's MAIN-world record survives.
+    const orphanRecord = () => evaluate(popupSession, `(async()=>{const {guardian:g}=await chrome.storage.session.get('guardian');
+      await chrome.scripting.executeScript({target:{tabId:g.tabId,documentIds:[g.editorDocument]},world:'MAIN',
+        func:()=>{globalThis.__classroomGuardianMarkerV1.token='old-fixture-run';}});})()`);
+    await orphanRecord();
+    r=await send({type:'CHECK'}); assert.equal(r.state.editor,'previous-edit-pending');
+    assert.equal(r.state.warning,'previous-monitor-run-needs-cleanup');
+    await send({type:'STOP'});
+    r=await send({type:'START',tabId,interval:1,mode:'marker',activity:true,confirm:true});
+    assert.equal(r.state.editor,'marker-present',JSON.stringify(r)); assert.equal(r.state.warning,'');
+    assert.equal(r.state.activityCount,0); assert.equal((await markerRead()).originalX,100);
+    console.log('PASS: explicit Start recovers an unchanged owned icon after simulated lost authorization');
+    await delay(200); await ageMarker(60001);
+    r=await send({type:'CHECK'}); assert.equal(r.state.editor,'marker-absent');
+    await orphanRecord(); await send({type:'STOP'});
+    r=await send({type:'START',tabId,interval:1,mode:'marker',activity:true,confirm:true});
+    assert.equal(r.state.editor,'marker-present',JSON.stringify(r)); assert.equal(r.state.warning,'');
+    assert.equal(r.state.activityCount,0);
+    console.log('PASS: completed old deletion record is cleared without reloading the student page or counting old activity');
+    r=await send({type:'STOP'}); assert.equal(r.state.phase,'idle');
+    assert.equal((await markerRead()).present,false);
+  }
   if (process.argv.includes("--alarms")) {
     await call("Page.navigate", {url: "https://classroom.microbit.org/join"}, fixtureSession);
     await delay(700);

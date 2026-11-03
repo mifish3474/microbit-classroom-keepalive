@@ -1,5 +1,37 @@
 # Prototype validation record
 
+## Version 0.2.3 previous-run recovery
+
+- The teacher confirmed the immediate generic adapter warning had underlying status `previous-edit-pending`. The MAIN-world editor record can survive an extension reload while the worker loses its old authorization token; the old guard consequently refused even harmless cleanup under the new token.
+- Explicit Start with icon activity enabled now prepares the pinned editor after checking the dedicated student identity, connection UI, lock state, and iframe document. Recovery clears only a provably completed owned deletion or removes the still-referenced, unchanged, disabled, disconnected owned leaf using ordinary guarded cleanup. Ordinary probes/Stop cannot claim another token; changed/connected/unverified records still refuse. No page reload, automatic rejoin, or additional network access is used.
+- `npm test`: 34 passed, 0 failed. New cases cover completed and present old markers, rejection of changed/connected/unproven state, specific error mapping, and no recovery on passive, wrong-student, locked, or disconnected Start.
+- Browser fixture regression models lost authorization by changing the owned test record's token. Explicit Stop/Start recovers both a present owned icon and an absent disposed icon, keeps the original program untouched, and does not count old activity. This models the reload consequence rather than performing a real extension reload.
+- Live acceptance and overnight accessibility remain unverified. Source and desktop version: 0.2.3.
+
+## Version 0.2.2 background editor handling
+
+- The teacher reported recurrence while the monitor was backgrounded/minimized. Captured MakeCode `main.js.download` confirms Blockly event dispatch goes through `requestAnimationFrame`, then a timer. Chrome documents suspension of animation-frame callbacks in background pages: https://developer.chrome.com/blog/background_tabs . This is a concrete explanation for delayed events; the exact missing fallback condition in the user's run was not captured.
+- Icon operations now wait when the iframe reports hidden visibility. Monitoring continues through alarms; no tab activation, animation-frame monkey patch, private event-queue flushing, or synthetic event is used. Missing creation confirmation retains the icon and retries, preventing an add/delete pair before creation has been observed. A late verified deletion can recover only a deletion-specific pause; independent safety/connection pauses remain latched.
+- `npm test`: 29 passed, 0 failed. New regressions cover hidden-page mutation guards, visibility resumption, delayed creation, late deletion after the grace timeout, and revoking automatic recovery after a connection failure or observation gap.
+- `npm run test:browser`: exit 0, Edge 156.0.4314.58. The synthetic editor now queues events through animation frames, matching the captured scheduling mechanism. Switching to another real browser tab held the owned icon without mutations; returning resumed removal and verification. Missing-delete recovery and existing integration checks also passed. Time thresholds in this smoke test are accelerated, not an overnight trial.
+- Previous advice that continuous icon editing could reliably run in a hidden tab was too optimistic. Use a separate visible window for continuous edits; live school workstation/overnight testing remains required. No new permissions or network destinations.
+
+## Version 0.2.1 delete-event recovery
+
+- The teacher observed the disabled icon appear and disappear in live MakeCode, followed intermittently by `delete-event-unconfirmed-edits-paused`. That warning stopped new edits but left monitoring running. Why the live delete event was missing has not been established.
+- The adapter now tracks creation and deletion independently, accepts matching root/workspace identity with optional IDs metadata, and preserves late events. The worker retries missing deletion confirmation for two extra minutes after the normal absent hold. A fallback requires previously observed creation, successful owned disposal, absence from the same workspace, a disposed block object, and a detached SVG. It never clears an independent pause or counts this fallback as an event-confirmed cycle.
+- `npm test`: 23 passed, 0 failed. Includes delayed delivery, missing delivery, strict fallback evidence, separate counters, unchanged last event-confirmed activity time, and preservation of connection pauses.
+- `npm run test:browser`: passed on isolated headless Edge 156.0.4314.58. A synthetic editor suppressed the delete event; real extension messaging/injection retried, safely re-added, and kept event-confirmed count/time unchanged. This regression uses accelerated adapter timestamps, not a real three-minute delay. Existing identity, warning, visible-placement, and minimum-hold checks also passed.
+- No new permissions, external requests, live accounts, or server delivery claims. The actual-alarm baseline below belongs to 0.2.0; the new retry decisions are covered by deterministic worker tests. Background and overnight live acceptance still remain necessary.
+
+## Version 0.2.0 visible icon activity
+
+- `npm test`: 15 passed, 0 failed, including one-minute mode validation, scrolled-viewport placement, full rendered bounds, minimum hold enforcement, missing create/delete events, refusal to delete connected/changed blocks, and owned-only cleanup.
+- `npm run test:browser`: passed legacy integration checks and visible disabled-icon creation in a synthetic editor. Check/activity requests did not bypass its one-minute hold; Stop removed only the owned icon.
+- `npm run test:browser -- --marker-alarms`: passed with exit 0. After closing the popup and stopping the MV3 worker, a real alarm deleted the icon after its full minute. It remained absent for another full minute, then a real alarm re-added it. The complete create/delete cycle counted once.
+- Runtime tests used synthetic Blockly objects and pages, not a live classroom. The captured target identifies `basic_show_icon`; live MakeCode adapter compatibility, teacher receipt, and server longevity still require the teacher's test. The visible mode intentionally leaves executable behavior unchanged.
+- Source, package, and desktop handoff are version 0.2.0. No additional host permissions or network calls were introduced.
+
 ## Version 0.1.2 badge acknowledgment
 
 Recording a manual separate-device join now clears the **?** reminder for the current monitoring run. The timestamp remains historical evidence in the popup. Warnings retain **!**, and a new Start resets the reminder. No scheduling, movement, permissions, or automatic connection claims changed.

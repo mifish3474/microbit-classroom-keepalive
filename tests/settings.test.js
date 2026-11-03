@@ -13,3 +13,8 @@ test("supported interval boundaries work with movement on or off", () => {
     assert.equal(startSettingsError({...settings, interval, activity}), "");
   }
 });
+test("visible icon mode accepts one minute and retains whole-minute limits", () => {
+  assert.equal(startSettingsError({...settings, mode: "marker", interval: 1}), "");
+  for (const interval of [0, 0.5, 61]) assert.match(startSettingsError({...settings, mode: "marker", interval}), /1 to 60/);
+  assert.notEqual(startSettingsError({...settings, mode: "unknown"}), "");
+});

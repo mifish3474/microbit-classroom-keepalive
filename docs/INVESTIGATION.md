@@ -18,6 +18,10 @@ Reviewed `spec.md`, both supplied outer HTML files, extracted editor HTML/JavaSc
 
 ## Chosen activity
 
+Version 0.2.0 adds a visible mode at the teacher's request. `target.js.download` identifies MakeCode's built-in show icon as `basic_show_icon`. The new adapter creates that block through `workspace.newBlock`, applies a dedicated disabled reason, keeps it disconnected, and places it using `getMetricsManager().getViewMetrics(true)` plus rendered-size checks. Only its own block reference and ID may be disposed. Connected or modified blocks are refused. A genuine `BlockCreate` followed later by `BlockDelete` must be observed; their XML/JSON payloads are never read. One-minute present/absent periods prevent immediate edit cancellation, but still do not establish server receipt or timeout prevention.
+
+The existing layout mode behaves as follows:
+
 The adapter selects a movable top-level `pxt-on-start` or `device_forever` only. The former is confirmed in the captured main bundle; the latter is an optional supported type. It moves horizontally 24 workspace units, verifies unchanged ordered top-level traversal, and later restores exact original coordinates. It reads no fields or generated code. Changed block/workspace identity, coordinates, or top-level order cause refusal rather than overwriting later edits.
 
 Immediate move-and-inverse can be filtered into a no-op by Blockly. Holding the harmless layout shift until the next alarm allows the normal editor to process it. Both exact-coordinate move events must be observed before a cycle counts. This proves local editor handling only: unchanged generated code may still be deduplicated downstream. No synthetic event is treated as trusted user input.
@@ -36,7 +40,10 @@ There is no established automatic positive test for fresh classroom joins. The p
 
 ## Primary documentation checked
 
+The November 3 background-tab failure prompted a closer check of captured Blockly event scheduling: `fireInternal` waits for `requestAnimationFrame` before a timer dispatches queued events. Chrome can suspend those animation frames for background pages ([Chrome background tab behavior](https://developer.chrome.com/blog/background_tabs)). Extension alarms do not bypass that page-level dependency. Version 0.2.2 therefore waits for editor visibility, retains a newly created icon until its creation event is observed, and avoids relying on a longer timeout alone. The teacher confirmed the failure occurred backgrounded/minimized; the precise failed removal-proof condition in that run is not established. New fixed diagnostic codes identify which proof is missing without capturing programs or event payloads.
+
 - [Chrome scripting](https://developer.chrome.com/docs/extensions/reference/api/scripting): isolated/MAIN worlds, exact frame/document targeting, and host permissions.
 - [Chrome alarms](https://developer.chrome.com/docs/extensions/reference/api/alarms): scheduling delays, sleep, and alarm recreation.
 - [Blockly BlockSvg](https://docs.blockly.com/reference/classes/BlockSvg/): relative `moveBy` behavior.
 - [Blockly events](https://docs.blockly.com/reference/namespaces/Events/): `BlockMove` observations; appearance alone is insufficient verification.
+- [Blockly Block](https://docs.blockly.com/reference/classes/Block/): disabling with a reason, ownership checks, and safe leaf disposal. [Blockly BlockCreate](https://docs.blockly.com/reference/namespaces/Events/classes/BlockCreate/) documents create event identifiers; the adapter deliberately ignores payloads.

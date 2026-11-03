@@ -1,10 +1,18 @@
 # Micro:bit Classroom Keep-Alive
 
-A local Chrome Manifest V3 prototype for a teacher's dedicated **Classroom Monitor** virtual student. It monitors the student page and editor, warns about connection problems, and optionally performs reversible Blockly layout changes. **It does not establish that edits prevent session expiration.**
+A local Chrome Manifest V3 prototype for a teacher's dedicated **Classroom Monitor** virtual student. It monitors the student page and editor, warns about connection problems, and optionally adds/deletes a visible disabled icon block or performs reversible layout changes. **It does not establish that edits prevent session expiration.**
 
 Prepared November 3, 2026 for a live trial before Thursday, November 5. No classroom was created or joined and no real student account was used during development. See [investigation](docs/INVESTIGATION.md), [testing and overnight checklist](docs/TESTING.md), and [substitute recovery sheet](docs/SUBSTITUTE.md).
 
-**Version 0.1.2:** After testing a successful join from another computer, check the confirmation box and click **Record my join check**. This clears **?** for the current monitoring run. It preserves the verification time and does not dismiss warnings or certify future access. Version 0.1.1 also fixed the misleading “Action failed” message for intervals outside the supported **3–60 whole minutes**. For a faster manual activity test, leave the interval at 3 and use **Check now**, waiting several seconds between clicks.
+**Version 0.2.3:** Fixes `previous-edit-pending` after an extension reload or failed cleanup. On an explicit Start with icon activity enabled, the extension rechecks the dedicated student's identity and exact iframe, then clears a provably completed old deletion record or safely removes its own unchanged, disconnected icon before starting a new cycle. It does not count the old cleanup as activity. Changed, connected, unknown, or unverified blocks remain protected. Editor failures now have specific messages instead of the generic "visible block adapter unavailable."
+
+Background monitoring continues, but icon edits wait while the editor is hidden. Blockly's event delivery depends on animation frames, which Chrome can suspend in background/minimized pages. The popup shows **Waiting for visible editor** and resumes when visible, unless another warning has paused activity. Keep Classroom Monitor as the selected tab in a separate, visible, non-minimized Chrome window while working in another window. An unobscured second monitor is useful. Browser visibility is an imperfect signal; check the popup and actual block cycle on your workstation.
+
+Missing delete events still get an extra two minutes for verification. If the event never arrives, continuing requires confirmed creation and proof that the owned block was disposed and removed from both the workspace and rendered page. These cycles have a separate counter and do not count as event-confirmed activity or server delivery. Late deletion confirmation can now recover a deletion-only pause; it never clears an independent connection, lock, or observation-gap pause. Missing creation confirmation keeps the icon in place and retries instead of deleting it prematurely.
+
+Choose **Add/delete show icon block**, enable activity, and set **1 minute**. The extension adds MakeCode's built-in show icon block in the visible workspace, leaves it for a full minute, deletes it, leaves it absent for a full minute, and repeats. The block is disabled and disconnected so it does not run. Missing-event verification can extend the absent period. The previous move/restore mode is still available.
+
+**Upgrade:** Click **Stop** in the old extension, open `chrome://extensions`, and click **Reload** for Classroom Keep-Alive. On the Classroom Monitor student tab, confirm the identity, enable activity, select the icon mode and interval, and click **Start** again. Files alone do not reload an already running extension. Inspect the monitor for any leftover test icon before restarting.
 
 ## Install in Chrome on Windows
 
@@ -22,9 +30,9 @@ No build or npm install is needed. Only `extension/` is installed; the handoff Z
 2. Join in a second Chrome window as **Classroom Monitor**, exactly spelled. If shared browser storage interferes with the two sessions, use separate Chrome profiles and install the extension in the monitor profile. Incognito is unnecessary.
 3. Leave the monitor in **Blocks** mode with a simple disposable program containing an **on start** block. Do not put real pupil work in this virtual student.
 4. Make the monitor's student tab active. Open the popup and confirm that this is your dedicated virtual student.
-5. Initially leave experimental movement **off** and click **Start on this tab**. This tests whether a joined monitor alone helps.
-6. To test edits, **Stop**, enable **experimental reversible block movement**, choose an interval, and **Start** again. The default is **3 minutes**; whole-minute values **3–60** are accepted. Settings take effect on Start.
-7. Close the popup. A `chrome.alarms` check runs every minute. Only the selected tab is authorized; switching tabs does not transfer authorization. Stop before switching targets.
+5. Initially leave experimental activity **off** and click **Start on this tab**. This tests whether a joined monitor alone helps.
+6. To see edits, **Stop**, enable **experimental editor activity**, select **Add/delete show icon block**, set **1 minute**, and **Start**. This mode accepts whole-minute intervals **1–60**; each present/absent state lasts at least that long. New installations default to this mode at 1 minute. Existing settings may be remembered, so select the mode and interval explicitly after upgrading. **Move/restore existing block** retains the **3–60** minute range. Settings take effect on Start.
+7. Close the popup. Monitoring and scheduled checks use `chrome.alarms`. Only the selected tab is authorized; switching tabs does not transfer authorization. Hidden icon editors wait and resume when visible; use a separate visible monitor window for ongoing edits. Stop before switching targets.
 
 Start refuses teacher pages, unjoined pages, other displayed student names, or a missing/ambiguous MakeCode iframe. The name check follows the supplied English UI structure; a site redesign or localization may need an adapter update. Never rename a real student to satisfy this guard.
 
@@ -36,22 +44,29 @@ Start refuses teacher pages, unjoined pages, other displayed student names, or a
 | Student status | Student UI and visible app connection warnings. “Appears connected” is not a server acknowledgement. |
 | Transport | Optional read-only Pusher state. A connected socket does not prove classroom membership or new joins. “Not observable” means unknown. |
 | Editor | Runtime Blockly availability or pending/refused activity. |
-| Last attempt | A requested move, including unsuccessful attempts. |
-| Editor-confirmed / count | A shift-and-restore cycle with both matching Blockly events and coordinates verified. This does not prove delivery to the teacher/server. |
+| Editor visibility / Activity | Hidden pages wait without further edits; visible pages resume verification and due edits unless independently paused. Monitoring remains active. |
+| Last attempt | A requested editor operation, including unsuccessful attempts. |
+| Activity type / cycle / next editor change | Which activity is selected, whether the icon is present or absent, and when the next change is due. Chrome can delay alarms; these are not real-time deadlines. |
+| Editor-confirmed / count | A complete add/delete or move/restore cycle with matching Blockly events verified. This does not prove delivery to the teacher/server. |
+| Cycles without delete event / Verification | Separate count of cycles with confirmed creation and verified local removal but no observed delete event. A waiting notice means verification is retrying; a workspace-only notice means activity continued without claiming event confirmation or server receipt. |
 | Editor save observed | A normal `pxthost/workspacesave` envelope arrived from the exact iframe. No payload is read. It is not attributed exclusively to automation. |
 | Reachability | Always currently unverified. You can record a successful separate-device join; this stores your confirmation time, not an automatic network test. |
 
-Badge **?** reminds you to check a fresh join. After a successful separate-device join, check the confirmation box and click **Record my join check** to clear it for this monitoring run. Monitoring continues; the popup retains your check time and still labels current reachability unverified. A new Start resets the reminder. Badge **!** means a warning and cannot be dismissed by recording a join. A blank badge is not a “session safe” status. An observation gap over 2½ minutes is stale and pauses new edits. Warnings latch deliberately: fix the cause, then Stop and explicitly Start again.
+Badge **?** reminds you to check a fresh join. After a successful separate-device join, check the confirmation box and click **Record my join check** to clear it for this monitoring run. Monitoring continues; the popup retains your check time and still labels current reachability unverified. A new Start resets the reminder. Badge **!** means a warning and cannot be dismissed by recording a join. A blank badge is not a “session safe” status. An observation gap over 2½ minutes is stale and pauses new edits. Connection/safety warnings latch: fix the cause, then Stop and explicitly Start again. A deletion-only verification warning may clear automatically once late proof arrives and no independent pause has occurred.
 
-**Check now** observes and advances pending restoration. **Try activity now** requests a cycle only when enabled and idle. Neither joins or reconnects a classroom. **Stop** cancels monitoring and tries to restore a pending move when the original document and block remain safely identifiable.
+**Check now** observes and advances due operations. **Try activity now** requests a cycle only when enabled and idle. Neither button shortens the icon's present/absent interval or reconnects a classroom. **Stop** cancels monitoring and removes the extension-owned icon (or restores a pending move) when the original document and block remain safely identifiable. An explicit Stop can remove the icon immediately.
 
 ## Confirm real local editor activity
 
-On Start with movement enabled, a supported top-level **on start** (or forever) block moves **24 workspace units horizontally**. No fields, code text, connections, or blocks are added/deleted. The adapter checks that Blockly's ordered traversal remains unchanged, rolling back unsafe ordering changes immediately.
+For **Add/delete show icon block**, keep the Blocks workspace visible and watch near its bottom center. The extension uses Blockly's current scroll/zoom-aware viewport, measures the block, and checks its rendered bounds. If the editor is hidden or too small for the whole icon block, it refuses the edit and reports the issue. Widen the editor and restart monitoring. Existing blocks are not moved to make room.
 
-On the next minute's check, it verifies the move event and restores the original coordinates. On the following check, it verifies restoration and increments **Activity count**. The first full cycle normally takes about two minutes; subsequent cycles start on the chosen interval, subject to scheduling delays. For a faster manual check, wait several seconds between **Check now** clicks for queued Blockly events.
+With a 1-minute interval, the expected sequence is: **Start: icon appears → about +1 minute: icon disappears → about +2 minutes: icon reappears → about +3 minutes: icon disappears**. Each state lasts at least a full minute; Chrome delays may make it longer. At the re-add check, the previous add/delete cycle is counted only after both corresponding Blockly events have been observed. The block is greyed because it is intentionally disabled. It remains disconnected and cannot be moved or edited through the normal UI. If it is connected to other code or otherwise changed, automatic deletion refuses rather than risking another block.
 
-API failure, hidden/read-only editor, missing starter block, manual layout changes, or unobserved events pause activity. There is no fallback to fake mouse/keyboard input. Immediate move-and-undo is avoided because Blockly can merge it into no change. A crash/reload can leave the temporary shifted layout saved; it does not change executable behavior. Moves may enter the editor's undo history or trigger its normal simulator/save behavior. Do not edit the monitor program while automation runs.
+To verify propagation separately, watch **only Classroom Monitor's program** on the teacher dashboard during the minute it contains the icon. Check whether the icon appears there and whether **Editor save observed** advances. The extension observes save-envelope metadata but no acknowledgement from the server. Disabled blocks change the workspace representation while leaving executable behavior unchanged; the app/server could still deduplicate them. A successful join after hours/overnight remains the required longevity test.
+
+The legacy **Move/restore existing block** mode moves a supported starter block 24 workspace units horizontally, leaves it until a later check, restores it, then verifies the restore event. It never adds/deletes blocks. That is the earlier subtle edit, not an instantaneous undo.
+
+API failure, read-only editor, ownership changes, or unverified deletion pause new activity. Background visibility and delayed creation events instead put icon activity into an automatic waiting state. A missing icon delete event triggers retries for up to two additional minutes after the normal absent interval; verified local removal permits continuing with a separate counter. This never clears a connection, lock, or observation-gap pause. Connection monitoring continues while edits wait or are paused. No fake mouse/keyboard fallback is used. A crash/reload can leave a disabled icon or shifted layout saved; inspect the monitor before restarting and manually remove any leftover disabled test icon. The extension will not claim or delete an unknown leftover block. Operations may enter undo history or trigger MakeCode's normal simulator/save behavior. Do not edit or undo the monitor program while automation runs.
 
 ## Workstation reliability
 
@@ -70,7 +85,7 @@ Scripts are injected into the selected tab only. Read-only discovery uses `allFr
 
 The dedicated name slot is compared locally with **Classroom Monitor**; only a boolean leaves the page. No name is retained. Blockly references and original coordinates stay transiently in the designated editor. No code, XML, credentials, classroom links, roster, or message payloads are collected. Chrome URLs are used transiently for allowlist checks, never logged or exported.
 
-Only interval/activity preference persists in `storage.local`. Run state and up to 120 timestamp/status-code log entries use `storage.session`, cleared on browser restart. The optional manually exported JSON excludes tab/classroom identifiers and raw errors. Normal MakeCode/Classroom behavior may transmit the monitor layout through its existing services. The extension adds no destination and does not alter the website's own privacy/telemetry behavior.
+Only interval/activity-type/activity-enabled preferences persist in `storage.local`. Run state and up to 120 timestamp/status-code log entries use `storage.session`, cleared on browser restart. The optional manually exported JSON excludes tab/classroom identifiers and raw errors. Normal MakeCode/Classroom behavior may transmit the monitor workspace through its existing services. The extension adds no destination and does not alter the website's own privacy/telemetry behavior.
 
 ## Tests
 
@@ -80,8 +95,9 @@ Use Node.js 24+; no third-party dependencies:
 npm test
 npm run test:browser
 npm run test:browser -- --alarms
+npm run test:browser -- --marker-alarms
 ```
 
-The browser fixture uses a separate headless Edge profile because branded Chrome may restrict command-line unpacked-extension loading. Set `BROWSER_EXE` to a compatible Chromium executable if needed. Interception is installed before test navigation; classroom/editor pages are synthetic. No sign-in or classroom join occurs. `--alarms` adds a real one-minute alarm test after closing the popup and stopping the worker. The temporary profile is removed afterward.
+The browser fixture uses a separate headless Edge profile because branded Chrome may restrict command-line unpacked-extension loading. Set `BROWSER_EXE` to a compatible Chromium executable if needed. Interception is installed before test navigation; classroom/editor pages are synthetic. No sign-in or classroom join occurs. `--alarms` tests the legacy move/restore alarm after closing the popup and stopping the worker. `--marker-alarms` tests actual icon deletion and re-addition over two full minutes. Run these flags separately. The temporary profile is removed afterward.
 
 This is Chromium integration evidence, not live Chrome/MakeCode longevity evidence. The remaining acceptance work is a real test classroom, fresh joins after several hours/overnight, and recovery rehearsal on the school workstation. Prefer passive monitoring if it proves sufficient.

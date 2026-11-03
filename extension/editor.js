@@ -4,6 +4,7 @@ export function editorOperation(command, token, deadline = Date.now() + 5000) {
   const key = "__classroomGuardianEditorV1";
   const result = (status, extra = {}) => ({status, ...extra});
   try {
+    if (globalThis.__classroomGuardianMarkerV1) return result("previous-edit-pending");
     if (!Number.isFinite(deadline) || Date.now() > deadline) return result("expired-command");
     if (location.origin !== "https://makecode.microbit.org" || window === window.top ||
         window.parent !== window.top || location.ancestorOrigins[0] !== "https://classroom.microbit.org" ||

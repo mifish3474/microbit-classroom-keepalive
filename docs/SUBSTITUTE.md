@@ -4,7 +4,7 @@
 
 The teacher should leave the official saved classroom HTML recovery file in a school-approved location, plus the lesson and where joining details are normally shared. Do not attach exports containing pupil data to public tickets or send them outside approved channels.
 
-1. Keep the teacher dashboard and **Classroom Monitor** windows open, workstation plugged in, and approved network connected.
+1. Keep the teacher dashboard and **Classroom Monitor** windows open, workstation plugged in, and approved network connected. For continuous icon activity, keep the monitor's Blocks tab selected in a separate visible, non-minimized window. Version 0.2.2 waits when the editor is hidden and resumes when visible; monitoring continues during that wait.
 2. Try the existing joining details from another device or fresh browser context. If successful, use them for class. In the extension popup, check the confirmation box and click **Record my join check**. Version 0.1.2 clears the **?** reminder and keeps the verification time; this does not guarantee future access.
 3. If joining fails, check the teacher dashboard for expired/ended/offline warnings. Restore normal connectivity if appropriate. Do not bypass school security or sign-in prompts.
 4. Click **Stop** in the extension. Open the teacher's official saved classroom HTML file in Chrome.
