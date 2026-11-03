@@ -15,6 +15,7 @@ Install and set up an empty test classroom using [README](../README.md). Do not 
 - [ ] Start refuses the teacher tab and another test student's tab; neither program changes.
 - [ ] Start on the monitor with movement off. Page, student UI, transport, editor, and reachability are separate; reachability says unverified.
 - [ ] Close/reopen the popup. Running state persists. Switching tabs does not change the target.
+- [ ] After a successful separate-device join, check the confirmation box and click **Record my join check**. In 0.1.2, **?** clears, monitoring continues, and the popup keeps the check time without claiming current reachability. A later warning must still show **!**; a new Start resets **?**.
 - [ ] Stop, enable movement with interval 3, and Start. A starter block shifts sideways without changed fields/connections/code.
 - [ ] Enter interval 1 before Start. Version 0.1.1 explains the supported 3–60 minute range; it must not log a probe failure or reset monitoring. Correct it to 3 to proceed.
 - [ ] Observe Last attempt, restoration at the next check, then Editor-confirmed/count at the following check. Missing events must not count. Wait several seconds between manual Check now clicks.

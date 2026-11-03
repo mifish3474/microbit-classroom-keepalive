@@ -30,8 +30,13 @@ function log(code) {
 }
 async function save() {
   await chrome.storage.session.set({guardian: state});
-  await chrome.action.setBadgeText({text: state.warning ? "!" : state.running ? "?" : ""});
+  // A recorded manual join dismisses the reminder for this run, not future warnings.
+  await chrome.action.setBadgeText({text: state.warning ? "!" : state.running && !state.joinVerifiedAt ? "?" : ""});
   await chrome.action.setBadgeBackgroundColor({color: state.warning ? "#b42318" : "#996300"});
+  await chrome.action.setTitle({title: state.warning ? "Classroom Keep-Alive — warning; open popup for details" :
+    !state.running ? "Classroom Keep-Alive — stopped" :
+    state.joinVerifiedAt ? "Classroom Keep-Alive — monitoring; manual join check recorded, see popup for time" :
+    "Classroom Keep-Alive — monitoring; a manual join check is needed"});
 }
 async function ensureAlarm() {
   if (!await chrome.alarms.get(ALARM)) await chrome.alarms.create(ALARM, {periodInMinutes: 1});

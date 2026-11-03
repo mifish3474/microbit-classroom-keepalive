@@ -1,5 +1,13 @@
 # Prototype validation record
 
+## Version 0.1.2 badge acknowledgment
+
+Recording a manual separate-device join now clears the **?** reminder for the current monitoring run. The timestamp remains historical evidence in the popup. Warnings retain **!**, and a new Start resets the reminder. No scheduling, movement, permissions, or automatic connection claims changed.
+
+- `npm test`: 9 passed, 0 failed.
+- `npm run test:browser`: passed the actual popup confirmation/button flow, blank badge persistence after another check, continued running status, retained timestamp/current-reachability disclaimer, warning precedence even after another confirmation, and reminder reset on a new Start. Existing integration checks also passed.
+- No new live or overnight reliability claim.
+
 ## Version 0.1.1 validation fix
 
 The reported failure occurred with a 1-minute interval; 3 minutes worked. Version 0.1.0 rejected values below 3 but incorrectly treated that input error as a probe failure, pausing edits and displaying “Action failed.” Version 0.1.1 validates settings before sending Start, preserves a clear range message through popup refreshes, and separates worker input errors from monitoring failures. The 3–60 minute supported range is unchanged.

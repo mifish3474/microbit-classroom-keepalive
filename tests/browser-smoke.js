@@ -128,6 +128,7 @@ try {
   assert.equal(r.state.running, true, JSON.stringify(r));
   assert.equal(r.state.editor, "shifted", JSON.stringify(r));
   assert.equal(r.state.activityCount, 0);
+  assert.equal(await evaluate(popupSession, "chrome.action.getBadgeText({})"), "?");
   const beforeInvalidInput = r.state;
   const invalid = await send({type: "START", tabId, interval: 1, activity: true, confirm: true});
   assert.equal(invalid.ok, false);
@@ -145,12 +146,30 @@ try {
   assert.equal(r.state.joinVerifiedAt, null);
   assert.ok(r.state.lastEditorSave);
   console.log("PASS: real MV3 messaging, cross-origin MAIN-world injection, verified edit/restore, no false join claim");
+  await delay(2200); // Let popup polling render the current running state.
+  await evaluate(popupSession, `document.getElementById('joined').checked=true;
+    document.getElementById('joined').dispatchEvent(new Event('change'));
+    document.getElementById('verify').click();`);
+  await delay(100);
+  r = await send({type: "STATUS"});
+  assert.ok(r.state.joinVerifiedAt);
+  const recordedJoin = r.state.joinVerifiedAt;
+  assert.equal(await evaluate(popupSession, "chrome.action.getBadgeText({})"), "");
+  r = await send({type: "CHECK"});
+  assert.equal(r.state.running, true);
+  assert.equal(r.state.joinVerifiedAt, recordedJoin);
+  assert.equal(await evaluate(popupSession, "chrome.action.getBadgeText({})"), "");
+  assert.match(await evaluate(popupSession, "document.getElementById('status').textContent"), /current reachability unverified/);
+  console.log("PASS: recording a manual join clears the reminder while monitoring and historical verification remain");
   // Page messages cannot invoke extension commands.
   await evaluate(fixtureSession, "window.postMessage({type:'START',activity:true},'*')");
   r = await send({type: "STATUS"}); assert.equal(r.state.activityCount, 1);
   await evaluate(fixtureSession, "document.body.insertAdjacentHTML('beforeend','<div data-testid=connection-error-indicator>Session expired due to inactivity</div>')");
   r = await send({type: "CHECK"});
   assert.equal(r.state.connection, "expired"); assert.equal(r.state.activityEnabled, false);
+  assert.equal(await evaluate(popupSession, "chrome.action.getBadgeText({})"), "!");
+  await send({type: "JOIN_VERIFIED"});
+  assert.equal(await evaluate(popupSession, "chrome.action.getBadgeText({})"), "!");
   console.log("PASS: expiration warning pauses edits");
   await send({type: "STOP"});
   await evaluate(fixtureSession, "document.querySelector('.ov_hidden p').textContent='Different fixture student'");
@@ -160,6 +179,9 @@ try {
   await evaluate(fixtureSession, "document.querySelector('.ov_hidden p').textContent='Classroom Monitor';document.querySelector('[data-testid=connection-error-indicator]').remove()");
   r = await send({type: "START", tabId, interval: 3, activity: false, confirm: true});
   assert.equal(r.state.running, true);
+  assert.equal(r.state.joinVerifiedAt, null);
+  assert.equal(await evaluate(popupSession, "chrome.action.getBadgeText({})"), "?");
+  console.log("PASS: manual confirmation cannot hide warnings; a new monitoring run restores the reminder");
   await evaluate(fixtureSession, "document.querySelector('iframe').remove()");
   await delay(200);
   r = await send({type: "STATUS"});

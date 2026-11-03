@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Micro:bit Classroom Keep-Alive",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "minimum_chrome_version": "120",
   "description": "Local monitoring and optional reversible Blockly activity for a designated Classroom Monitor student.",
   "permissions": ["alarms", "scripting", "storage"],

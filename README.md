@@ -4,7 +4,7 @@ A local Chrome Manifest V3 prototype for a teacher's dedicated **Classroom Monit
 
 Prepared November 3, 2026 for a live trial before Thursday, November 5. No classroom was created or joined and no real student account was used during development. See [investigation](docs/INVESTIGATION.md), [testing and overnight checklist](docs/TESTING.md), and [substitute recovery sheet](docs/SUBSTITUTE.md).
 
-**Version 0.1.1:** Fixes the misleading “Action failed” error for unsupported intervals. This prototype accepts **3–60 whole minutes**, not 1 minute: a cycle uses separate move, restore, and verification checks. Invalid input now explains the limit without changing a running monitor. For a faster manual check, leave the interval at 3 and use **Check now**, waiting several seconds between clicks.
+**Version 0.1.2:** After testing a successful join from another computer, check the confirmation box and click **Record my join check**. This clears **?** for the current monitoring run. It preserves the verification time and does not dismiss warnings or certify future access. Version 0.1.1 also fixed the misleading “Action failed” message for intervals outside the supported **3–60 whole minutes**. For a faster manual activity test, leave the interval at 3 and use **Check now**, waiting several seconds between clicks.
 
 ## Install in Chrome on Windows
 
@@ -41,7 +41,7 @@ Start refuses teacher pages, unjoined pages, other displayed student names, or a
 | Editor save observed | A normal `pxthost/workspacesave` envelope arrived from the exact iframe. No payload is read. It is not attributed exclusively to automation. |
 | Reachability | Always currently unverified. You can record a successful separate-device join; this stores your confirmation time, not an automatic network test. |
 
-Badge **?** means monitoring; **!** means a warning. There is no green “session safe” status. An observation gap over 2½ minutes is stale and pauses new edits. Warnings latch deliberately: fix the cause, then Stop and explicitly Start again.
+Badge **?** reminds you to check a fresh join. After a successful separate-device join, check the confirmation box and click **Record my join check** to clear it for this monitoring run. Monitoring continues; the popup retains your check time and still labels current reachability unverified. A new Start resets the reminder. Badge **!** means a warning and cannot be dismissed by recording a join. A blank badge is not a “session safe” status. An observation gap over 2½ minutes is stale and pauses new edits. Warnings latch deliberately: fix the cause, then Stop and explicitly Start again.
 
 **Check now** observes and advances pending restoration. **Try activity now** requests a cycle only when enabled and idle. Neither joins or reconnects a classroom. **Stop** cancels monitoring and tries to restore a pending move when the original document and block remain safely identifiable.
 
