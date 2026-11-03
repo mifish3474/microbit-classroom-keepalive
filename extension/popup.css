@@ -1,0 +1,9 @@
+:root { font: 14px/1.4 system-ui, sans-serif; color: #183247; background: #fafcfd; }
+body { width: 375px; margin: 16px; } h1 { font-size: 20px; margin: 0 0 8px; }
+label { display: block; margin: 10px 0; } input[type=number] { width: 55px; padding: 4px; }
+button { padding: 7px 10px; border: 1px solid #7796a8; border-radius: 5px; cursor: pointer; background: white; color: #183247; }
+button:disabled { opacity: .5; cursor: default; } #start { background: #165d7d; color: white; }
+.buttons { display: flex; gap: 8px; margin: 12px 0; } dl { display: grid; grid-template-columns: 125px 1fr; gap: 7px; }
+dt { font-weight: 600; } dd { margin: 0; overflow-wrap: anywhere; } #notice { color: #a12b10; font-weight: 600; }
+.caution { border-left: 3px solid #a66b00; padding-left: 9px; } pre { font-size: 11px; max-height: 170px; overflow: auto; }
+details { margin-top: 16px; } :focus-visible { outline: 3px solid #de9c25; outline-offset: 2px; }

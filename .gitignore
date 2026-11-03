@@ -1,4 +1,6 @@
 # Logs
+.browser-test/
+artifacts/
 logs
 *.log
 npm-debug.log*

@@ -1,0 +1,10 @@
+{
+  "name": "microbit-classroom-keepalive",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-isolation=none tests/*.test.js",
+    "test:browser": "node tests/browser-smoke.js"
+  }
+}

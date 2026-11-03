@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classroom Keep-Alive</title><link rel="stylesheet" href="popup.css"></head>
+<body><h1>Classroom Keep-Alive</h1>
+<p>Open the dedicated student tab before starting.</p>
+<label><input id="confirm" type="checkbox"> This is my virtual student named <strong>Classroom Monitor</strong>.</label>
+<label><input id="activity" type="checkbox"> Enable experimental reversible block movement</label>
+<label>Activity interval (minutes) <input id="interval" type="number" min="3" max="60" step="1" value="3"></label>
+<div class="buttons"><button id="start">Start on this tab</button><button id="stop">Stop</button></div>
+<p id="notice" role="alert"></p>
+<dl id="status" aria-live="polite"></dl>
+<p class="caution">A loaded page, connected transport, or local edit does not prove students can join. Test from another device.</p>
+<div class="buttons"><button id="check">Check now</button><button id="test">Try activity now</button></div>
+<label><input id="joined" type="checkbox"> I just joined this classroom successfully from a separate device.</label>
+<button id="verify">Record my join check</button>
+<details><summary>Local diagnostics</summary><p>Timestamped status codes only. Cleared on browser restart.</p><pre id="logs"></pre>
+<button id="export">Export log</button> <button id="clear">Clear log</button></details>
+<script src="popup.js" type="module"></script></body></html>

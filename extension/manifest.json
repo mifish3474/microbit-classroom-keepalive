@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Micro:bit Classroom Keep-Alive",
+  "version": "0.1.0",
+  "minimum_chrome_version": "120",
+  "description": "Local monitoring and optional reversible Blockly activity for a designated Classroom Monitor student.",
+  "permissions": ["alarms", "scripting", "storage"],
+  "host_permissions": ["https://classroom.microbit.org/*", "https://makecode.microbit.org/*"],
+  "background": {"service_worker": "worker.js", "type": "module"},
+  "action": {"default_popup": "popup.html", "default_title": "Classroom Keep-Alive — reachability unverified"}
+}
