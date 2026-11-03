@@ -6,7 +6,7 @@ Reviewed `spec.md`, both supplied outer HTML files, extracted editor HTML/JavaSc
 
 | Evidence | Finding and consequence |
 | --- | --- |
-| Student HTML | Saved from `https://classroom.microbit.org/join`; contains `data-testid="student-leave"`, a distinct displayed-name slot, and `section[aria-label="Code editor"] iframe[title="MakeCode"]`. The captured student is **not** Classroom Monitor, so the capture must fail the activity guard. |
+| Student HTML | Saved from `https://classroom.microbit.org/join`; contains `data-testid="student-leave"`, a distinct displayed-name slot, and `section[aria-label="Code editor"] iframe[title="MakeCode"]`. These are structural evidence only; captures must never be used as authorization to modify a live student's work. Since 0.2.4, teacher confirmation designates the monitor and names are not inspected. |
 | Editor HTML | Saved from `https://makecode.microbit.org/?lang=en&controller=1&hideMenu=#editor`, with Blockly SVG. Browser save rewrites iframe URLs to local paths. Live access is cross-origin; local saved pages are not authorized targets. |
 | `main.js.download` | Exposes `pxt.blocks.requireBlockly=()=>...`. Blockly has workspace access, `BlockSvg.moveBy`, and queued `BlockMove` events. MakeCode's workspace listener includes moves in `changeCallback()`. Runtime API availability still needs testing. |
 | Classroom bundle | Handles `pxthost/workspacesave` and `editorcontentloaded`; the normal save handler forwards projects. The extension observes envelope metadata only, never project payloads or controller commands. |
@@ -39,6 +39,8 @@ Activity is opt-in and initially off. An unavailable API yields monitoring only.
 There is no established automatic positive test for fresh classroom joins. The popup therefore reports current reachability as unverified and records only teacher-reported separate-device join times.
 
 ## Primary documentation checked
+
+Compact-window investigation: captured `index-cGcUuupo.js.download` places the desktop Leave button inside `display: {base: "none", lg: "flex"}`. The button remains in the DOM while its group is hidden at narrow widths. Version 0.2.4 checks its unique presence inside a visible header instead of its own visibility. At the teacher's explicit request, the displayed-name comparison and name-change observer were removed; the confirmation checkbox now supplies identity authorization. Route, student structure, pinned tab/document, iframe replacement, and connection warnings remain checked.
 
 The November 3 background-tab failure prompted a closer check of captured Blockly event scheduling: `fireInternal` waits for `requestAnimationFrame` before a timer dispatches queued events. Chrome can suspend those animation frames for background pages ([Chrome background tab behavior](https://developer.chrome.com/blog/background_tabs)). Extension alarms do not bypass that page-level dependency. Version 0.2.2 therefore waits for editor visibility, retains a newly created icon until its creation event is observed, and avoids relying on a longer timeout alone. The teacher confirmed the failure occurred backgrounded/minimized; the precise failed removal-proof condition in that run is not established. New fixed diagnostic codes identify which proof is missing without capturing programs or event payloads.
 

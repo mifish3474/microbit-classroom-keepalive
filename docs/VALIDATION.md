@@ -1,5 +1,13 @@
 # Prototype validation record
 
+## Version 0.2.4 teacher-confirmed target and compact headers
+
+- The teacher confirmed maximizing the window fixed Start. Captured Classroom code hides the desktop Leave button below its large-screen breakpoint; the old extension mistakenly used that button's visibility as evidence of a joined student. The revised probe uses its unique presence in a visible header plus the exact student route and editor structure.
+- At the teacher's explicit request, the confirmation checkbox now designates the monitor. Student names are no longer read or compared, and name changes do not invalidate authorization. Teacher pages, unconfirmed Starts, missing/ambiguous editors, navigation, and iframe changes remain guarded. Stop before changing the selected tab to another student/session.
+- `npm test`: 37 passed, 0 failed, including compact/full header recognition, no name inspection, ambiguous-control and incorrect-route/origin refusal, and retained expiry detection.
+- `npm run test:browser`: verified Start with a hidden desktop Leave button, active monitoring through 640/1200/640 pixel viewport changes, required explicit confirmation, and acceptance of a different displayed test name. Existing activity/recovery/isolation regressions also ran. Tests use synthetic pages, not live students.
+- No guarantee of uninterrupted operation: hidden-editor waits, insufficient workspace area, sleep/discard, network interruptions, and server expiration still apply. Live compact-window and overnight acceptance remain necessary.
+
 ## Version 0.2.3 previous-run recovery
 
 - The teacher confirmed the immediate generic adapter warning had underlying status `previous-edit-pending`. The MAIN-world editor record can survive an extension reload while the worker loses its old authorization token; the old guard consequently refused even harmless cleanup under the new token.

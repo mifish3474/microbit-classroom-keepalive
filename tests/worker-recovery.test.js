@@ -131,9 +131,9 @@ test("explicit enabled Start prepares the pinned editor; passive or ineligible S
   const f=setup({running:false}); const r=await f.start();
   assert.equal(r.ok,true); assert.equal(r.state.editor,"marker-present");
   assert.equal(f.commands[0],"prepare"); assert.equal(r.state.activityCount,0);
-  for(const variant of ["passive","wrong-student","locked","disconnected"]) {
+  for(const variant of ["passive","ineligible-page","locked","disconnected"]) {
     const f=setup({running:false});
-    if(variant==="wrong-student") f.controls.eligible=false;
+    if(variant==="ineligible-page") f.controls.eligible=false;
     if(variant==="locked") f.controls.locked=true;
     if(variant==="disconnected") f.controls.connection="connection-warning";
     await f.start(variant!=="passive");

@@ -361,7 +361,7 @@ async function start(msg) {
   const r = await top("bind");
   state.topDocument = r.documentId;
   if (!r.result?.eligible || !r.result.bound) {
-    state.warning = "start-refused-check-monitor-name-and-student-page";
+    state.warning = r.result?.eligible ? "start-refused-previous-page-binding" : "start-refused-check-student-page-and-editor";
     await save();
     return;
   }
@@ -374,7 +374,7 @@ async function start(msg) {
   if (candidates.length === 1) state.editorDocument = candidates[0].documentId;
   else { state.activityEnabled = false; state.warning = "editor-frame-unavailable"; }
   if (state.editorDocument && state.activityMode === "marker" && state.activityEnabled) {
-    // Fresh explicit authorization only, never from a timer or a passive monitoring Start.
+    // Fresh teacher authorization only, never from a timer or a passive monitoring Start.
     const guard = (await top()).result;
     if (!guard?.eligible || !guard.bound) return stop("identity-or-frame-changed", false);
     if (guard.connection === "ui-present" && !guard.locked) {

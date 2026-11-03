@@ -4,7 +4,9 @@ A local Chrome Manifest V3 prototype for a teacher's dedicated **Classroom Monit
 
 Prepared November 3, 2026 for a live trial before Thursday, November 5. No classroom was created or joined and no real student account was used during development. See [investigation](docs/INVESTIGATION.md), [testing and overnight checklist](docs/TESTING.md), and [substitute recovery sheet](docs/SUBSTITUTE.md).
 
-**Version 0.2.3:** Fixes `previous-edit-pending` after an extension reload or failed cleanup. On an explicit Start with icon activity enabled, the extension rechecks the dedicated student's identity and exact iframe, then clears a provably completed old deletion record or safely removes its own unchanged, disconnected icon before starting a new cycle. It does not count the old cleanup as activity. Changed, connected, unknown, or unverified blocks remain protected. Editor failures now have specific messages instead of the generic "visible block adapter unavailable."
+**Version 0.2.4:** Your confirmation checkbox designates the monitor tab; the extension no longer reads or checks the student name. Compact windows work even when Classroom hides its desktop Leave button. Start still requires a student page with the expected editor, and automation stays pinned to your selected tab and editor document. Stop before changing that tab to another student or classroom. This fixes the known compact-header failure, not every possible browser or server failure.
+
+Previous-run recovery remains available: explicit Start with icon activity enabled clears a provably completed old deletion record or safely removes its own unchanged, disconnected icon before starting a new cycle. It does not count the old cleanup as activity. Changed, connected, unknown, or unverified blocks remain protected.
 
 Background monitoring continues, but icon edits wait while the editor is hidden. Blockly's event delivery depends on animation frames, which Chrome can suspend in background/minimized pages. The popup shows **Waiting for visible editor** and resumes when visible, unless another warning has paused activity. Keep Classroom Monitor as the selected tab in a separate, visible, non-minimized Chrome window while working in another window. An unobscured second monitor is useful. Browser visibility is an imperfect signal; check the popup and actual block cycle on your workstation.
 
@@ -27,14 +29,14 @@ No build or npm install is needed. Only `extension/` is installed; the handoff Z
 ## Create a test classroom and start
 
 1. Manually create a classroom with **no real pupils** using Micro:bit Classroom. Keep the teacher dashboard open.
-2. Join in a second Chrome window as **Classroom Monitor**, exactly spelled. If shared browser storage interferes with the two sessions, use separate Chrome profiles and install the extension in the monitor profile. Incognito is unnecessary.
+2. Join in a second Chrome window as your dedicated virtual student; **Classroom Monitor** is the suggested name, but spelling is no longer checked. If shared browser storage interferes with the two sessions, use separate Chrome profiles and install the extension in the monitor profile. Incognito is unnecessary.
 3. Leave the monitor in **Blocks** mode with a simple disposable program containing an **on start** block. Do not put real pupil work in this virtual student.
 4. Make the monitor's student tab active. Open the popup and confirm that this is your dedicated virtual student.
 5. Initially leave experimental activity **off** and click **Start on this tab**. This tests whether a joined monitor alone helps.
 6. To see edits, **Stop**, enable **experimental editor activity**, select **Add/delete show icon block**, set **1 minute**, and **Start**. This mode accepts whole-minute intervals **1–60**; each present/absent state lasts at least that long. New installations default to this mode at 1 minute. Existing settings may be remembered, so select the mode and interval explicitly after upgrading. **Move/restore existing block** retains the **3–60** minute range. Settings take effect on Start.
 7. Close the popup. Monitoring and scheduled checks use `chrome.alarms`. Only the selected tab is authorized; switching tabs does not transfer authorization. Hidden icon editors wait and resume when visible; use a separate visible monitor window for ongoing edits. Stop before switching targets.
 
-Start refuses teacher pages, unjoined pages, other displayed student names, or a missing/ambiguous MakeCode iframe. The name check follows the supplied English UI structure; a site redesign or localization may need an adapter update. Never rename a real student to satisfy this guard.
+Start refuses teacher pages, pages without the joined-student controls, and a missing/ambiguous MakeCode iframe. It trusts your confirmation that the selected tab is your disposable monitor; it cannot distinguish that tab from a real student's tab by name. The student controls may be hidden by the compact layout, but the header and editor structure must still exist. A site redesign or localization may need an adapter update.
 
 ## Read the status accurately
 
@@ -81,9 +83,9 @@ Chrome alarms may be delayed and do not wake a sleeping computer. They wake the 
 
 Permissions are only `alarms`, `scripting`, `storage`, and host access to `https://classroom.microbit.org/*` and `https://makecode.microbit.org/*`. There is no broad tabs permission, cookies access, debugger, webRequest, notifications, analytics, remote script, or extension-origin network request.
 
-Scripts are injected into the selected tab only. Read-only discovery uses `allFrames`; mutations target the exact MakeCode document ID in MAIN world after isolated-world identity checks. Page postMessage traffic cannot command edits. The passive save listener validates the pinned iframe's window and origin.
+Scripts are injected into the selected tab only. Read-only discovery uses `allFrames`; mutations target the exact MakeCode document ID in MAIN world after teacher confirmation and isolated-world student-page checks. Page postMessage traffic cannot command edits. The passive save listener validates the pinned iframe's window and origin.
 
-The dedicated name slot is compared locally with **Classroom Monitor**; only a boolean leaves the page. No name is retained. Blockly references and original coordinates stay transiently in the designated editor. No code, XML, credentials, classroom links, roster, or message payloads are collected. Chrome URLs are used transiently for allowlist checks, never logged or exported.
+Student names are neither read nor retained. Blockly references and original coordinates stay transiently in the designated editor. No code, XML, credentials, classroom links, roster, or message payloads are collected. Chrome URLs are used transiently for allowlist checks, never logged or exported.
 
 Only interval/activity-type/activity-enabled preferences persist in `storage.local`. Run state and up to 120 timestamp/status-code log entries use `storage.session`, cleared on browser restart. The optional manually exported JSON excludes tab/classroom identifiers and raw errors. Normal MakeCode/Classroom behavior may transmit the monitor workspace through its existing services. The extension adds no destination and does not alter the website's own privacy/telemetry behavior.
 

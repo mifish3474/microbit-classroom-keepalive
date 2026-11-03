@@ -67,9 +67,12 @@ window.pxt={blocks:{requireBlockly:()=>({BlockSvg:Marker,Blocks:{basic_show_icon
   Events:{isEnabled:()=>true,getGroup:()=>'',BLOCK_MOVE:'move',BLOCK_CREATE:'create',BLOCK_DELETE:'delete'}})}};
 window.testBlock=block;
 </script></body></html>`;
-const fixtureStudent = `<!doctype html><html><body><section aria-label="Header">
+const fixtureStudent = `<!doctype html><html><head><style>
+.ov_hidden {overflow:hidden;max-width:85px} .ov_hidden p {white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:999px){.student-actions{display:none}}
+</style></head><body><section aria-label="Header">
 <div><svg></svg><div class="ov_hidden"><p>Classroom Monitor</p></div></div>
-<button data-testid="student-leave">Leave</button></section>
+<div class="student-actions"><button data-testid="student-leave">Leave</button></div></section>
 <section aria-label="Code editor"><iframe title="MakeCode" src="https://makecode.microbit.org/?controller=1" width="600" height="400"></iframe></section>
 <script>window.Pusher={instances:[{connection:{state:'connected'}}]}</script></body></html>`;
 let browserClosed = false;
@@ -170,6 +173,16 @@ try {
   assert.equal(r.state.joinVerifiedAt, null);
   assert.ok(r.state.lastEditorSave);
   console.log("PASS: real MV3 messaging, cross-origin MAIN-world injection, verified edit/restore, no false join claim");
+  for(const width of [640,1200,640]) {
+    await call('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:false},fixtureSession);
+    await delay(100);
+    const leaveVisible=await evaluate(fixtureSession,"document.querySelector('[data-testid=student-leave]').getClientRects().length>0");
+    assert.equal(leaveVisible,width>=1000);
+    r=await send({type:'CHECK'});
+    assert.equal(r.state.running,true); assert.equal(r.state.activityEnabled,true);
+    assert.equal(r.state.connection,'ui-present'); assert.equal(r.state.warning,'');
+  }
+  console.log('PASS: resizing across the compact-header breakpoint does not stop monitoring or pause edits');
   await delay(2200); // Let popup polling render the current running state.
   await evaluate(popupSession, `document.getElementById('joined').checked=true;
     document.getElementById('joined').dispatchEvent(new Event('change'));
@@ -197,9 +210,12 @@ try {
   console.log("PASS: expiration warning pauses edits");
   await send({type: "STOP"});
   await evaluate(fixtureSession, "document.querySelector('.ov_hidden p').textContent='Different fixture student'");
-  r = await send({type: "START", tabId, interval: 3, activity: true, confirm: true});
-  assert.equal(r.state.running, false); assert.equal(r.state.activityCount, 0);
-  console.log("PASS: wrong student rejected");
+  r = await send({type: "START", tabId, interval: 3, activity: false, confirm: false});
+  assert.equal(r.ok, false); assert.equal(r.kind, 'input');
+  r = await send({type: "START", tabId, interval: 3, activity: false, confirm: true});
+  assert.equal(r.state.running, true); assert.equal(r.state.activityCount, 0);
+  await send({type:'STOP'});
+  console.log("PASS: teacher confirmation is required; displayed student name does not control authorization");
   await evaluate(fixtureSession, "document.querySelector('.ov_hidden p').textContent='Classroom Monitor';document.querySelector('[data-testid=connection-error-indicator]').remove()");
   r = await send({type: "START", tabId, interval: 3, activity: false, confirm: true});
   assert.equal(r.state.running, true);

@@ -2,8 +2,8 @@
 
 ## Development evidence — November 3, 2026
 
-- `npm test`: 34 adapter/settings/worker tests cover event requirements, exact restoration, visible icon placement, minimum holds, ownership checks, delayed/missing events, hidden-editor waiting/resumption, safe recovery, independent pauses, counter accuracy, and explicit Start cleanup of old run records.
-- Browser fixture smoke covers real MV3 loading/messaging, cross-origin isolated/MAIN injection, a complete event-confirmed cycle, passive save observation, expiry pause, wrong-student refusal, and iframe invalidation. Its Blockly API is synthetic, so it does not prove live MakeCode compatibility.
+- `npm test`: 37 adapter/settings/worker/probe tests cover event requirements, exact restoration, visible icon placement, minimum holds, ownership checks, delayed/missing events, hidden-editor waiting/resumption, safe recovery, independent pauses, counter accuracy, explicit Start cleanup, and compact-header recognition without reading names.
+- Browser fixture smoke covers real MV3 loading/messaging, cross-origin isolated/MAIN injection, a complete event-confirmed cycle, passive save observation, expiry pause, required teacher confirmation, compact/full resize transitions, and iframe invalidation. Its Blockly API is synthetic, so it does not prove live MakeCode compatibility.
 - The optional `--alarms` test closes the popup, stops the worker, waits for an actual one-minute alarm, and verifies restoration after worker restart.
 - No live Windows Chrome classroom, overnight survival, teacher receipt, or recovery rehearsal has been claimed successful. These remain acceptance work. See `VALIDATION.md` for final command results.
 
@@ -12,7 +12,8 @@
 Install and set up an empty test classroom using [README](../README.md). Do not use real pupil accounts.
 
 - [ ] Teacher dashboard remains open. Manually join as **Classroom Monitor**; use separate Chrome profiles if needed.
-- [ ] Start refuses the teacher tab and another test student's tab; neither program changes.
+- [ ] Start refuses the teacher tab and refuses any student tab without your confirmation. A different displayed name is accepted only when you explicitly designate that test tab. Use disposable test students only.
+- [ ] Start in a smaller window with the desktop Leave button hidden. Resize to full screen and back: monitoring continues without a name/connection warning. The workspace still needs enough space for the icon.
 - [ ] Start on the monitor with movement off. Page, student UI, transport, editor, and reachability are separate; reachability says unverified.
 - [ ] Close/reopen the popup. Running state persists. Switching tabs does not change the target.
 - [ ] With icon activity enabled, switch to another tab for at least four minutes. Monitoring stays running; Activity becomes **Waiting for visible editor**. No additional icon transitions occur. Return to Classroom Monitor; confirmation and edits resume without Stop/Start. Repeat by minimizing its window. Do not confuse waiting with stopped monitoring.
@@ -68,7 +69,7 @@ An overnight trial cannot be completed during a development turn. Do not label T
 
 | Symptom | Action |
 | --- | --- |
-| Start refused | Confirm `/join`, joined status, exact Classroom Monitor name in the student header, and MakeCode iframe. Do not weaken identity checks. |
+| Start refused | Confirm `/join`, joined status, the expected MakeCode iframe, and your confirmation checkbox. Version 0.2.4 does not check the name or require the desktop Leave button to be visible. If it reports a previous page binding, export diagnostics. |
 | API unavailable / no movable block | Use visible editable Blocks and a normal on-start block. Stop/Start. If still unavailable, use passive monitoring and report incompatibility. |
 | Widen or show Blocks editor | The icon could not be fully contained in the visible workspace. Widen/show the editor, close any overlays, then Stop/Start. |
 | Marker changed / delete refused | The owned icon has changed or become connected. Stop and inspect Classroom Monitor only. Never delete a whole connected program to remove the test icon. |

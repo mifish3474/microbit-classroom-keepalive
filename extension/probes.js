@@ -5,12 +5,10 @@ export function studentProbe(command = "read", token = "") {
     getComputedStyle(el).visibility !== "hidden" && getComputedStyle(el).display !== "none";
   const isStudentURL = location.origin === "https://classroom.microbit.org" &&
     /^\/join\/?$/.test(location.pathname) && window === window.top;
-  const leave = document.querySelector('[data-testid="student-leave"]');
-  // Compare only the dedicated name slot; never return or store any name.
-  const names = [...(leave?.closest("section")?.querySelectorAll("p") || [])].filter(p =>
-    p.parentElement?.classList.contains("ov_hidden") &&
-    p.parentElement.previousElementSibling?.tagName.toLowerCase() === "svg");
-  const monitor = names.length === 1 && names[0].textContent.trim() === "Classroom Monitor";
+  const leaves = document.querySelectorAll('[data-testid="student-leave"]');
+  const leave = leaves.length === 1 ? leaves[0] : null;
+  const header = leave?.closest("section");
+  // The teacher confirms which student tab is the monitor. Do not read names.
   const frames = [...document.querySelectorAll('section[aria-label="Code editor"] iframe[title="MakeCode"]')];
   const frame = frames.length === 1 ? frames[0] : null;
   let editorFrame = false;
@@ -18,7 +16,10 @@ export function studentProbe(command = "read", token = "") {
     const u = new URL(frame.src);
     editorFrame = u.origin === "https://makecode.microbit.org" && u.searchParams.get("controller") === "1";
   } catch { /* Missing/unsupported editor. */ }
-  const eligible = isStudentURL && visible(leave) && monitor && editorFrame;
+  // Classroom keeps the desktop Leave button in the DOM but hides its group below
+  // the large-screen breakpoint. Its visibility is not evidence of membership.
+  const studentUI = !!leave?.isConnected && visible(header);
+  const eligible = isStudentURL && studentUI && editorFrame;
   if (command === "release") {
     const old = globalThis[key];
     if (old?.token === token) {
@@ -50,8 +51,7 @@ export function studentProbe(command = "read", token = "") {
     state.onOnline = state.onOffline;
     state.observer = new MutationObserver(() => {
       // Latch invalidation: even a brief switch to a different session needs a new Start.
-      if (!frame.isConnected || !leave.isConnected || !names[0].isConnected ||
-          names[0].textContent.trim() !== "Classroom Monitor" ||
+      if (!frame.isConnected || !leave.isConnected ||
           !/^\/join\/?$/.test(location.pathname)) invalidate();
     });
     state.observer.observe(document.documentElement, {subtree: true, childList: true, characterData: true});
@@ -69,7 +69,7 @@ export function studentProbe(command = "read", token = "") {
     const text = warning.textContent.toLowerCase();
     connection = /inactiv|expir/.test(text) ? "expired" : /ended|closed/.test(text) ? "ended" :
       /teacher.*offline|teacher.*disconnect/.test(text) ? "teacher-offline" : "connection-warning";
-  } else if (!visible(leave)) connection = "not-joined";
+  } else if (!studentUI) connection = "not-joined";
   const locked = visible(document.querySelector('[data-testid="screen-locked"]'));
   return {eligible, bound: !!bound && bound.token === token && bound.frame === frame && !bound.invalidated,
     connection, locked, editorFrame, lastEditorSave: bound?.lastEditorSave || null};
