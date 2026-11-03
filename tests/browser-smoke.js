@@ -31,7 +31,8 @@ const evaluate = async (session, expression) => {
   if (r.exceptionDetails) throw new Error(`Browser evaluation failed: ${r.exceptionDetails.text}`);
   return r.result.value;
 };
-const fixtureEditor = `<!doctype html><html><body><svg id="workspace" width="500" height="300"></svg><script>
+const fixtureEditor = `<!doctype html><html><body><svg id="workspace" width="500" height="300"></svg>
+<iframe title="Simulator" src="https://trg-microbit.userpxt.io/---simulator"></iframe><script>
 const listeners = new Set();
 const workspace = {id:'fake-workspace',options:{},getParentSvg:()=>document.querySelector('svg'),
   addChangeListener:f=>listeners.add(f), removeChangeListener:f=>listeners.delete(f),getTopBlocks:()=>[block]};
@@ -109,11 +110,32 @@ try {
   assert.equal(observation.eligible, true, JSON.stringify({observation,
     dom: await evaluate(fixtureSession, "document.body.innerHTML") }));
   const send = msg => evaluate(popupSession, `chrome.runtime.sendMessage(${JSON.stringify(msg)})`);
+  await evaluate(popupSession, `document.getElementById('interval').value='1';
+    document.getElementById('confirm').checked=true;
+    document.getElementById('confirm').dispatchEvent(new Event('change'));
+    document.getElementById('start').click();`);
+  await delay(2200); // Periodic status rendering must not erase the validation message.
+  assert.match(await evaluate(popupSession, "document.getElementById('notice').textContent"), /whole number from 3 to 60 minutes/);
+  let status = await send({type: "STATUS"});
+  assert.equal(status.state.running, false);
+  assert.equal(status.state.warning, "");
+  assert.equal(status.state.logs.length, 0);
+  await evaluate(popupSession, `document.getElementById('interval').value='3';
+    document.getElementById('interval').dispatchEvent(new Event('input'));`);
+  console.log("PASS: popup explains the one-minute limit without starting or failing monitoring");
   let r = await send({type: "START", tabId, interval: 3, activity: true, confirm: true});
   assert.equal(r.ok, true);
   assert.equal(r.state.running, true, JSON.stringify(r));
   assert.equal(r.state.editor, "shifted", JSON.stringify(r));
   assert.equal(r.state.activityCount, 0);
+  const beforeInvalidInput = r.state;
+  const invalid = await send({type: "START", tabId, interval: 1, activity: true, confirm: true});
+  assert.equal(invalid.ok, false);
+  assert.equal(invalid.kind, "input");
+  assert.match(invalid.error, /whole number from 3 to 60 minutes/);
+  status = await send({type: "STATUS"});
+  assert.deepEqual(status.state, beforeInvalidInput);
+  console.log("PASS: invalid interval leaves active monitoring, pending restoration, and diagnostics unchanged");
   await delay(100);
   r = await send({type: "CHECK"});
   assert.equal(r.state.editor, "restored", JSON.stringify(r));

@@ -4,6 +4,8 @@ A local Chrome Manifest V3 prototype for a teacher's dedicated **Classroom Monit
 
 Prepared November 3, 2026 for a live trial before Thursday, November 5. No classroom was created or joined and no real student account was used during development. See [investigation](docs/INVESTIGATION.md), [testing and overnight checklist](docs/TESTING.md), and [substitute recovery sheet](docs/SUBSTITUTE.md).
 
+**Version 0.1.1:** Fixes the misleading “Action failed” error for unsupported intervals. This prototype accepts **3–60 whole minutes**, not 1 minute: a cycle uses separate move, restore, and verification checks. Invalid input now explains the limit without changing a running monitor. For a faster manual check, leave the interval at 3 and use **Check now**, waiting several seconds between clicks.
+
 ## Install in Chrome on Windows
 
 1. Keep the project on the teacher's computer. Extract the handoff ZIP if using it.

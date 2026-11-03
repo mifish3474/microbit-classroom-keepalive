@@ -1,5 +1,16 @@
 # Prototype validation record
 
+## Version 0.1.1 validation fix
+
+The reported failure occurred with a 1-minute interval; 3 minutes worked. Version 0.1.0 rejected values below 3 but incorrectly treated that input error as a probe failure, pausing edits and displaying “Action failed.” Version 0.1.1 validates settings before sending Start, preserves a clear range message through popup refreshes, and separates worker input errors from monitoring failures. The 3–60 minute supported range is unchanged.
+
+- `npm test`: 9 passed, 0 failed.
+- `npm run test:browser`: passed popup validation, error-message persistence, and rejection of interval 1 without modifying active run state, logs, or pending restoration; existing edit/restore and isolation checks also passed.
+- The browser fixture now includes a nested simulator on an unpermitted origin. This was investigated as a possible cause but did not reproduce the error; the user's interval clarification identified the input-validation path instead.
+- No new live-classroom or overnight claim. The actual-alarm result below belongs to the 0.1.0 baseline; scheduling and the movement adapter were not changed in this patch.
+
+## Version 0.1.0 baseline
+
 Date: November 3, 2026 (user's America/New_York schedule).
 
 | Check | Result |

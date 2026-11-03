@@ -1,5 +1,8 @@
 import {studentProbe, editorFrameProbe, transportProbe} from "./probes.js";
 import {editorOperation} from "./editor.js";
+import {startSettingsError} from "./settings.js";
+
+class InputError extends Error {}
 
 const ALARM = "guardian-observe";
 const empty = () => ({running: false, tabId: null, interval: 3, activityEnabled: false,
@@ -180,10 +183,12 @@ async function observe(forceActivity = false) {
   await save();
 }
 async function start(msg) {
-  if (msg.confirm !== true || !Number.isInteger(msg.tabId) || !Number.isInteger(msg.interval) ||
-      msg.interval < 3 || msg.interval > 60 || typeof msg.activity !== "boolean") throw new Error("invalid-start");
+  const inputError = startSettingsError(msg);
+  if (inputError) throw new InputError(inputError);
   const tab = await chrome.tabs.get(msg.tabId);
-  if (!studentURL(tab.url) || !tab.active || tab.discarded) throw new Error("not-student-tab");
+  if (!studentURL(tab.url) || !tab.active || tab.discarded) {
+    throw new InputError("Open the joined Classroom Monitor student tab and keep it active before clicking Start.");
+  }
   if (state.running) await stop();
   const oldLogs = state.logs;
   state = {...empty(), logs: oldLogs, tabId: msg.tabId, token: crypto.randomUUID(),
@@ -246,7 +251,12 @@ chrome.runtime.onMessage.addListener((msg, sender, respond) => {
     // Never expose tokens, document identifiers, or raw tab URLs in popup/log exports.
     const {token, topDocument, editorDocument, lastSummary, ...publicState} = state;
     return publicState;
-  }).then(value => respond({ok: true, state: value})).catch(async () => {
+  }).then(value => respond({ok: true, state: value})).catch(async error => {
+    if (error instanceof InputError) {
+      // Our own fixed messages only. No raw Chrome/page errors or state changes.
+      respond({ok: false, kind: "input", error: error.message});
+      return;
+    }
     await failure();
     respond({ok: false, error: "Action failed. Check the selected student tab and extension status."});
   });

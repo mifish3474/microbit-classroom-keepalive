@@ -16,6 +16,7 @@ Install and set up an empty test classroom using [README](../README.md). Do not 
 - [ ] Start on the monitor with movement off. Page, student UI, transport, editor, and reachability are separate; reachability says unverified.
 - [ ] Close/reopen the popup. Running state persists. Switching tabs does not change the target.
 - [ ] Stop, enable movement with interval 3, and Start. A starter block shifts sideways without changed fields/connections/code.
+- [ ] Enter interval 1 before Start. Version 0.1.1 explains the supported 3–60 minute range; it must not log a probe failure or reset monitoring. Correct it to 3 to proceed.
 - [ ] Observe Last attempt, restoration at the next check, then Editor-confirmed/count at the following check. Missing events must not count. Wait several seconds between manual Check now clicks.
 - [ ] See whether Editor save observed advances. Check only the disposable monitor's work from the teacher dashboard to determine whether its layout was received.
 - [ ] Background both windows and close DevTools. Confirm three cycles over approximately 9–12 minutes. DevTools can change background behavior.

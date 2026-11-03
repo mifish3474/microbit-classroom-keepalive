@@ -2,7 +2,8 @@ $ErrorActionPreference = 'Stop'
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $outputDirectory = Join-Path $projectRoot 'artifacts'
 New-Item -ItemType Directory -Force -Path $outputDirectory | Out-Null
-$outputZip = Join-Path $outputDirectory 'microbit-classroom-keepalive-0.1.0.zip'
+$extensionVersion = (Get-Content -Raw -LiteralPath (Join-Path $projectRoot 'extension/manifest.json') | ConvertFrom-Json).version
+$outputZip = Join-Path $outputDirectory ('microbit-classroom-keepalive-' + $extensionVersion + '.zip')
 # Explicit allowlist: never package reference captures, browser profiles, or credentials.
 $packageInputs = @(
     (Join-Path $projectRoot 'extension'),

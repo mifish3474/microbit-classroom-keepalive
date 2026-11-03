@@ -1,6 +1,9 @@
+import {startSettingsError} from "./settings.js";
+
 const $ = id => document.getElementById(id);
 let current;
 let activeTab;
+let inputError = "";
 const when = t => t ? new Date(t).toLocaleString() : "Never";
 const labels = {
   "ui-present": "Student UI appears connected (unverified)", "not-joined": "Student is not joined",
@@ -11,7 +14,10 @@ const labels = {
 };
 async function request(type, args = {}) {
   const result = await chrome.runtime.sendMessage({type, ...args});
-  if (!result?.ok) throw new Error(result?.error || "Extension worker unavailable.");
+  if (!result?.ok) {
+    if (result?.kind === "input") inputError = result.error;
+    throw new Error(result?.error || "Extension worker unavailable.");
+  }
   return result.state;
 }
 function render(s) {
@@ -38,7 +44,7 @@ function render(s) {
     const dt = document.createElement("dt"), dd = document.createElement("dd");
     dt.textContent = key; dd.textContent = String(value); $("status").append(dt, dd);
   }
-  $("notice").textContent = stale ? "Monitoring is overdue. Check Chrome, power, and the network." : s.warning.replaceAll("-", " ");
+  $("notice").textContent = inputError || (stale ? "Monitoring is overdue. Check Chrome, power, and the network." : s.warning.replaceAll("-", " "));
   $("stop").disabled = !s.running;
   $("check").disabled = !s.running;
   $("test").disabled = !s.running || !s.activityEnabled || s.phase !== "idle";
@@ -50,8 +56,18 @@ async function act(type, args) {
   try { render(await request(type, args)); }
   catch (error) { $("notice").textContent = error.message; }
 }
-$("start").onclick = () => act("START", {tabId: activeTab?.id, confirm: $("confirm").checked,
-  activity: $("activity").checked, interval: Number($("interval").value)});
+$("start").onclick = () => {
+  const settings = {tabId: activeTab?.id, confirm: $("confirm").checked,
+    activity: $("activity").checked, interval: Number($("interval").value)};
+  inputError = startSettingsError(settings);
+  if (inputError) {
+    if (current) render(current);
+    $("interval").reportValidity();
+    return;
+  }
+  return act("START", settings);
+};
+$("interval").oninput = () => { inputError = ""; if (current) render(current); };
 $("stop").onclick = () => act("STOP");
 $("check").onclick = () => act("CHECK");
 $("test").onclick = () => act("ACTIVITY");

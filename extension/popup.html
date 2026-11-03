@@ -5,7 +5,8 @@
 <p>Open the dedicated student tab before starting.</p>
 <label><input id="confirm" type="checkbox"> This is my virtual student named <strong>Classroom Monitor</strong>.</label>
 <label><input id="activity" type="checkbox"> Enable experimental reversible block movement</label>
-<label>Activity interval (minutes) <input id="interval" type="number" min="3" max="60" step="1" value="3"></label>
+<label>Activity interval (3–60 minutes) <input id="interval" type="number" min="3" max="60" step="1" value="3" required aria-describedby="interval-help"></label>
+<p id="interval-help">Minimum 3 minutes for separate move, restore, and verification checks.</p>
 <div class="buttons"><button id="start">Start on this tab</button><button id="stop">Stop</button></div>
 <p id="notice" role="alert"></p>
 <dl id="status" aria-live="polite"></dl>
